@@ -1,0 +1,67 @@
+name: ayov2
+description: A new Flutter project.
+
+publish_to: 'none' 
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  get: ^3.23.1
+  dio: ^3.0.10
+  firebase_messaging: ^7.0.3
+  firebase_core: ^0.5.0+1
+  firebase_auth: ^0.18.4+1
+  flutter_facebook_auth: ^3.3.3-no-nullsafety
+  google_sign_in: ^4.5.9
+  flutter_rating_bar: ^3.0.1+1
+  shared_preferences: ^0.5.12+4
+  font_awesome_flutter: ^8.8.1
+  cached_network_image: ^2.2.0+1
+  location: ^3.0.0
+  flutter_svg: ^0.19.0
+  google_maps_flutter: ^1.0.2
+  google_maps_webservice: ^0.0.18
+  flutter_polyline_points: ^0.2.4
+  geolocator: ^6.1.14
+  sliding_up_panel: ^1.0.2
+  lottie: ^0.7.0+1
+  path_provider: ^1.6.14
+  shimmer: ^1.1.1
+  intl: ^0.16.1
+  fluttertoast: ^7.1.6
+  expandable: ^4.1.4
+  flutter_sticky_header: ^0.5.0
+  permission_handler: ^5.0.1+1
+  flutter_pusher_client: ^0.3.1
+  laravel_echo: ^0.2.9
+  json_serializable: ^3.5.1
+  cupertino_icons: ^1.0.0
+  intl_phone_number_input: ^0.6.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: ^1.10.1
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/animations/
+
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat-Regular.ttf
+        - asset: assets/fonts/Montserrat-Medium.ttf
+          weight: 400
+        - asset: assets/fonts/Montserrat-Bold.ttf
+          weight: 600
+        - asset: assets/fonts/Montserrat-Italic.ttf
+          style: italic

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ayo Belanja</string>
+    <string name="facebook_app_id">532377304596661</string>
+    <string name="fb_login_protocol_scheme">fb532377304596661</string>
+</resources>
