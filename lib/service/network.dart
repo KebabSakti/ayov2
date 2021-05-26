@@ -53,7 +53,7 @@ class Network {
     int receiveTimeout,
     String authToken,
     dynamic data,
-    CancelToken token,
+    CancelToken cancelToken,
   }) async {
     //options
     if (baseUrl != null) _dio.options.baseUrl = baseUrl;
@@ -68,11 +68,11 @@ class Network {
 
     switch (method) {
       case Methods.GET:
-        response = await _dio.get(path, cancelToken: token);
+        response = await _dio.get(path, cancelToken: cancelToken);
         break;
 
       case Methods.POST:
-        response = await _dio.post(path, data: data, cancelToken: token);
+        response = await _dio.post(path, data: data, cancelToken: cancelToken);
         break;
     }
 

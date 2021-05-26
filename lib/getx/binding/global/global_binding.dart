@@ -8,9 +8,11 @@ class GlobalBinding extends Bindings {
   @override
   void dependencies() {
     Get.put(GlobalObs());
-    Get.put(Network());
     Get.put(AppPreference());
+    Get.put(Network());
     Get.put(AuthFirebase());
+    Get.put(AuthLocal());
     Get.put(Helper());
+    Get.put(GlobalController());
   }
 }

@@ -33,7 +33,7 @@ class RegisterPage extends GetView<RegisterPageController> {
               height: 20,
             ),
             TextFormField(
-              controller: controller.name,
+              controller: controller.nameField,
               autofocus: false,
               cursorColor: Colors.grey[800],
               cursorWidth: 1,
@@ -72,7 +72,7 @@ class RegisterPage extends GetView<RegisterPageController> {
               height: 20,
             ),
             TextFormField(
-              controller: controller.email,
+              controller: controller.emailField,
               autofocus: false,
               cursorColor: Colors.grey[800],
               cursorWidth: 1,
@@ -111,7 +111,7 @@ class RegisterPage extends GetView<RegisterPageController> {
               height: 20,
             ),
             TextFormField(
-              controller: controller.phone,
+              controller: controller.phoneField,
               autofocus: false,
               cursorColor: Colors.grey[800],
               cursorWidth: 1,

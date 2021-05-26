@@ -35,6 +35,29 @@ class CustomerModel {
     this.customerToken,
   });
 
+  CustomerModel copyWith({
+    String customerId,
+    String customerPhone,
+    String customerName,
+    String customerEmail,
+    String customerPassword,
+    String customerFcm,
+    int customerPoint,
+    int customerIsActive,
+    String customerToken,
+  }) =>
+      CustomerModel(
+        customerId: customerId ?? this.customerId,
+        customerPhone: customerPhone ?? this.customerPhone,
+        customerName: customerName ?? this.customerName,
+        customerEmail: customerEmail ?? this.customerEmail,
+        customerPassword: customerPassword ?? this.customerPassword,
+        customerFcm: customerFcm ?? this.customerFcm,
+        customerPoint: customerPoint ?? this.customerPoint,
+        customerIsActive: customerIsActive ?? this.customerIsActive,
+        customerToken: customerToken ?? this.customerToken,
+      );
+
   factory CustomerModel.fromJson(Map<String, dynamic> json) =>
       _$CustomerModelFromJson(json);
 

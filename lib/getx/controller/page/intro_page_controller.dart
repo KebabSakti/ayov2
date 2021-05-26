@@ -1,5 +1,5 @@
 import 'package:ayov2/const/const.dart';
-import 'package:ayov2/core/app_preference.dart';
+import 'package:ayov2/core/core.dart';
 import 'package:ayov2/getx/getx.dart';
 import 'package:ayov2/model/model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -50,9 +50,6 @@ class IntroPageController extends GetxController {
     await _initFirebase();
     await _cacheAssets();
     await _myPreference();
-
-    await Future.delayed(Duration(seconds: 5));
-
     await _authState();
   }
 

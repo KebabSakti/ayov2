@@ -2,7 +2,7 @@ import 'package:ayov2/const/const.dart';
 import 'package:ayov2/core/core.dart';
 import 'package:ayov2/getx/getx.dart';
 import 'package:ayov2/helper/helper.dart';
-import 'package:ayov2/model/customer/customer_model.dart';
+import 'package:ayov2/model/model.dart';
 import 'package:ayov2/repo/repo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -11,12 +11,12 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class LoginPageController extends GetxController {
   final AuthFirebase _authFirebase = Get.find();
+  final AuthLocal _authLocal = Get.find();
   final Helper _helper = Get.find();
   final GlobalObs _globalObs = Get.find();
   final AppPreference _appPreference = Get.find();
 
   final UtilRepo _utilRepo = UtilRepo();
-  final Customer _customer = Customer();
   final TextEditingController phoneField = TextEditingController();
 
   void facebookSignIn() async {
@@ -24,6 +24,8 @@ class LoginPageController extends GetxController {
       OAuthCredential facebookCredential =
           await _authFirebase.facebookCredential();
       if (facebookCredential != null) {
+        _helper.dialog.loading();
+
         await _authFirebase
             .signInWithCredential(facebookCredential)
             .then((result) async {
@@ -31,6 +33,7 @@ class LoginPageController extends GetxController {
         });
       }
     } catch (e) {
+      _helper.dialog.close();
       _helper.dialog.error(e.toString(), dismissible: true);
     }
   }
@@ -39,6 +42,8 @@ class LoginPageController extends GetxController {
     try {
       OAuthCredential googleCredential = await _authFirebase.googleCredential();
       if (googleCredential != null) {
+        _helper.dialog.loading();
+
         await _authFirebase
             .signInWithCredential(googleCredential)
             .then((result) async {
@@ -46,6 +51,7 @@ class LoginPageController extends GetxController {
         });
       }
     } catch (e) {
+      _helper.dialog.close();
       _helper.dialog.error(e.toString(), dismissible: true);
     }
   }
@@ -60,7 +66,8 @@ class LoginPageController extends GetxController {
       PhoneNumber phoneNumber = await PhoneNumber.getRegionInfoFromPhoneNumber(
           '+62${phoneField.text}', 'ID');
 
-      if (!await _phoneNumberExist(phoneNumber.toString()))
+      if (!await _utilRepo.phoneNumberExist(
+          phoneNumber: phoneNumber.toString()))
         throw Exception('Phone number not yet registered');
 
       await _authFirebase.signInWithPhone(
@@ -69,8 +76,8 @@ class LoginPageController extends GetxController {
           print('TIMEOUT');
           print(verificationId);
         },
-        verificationFailed: (FirebaseAuthException e) {
-          throw e;
+        verificationFailed: (FirebaseAuthException exception) {
+          throw exception;
         },
         codeSent: (String verificationId, int resendToken) {
           _helper.dialog.close();
@@ -90,39 +97,23 @@ class LoginPageController extends GetxController {
     }
   }
 
-  Future<bool> _phoneNumberExist(String phoneNumber) async {
-    return await _utilRepo.phoneNumberExist(phoneNumber: phoneNumber);
-  }
-
-  Future<CustomerModel> _registerUser(User user) async {
-    return await _customer.register(
-      customerId: user.uid,
-      customerName: user.displayName,
-      customerPhone: user.phoneNumber,
-      customerEmail: user.email,
-      customerPassword: user.uid,
-    );
-  }
-
-  Future<CustomerModel> _getUser(String userUID) async {
-    return await _customer.user(customerId: userUID);
-  }
-
-  Future _saveUserPreference(String userUID, String userToken) async {
-    await _appPreference.setUserUID(userUID);
-    await _appPreference.setUserToken(userToken);
-  }
-
   Future _validateUser(UserCredential userCredential) async {
     CustomerModel customerModel;
 
     if (userCredential.additionalUserInfo.isNewUser) {
-      customerModel = await _registerUser(userCredential.user);
+      customerModel = await _authLocal.registerUser(
+        customerId: userCredential.user.uid,
+        customerName: userCredential.user.displayName,
+        customerPhone: userCredential.user.phoneNumber,
+        customerEmail: userCredential.user.email,
+        customerFcm: await _appPreference.getFcmToken('fcm_token'),
+        customerPassword: userCredential.user.uid,
+      );
     } else {
-      customerModel = await _getUser(userCredential.user.uid);
+      customerModel = await _authLocal.getUser(userCredential.user.uid);
     }
 
-    await _saveUserPreference(
+    await _authLocal.saveUserPreference(
         customerModel.customerId, customerModel.customerToken);
 
     _globalObs.customerModel(customerModel);

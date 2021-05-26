@@ -40,4 +40,16 @@ class AppPreference {
 
     return prefs.getString('user_token');
   }
+
+  Future setFcmToken(String value) async {
+    SharedPreferences prefs = await _instance();
+
+    await prefs.setString('fcm_token', value);
+  }
+
+  Future<String> getFcmToken(String value) async {
+    SharedPreferences prefs = await _instance();
+
+    return prefs.getString('fcm_token');
+  }
 }
