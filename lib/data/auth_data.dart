@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class AuthData {
   final AuthRepo _authRepo = AuthRepo();
 
-  Future<CustomerModel> register({
+  Future<CustomerModel> authenticate({
     @required String customerId,
     @required String customerPhone,
     @required String customerName,
@@ -15,7 +15,7 @@ class AuthData {
     @required String customerPassword,
     @required String customerFcm,
   }) async {
-    var response = await _authRepo.register(
+    var response = await _authRepo.authenticate(
       customerId: customerId,
       customerPhone: customerPhone,
       customerName: customerName,
@@ -55,22 +55,23 @@ class AuthData {
     return CustomerModel.fromJson(parsedData['data']);
   }
 
-  Future<CustomerModel> user({@required String customerId}) async {
-    var response = await _authRepo.customer(customerId: customerId);
-
-    var parsedData = await jsonDecode(response.data);
-
-    if (!parsedData['success']) throw Exception(parsedData['message']);
-
-    return CustomerModel.fromJson(parsedData['data']);
-  }
-
   Future<bool> signout({@required String customerId}) async {
     var response = await _authRepo.signout(customerId: customerId);
 
     var parsedData = await jsonDecode(response.data);
 
     if (!parsedData['success']) throw Exception(parsedData['message']);
+
+    return parsedData['success'];
+  }
+
+  Future<bool> exist({String phoneNumber, String email}) async {
+    var response = await _authRepo.exist(
+      phoneNumber: phoneNumber,
+      email: email,
+    );
+
+    var parsedData = await jsonDecode(response.data);
 
     return parsedData['success'];
   }

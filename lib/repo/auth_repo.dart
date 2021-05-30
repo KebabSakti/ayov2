@@ -1,4 +1,4 @@
-import 'package:ayov2/const/api.dart';
+import 'package:ayov2/const/const.dart';
 import 'package:ayov2/core/core.dart';
 import 'package:ayov2/service/service.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +8,7 @@ class AuthRepo {
   final Network _network = Get.find();
   final AppPreference _appPreference = Get.find();
 
-  Future<dynamic> register({
+  Future<dynamic> authenticate({
     @required String customerId,
     @required String customerPhone,
     @required String customerName,
@@ -18,7 +18,7 @@ class AuthRepo {
   }) async {
     var response = await _network.action(
       Methods.POST,
-      CUSTOMER_REGISTER_API,
+      CUSTOMER_AUTHENTICATE_API,
       data: {
         'customer_id': customerId,
         'customer_phone': customerPhone,
@@ -43,6 +43,7 @@ class AuthRepo {
     var response = await _network.action(
       Methods.POST,
       CUSTOMER_UPDATE_API,
+      authToken: await _appPreference.getUserToken(),
       data: {
         'customer_id': customerId,
         'customer_phone': customerPhone,
@@ -56,13 +57,16 @@ class AuthRepo {
     return response;
   }
 
-  Future<dynamic> customer({@required String customerId}) async {
+  Future<dynamic> customer({
+    @required String customerId,
+    @required String customerFcm,
+  }) async {
     var response = await _network.action(
       Methods.POST,
       CUSTOMER_FETCH_ONE_API,
       data: {
         'customer_id': customerId,
-        'auth_token': await _appPreference.getUserToken('user_token'),
+        'customer_fcm': customerFcm,
       },
     );
 
@@ -73,9 +77,22 @@ class AuthRepo {
     var response = await _network.action(
       Methods.POST,
       CUSTOMER_SIGNOUT_API,
-      authToken: await _appPreference.getUserToken('user_token'),
+      authToken: await _appPreference.getUserToken(),
       data: {
         'customer_id': customerId,
+      },
+    );
+
+    return response;
+  }
+
+  Future<dynamic> exist({String phoneNumber, String email}) async {
+    var response = await _network.action(
+      Methods.POST,
+      CUSTOMER_EXIST_API,
+      data: {
+        'customer_phone': phoneNumber,
+        'customer_email': email,
       },
     );
 

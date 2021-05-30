@@ -1,4 +1,3 @@
-import 'package:ayov2/const/const.dart';
 import 'package:ayov2/core/core.dart';
 import 'package:ayov2/getx/getx.dart';
 import 'package:ayov2/helper/helper.dart';
@@ -24,18 +23,13 @@ class HomePageController extends GetxController {
   void signOutButton() async {
     try {
       _helper.dialog.loading();
-      await Future.delayed(Duration(seconds: 5));
-      await _authLocal.signout(_globalObs.customerModel.value.customerId);
-      await _authFirebase.signOut();
 
-      _routeToLoginPage();
+      await _authLocal.signout(_globalObs.customerModel.value.customerId);
+      await _authLocal.clearUserPreference();
+      await _authFirebase.signOut();
     } catch (e) {
       _helper.dialog.close();
       _helper.dialog.error(e.toString(), dismissible: true);
     }
-  }
-
-  void _routeToLoginPage() {
-    Get.offAllNamed(LOGIN_PAGE);
   }
 }

@@ -1,9 +1,6 @@
 import 'package:ayov2/const/const.dart';
 import 'package:ayov2/core/core.dart';
-import 'package:ayov2/getx/getx.dart';
 import 'package:ayov2/helper/helper.dart';
-import 'package:ayov2/model/model.dart';
-import 'package:ayov2/repo/repo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -13,9 +10,6 @@ class RegisterPageController extends GetxController {
   final AuthFirebase _authFirebase = Get.find();
   final AuthLocal _authLocal = Get.find();
   final Helper _helper = Get.find();
-  final GlobalObs _globalObs = Get.find();
-
-  final UtilRepo _utilRepo = UtilRepo();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController nameField = TextEditingController();
@@ -32,9 +26,9 @@ class RegisterPageController extends GetxController {
       PhoneNumber phoneNumber = await PhoneNumber.getRegionInfoFromPhoneNumber(
           '+62${phoneField.text}', 'ID');
 
-      if (!await _utilRepo.phoneNumberExist(
-          phoneNumber: phoneNumber.toString()))
-        throw Exception('Phone number not yet registered');
+      if (!await _authLocal.exist(
+          phoneNumber: phoneNumber.toString(), email: emailField.text))
+        throw Exception('Phone number or email already registered');
 
       await _authFirebase.signInWithPhone(
         phoneNumber.toString(),
@@ -45,16 +39,16 @@ class RegisterPageController extends GetxController {
         verificationFailed: (FirebaseAuthException exception) {
           throw exception;
         },
-        codeSent: (String verificationId, int resendToken) {
-          _helper.dialog.close();
-          _routeToOtpPage(verificationId);
+        codeSent: (String verificationId, int resendToken) async {
+          var credential = await _routeToOtpPage(verificationId);
+
+          if (credential == null)
+            _helper.dialog.close();
+          else
+            await _authFirebase.signInWithCredential(credential);
         },
         verificationCompleted: (PhoneAuthCredential credential) async {
-          await _authFirebase
-              .signInWithCredential(credential)
-              .then((result) async {
-            _validateUser(result);
-          });
+          await _authFirebase.signInWithCredential(credential);
         },
       );
     } catch (e) {
@@ -63,36 +57,8 @@ class RegisterPageController extends GetxController {
     }
   }
 
-  Future _validateUser(UserCredential userCredential) async {
-    CustomerModel customerModel;
-
-    if (userCredential.additionalUserInfo.isNewUser) {
-      customerModel = await _authLocal.registerUser(
-        customerId: userCredential.user.uid,
-        customerName: userCredential.user.displayName,
-        customerPhone: userCredential.user.phoneNumber,
-        customerEmail: userCredential.user.email,
-        customerFcm: null,
-        customerPassword: userCredential.user.uid,
-      );
-    } else {
-      customerModel = await _authLocal.getUser(userCredential.user.uid);
-    }
-
-    await _authLocal.saveUserPreference(
-        customerModel.customerId, customerModel.customerToken);
-
-    _globalObs.customerModel(customerModel);
-
-    _routeToHomePage();
-  }
-
-  void _routeToOtpPage(String verificationId) {
-    Get.toNamed(OTP_PAGE, arguments: verificationId);
-  }
-
-  void _routeToHomePage() {
-    Get.offAllNamed(HOME_PAGE);
+  Future<dynamic> _routeToOtpPage(String verificationId) async {
+    return await Get.toNamed(OTP_PAGE, arguments: verificationId);
   }
 
   String fieldValidator(String value) {

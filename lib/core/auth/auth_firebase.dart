@@ -8,21 +8,17 @@ class AuthFirebase {
     final LoginResult result = await FacebookAuth.instance
         .login(loginBehavior: LoginBehavior.NATIVE_WITH_FALLBACK);
 
-    // Create a credential from the access token
     return FacebookAuthProvider.credential(result.accessToken.token);
   }
 
   Future<OAuthCredential> googleCredential() async {
-    // Trigger the authentication flow
     final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
 
     if (googleUser == null) return null;
 
-    // Obtain the auth details from the request
     final GoogleSignInAuthentication googleAuth =
         await googleUser.authentication;
 
-    // Create a new credential
     return GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
@@ -40,6 +36,7 @@ class AuthFirebase {
     @required Function codeAutoRetrievalTimeout,
     @required Function codeSent,
     @required Function verificationFailed,
+    int forceResendingToken,
   }) async {
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: phoneNumber,
@@ -47,6 +44,7 @@ class AuthFirebase {
       codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
       codeSent: codeSent,
       verificationFailed: verificationFailed,
+      forceResendingToken: forceResendingToken,
     );
   }
 

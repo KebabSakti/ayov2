@@ -23,7 +23,7 @@ class AppPreference {
     await prefs.setString('user_uid', value);
   }
 
-  Future<String> getUserUID(String value) async {
+  Future<String> getUserUID() async {
     SharedPreferences prefs = await _instance();
 
     return prefs.getString('user_uid');
@@ -35,7 +35,7 @@ class AppPreference {
     await prefs.setString('user_token', value);
   }
 
-  Future<String> getUserToken(String value) async {
+  Future<String> getUserToken() async {
     SharedPreferences prefs = await _instance();
 
     return prefs.getString('user_token');
@@ -47,9 +47,15 @@ class AppPreference {
     await prefs.setString('fcm_token', value);
   }
 
-  Future<String> getFcmToken(String value) async {
+  Future<String> getFcmToken() async {
     SharedPreferences prefs = await _instance();
 
     return prefs.getString('fcm_token');
+  }
+
+  Future clearPreference() async {
+    SharedPreferences prefs = await _instance();
+
+    await prefs.clear();
   }
 }

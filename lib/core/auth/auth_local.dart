@@ -9,7 +9,7 @@ class AuthLocal {
 
   final AuthData _authData = AuthData();
 
-  Future<CustomerModel> registerUser({
+  Future<CustomerModel> authenticate({
     @required String customerId,
     @required String customerPhone,
     @required String customerName,
@@ -17,7 +17,7 @@ class AuthLocal {
     @required String customerPassword,
     @required String customerFcm,
   }) async {
-    return await _authData.register(
+    return await _authData.authenticate(
       customerId: customerId,
       customerName: customerName,
       customerPhone: customerPhone,
@@ -45,8 +45,8 @@ class AuthLocal {
     );
   }
 
-  Future<CustomerModel> getUser(String userUID) async {
-    return await _authData.user(customerId: userUID);
+  Future<bool> exist({String phoneNumber, String email}) async {
+    return await _authData.exist(phoneNumber: phoneNumber, email: email);
   }
 
   Future<bool> signout(String userUID) async {
@@ -56,5 +56,10 @@ class AuthLocal {
   Future saveUserPreference(String userUID, String userToken) async {
     await _appPreference.setUserUID(userUID);
     await _appPreference.setUserToken(userToken);
+  }
+
+  Future clearUserPreference() async {
+    await _appPreference.setUserUID('');
+    await _appPreference.setUserToken('');
   }
 }
