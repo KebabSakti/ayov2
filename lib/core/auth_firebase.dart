@@ -4,6 +4,10 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthFirebase {
+  FirebaseAuth instance() {
+    return FirebaseAuth.instance;
+  }
+
   Future<OAuthCredential> facebookCredential() async {
     final LoginResult result = await FacebookAuth.instance
         .login(loginBehavior: LoginBehavior.NATIVE_WITH_FALLBACK);
@@ -37,6 +41,7 @@ class AuthFirebase {
     @required Function codeSent,
     @required Function verificationFailed,
     int forceResendingToken,
+    Duration timeout = const Duration(seconds: 60),
   }) async {
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: phoneNumber,
@@ -45,6 +50,7 @@ class AuthFirebase {
       codeSent: codeSent,
       verificationFailed: verificationFailed,
       forceResendingToken: forceResendingToken,
+      timeout: timeout,
     );
   }
 

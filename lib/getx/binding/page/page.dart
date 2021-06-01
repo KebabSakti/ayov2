@@ -4,3 +4,4 @@ export './otp_page_binding.dart';
 export './register_page_binding.dart';
 export './login_page_binding.dart';
 export './home_page_binding.dart';
+export './app_page_binding.dart';

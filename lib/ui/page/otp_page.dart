@@ -63,23 +63,29 @@ class OtpPage extends GetView<OtpPageController> {
             ),
           ),
           SizedBox(height: 10),
-          (true)
-              ? GestureDetector(
-                  onTap: () {},
-                  child: Text(
-                    'Kirim ulang OTP',
-                    style: TextStyle(
-                      color: Get.theme.primaryColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                )
-              : Text(
-                  '01:00',
+          Obx(
+            () {
+              if (controller.duration.value > 0) {
+                return Text(
+                  '00:${controller.duration.value.toString().padLeft(2, '0')}',
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                   ),
+                );
+              }
+
+              return GestureDetector(
+                onTap: controller.resendButton,
+                child: Text(
+                  'Kirim ulang OTP',
+                  style: TextStyle(
+                    color: Get.theme.primaryColor,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
+              );
+            },
+          ),
           SizedBox(height: 30),
           Expanded(
             child: OnScreenKeyboard(

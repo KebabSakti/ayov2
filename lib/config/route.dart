@@ -31,9 +31,9 @@ class AppRoute {
       page: () => OtpPage(),
     ),
     GetPage(
-      name: HOME_PAGE,
-      binding: HomePageBinding(),
-      page: () => HomePage(),
+      name: APP_PAGE,
+      binding: AppPageBinding(),
+      page: () => AppPage(),
     ),
   ];
 }

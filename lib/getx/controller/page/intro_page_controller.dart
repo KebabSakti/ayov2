@@ -3,6 +3,7 @@ import 'package:ayov2/core/core.dart';
 import 'package:ayov2/getx/getx.dart';
 import 'package:ayov2/helper/helper.dart';
 import 'package:ayov2/model/model.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -12,24 +13,19 @@ class IntroPageController extends GetxController {
   final GlobalObs _globalObs = Get.find();
   final AppPreference _appPreference = Get.find();
   final AuthLocal _authLocal = Get.find();
+  final AuthFirebase _authFirebase = Get.find();
   final Helper _helper = Get.find();
 
   final Fcm _fcm = Fcm();
 
-  void _initFirebaseAuthListener() async {
-    debounce(_globalObs.authState, (AuthStateModel auth) async {
-      _authStateLogic(auth);
-    }, time: Duration(milliseconds: 200));
-  }
-
-  Future<void> _authStateLogic(AuthStateModel auth) async {
+  void _authState() async {
     if (await _appPreference.getOnboarding() == false) {
       _routeToOnboardingPage();
     } else {
-      if (auth.state) {
+      if (_authFirebase.instance().currentUser == null) {
         _routeToLoginPage();
       } else {
-        _authenticate(auth.user);
+        _authenticate(_authFirebase.instance().currentUser);
       }
     }
   }
@@ -50,19 +46,19 @@ class IntroPageController extends GetxController {
 
       _globalObs.customerModel(customerModel);
 
-      _routeToHomePage();
-    } catch (e) {
+      _routeToAppPage();
+    } on DioError {
       _helper.dialog.close();
-      _helper.dialog.error(e.toString(), dismissible: true);
+      _helper.dialog.error(DIOERROR_MESSAGE,
+          buttonText: 'Coba Lagi', dismissible: false, onPressed: () {
+        _helper.dialog.close();
+        _authState();
+      });
     }
   }
 
   Future _initFirebase() async {
     await Firebase.initializeApp();
-
-    FirebaseAuth.instance.userChanges().listen((User user) {
-      _globalObs.authState(AuthStateModel(state: (user == null), user: user));
-    });
   }
 
   Future _initFcm() async {
@@ -91,6 +87,14 @@ class IntroPageController extends GetxController {
         ExactAssetPicture(SvgPicture.svgStringDecoder, LOGO),
         null,
       ),
+      precachePicture(
+        ExactAssetPicture(SvgPicture.svgStringDecoder, QR_ICON),
+        null,
+      ),
+      precachePicture(
+        ExactAssetPicture(SvgPicture.svgStringDecoder, COIN_ICON),
+        null,
+      ),
     ]);
   }
 
@@ -103,11 +107,11 @@ class IntroPageController extends GetxController {
   }
 
   Future _init() async {
-    _initFirebaseAuthListener();
     await _initFirebase();
     await _initFcm();
     await _cacheSvgAssets();
     await _myPreference();
+    _authState();
   }
 
   void _routeToOnboardingPage() {
@@ -118,8 +122,8 @@ class IntroPageController extends GetxController {
     Get.offAllNamed(LOGIN_PAGE);
   }
 
-  void _routeToHomePage() {
-    Get.offAllNamed(HOME_PAGE);
+  void _routeToAppPage() {
+    Get.offAllNamed(APP_PAGE);
   }
 
   @override

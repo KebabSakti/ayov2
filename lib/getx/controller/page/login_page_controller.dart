@@ -1,12 +1,17 @@
 import 'package:ayov2/const/const.dart';
 import 'package:ayov2/core/core.dart';
+import 'package:ayov2/getx/getx.dart';
 import 'package:ayov2/helper/helper.dart';
+import 'package:ayov2/model/model.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class LoginPageController extends GetxController {
+  final GlobalObs _globalObs = Get.find();
+  final AppPreference _appPreference = Get.find();
   final AuthFirebase _authFirebase = Get.find();
   final AuthLocal _authLocal = Get.find();
   final Helper _helper = Get.find();
@@ -25,18 +30,19 @@ class LoginPageController extends GetxController {
     try {
       if (credential != null) {
         _helper.dialog.loading();
-        await _authFirebase.signInWithCredential(credential);
+        await _authFirebase
+            .signInWithCredential(credential)
+            .then((result) => _authenticate(result.user));
       }
-    } catch (e) {
+    } catch (_) {
       _helper.dialog.close();
-      _helper.dialog.error(e.toString(), dismissible: true);
+      _helper.dialog.error(GENERAL_MESSAGE, dismissible: true);
     }
   }
 
   void phoneSignIn() async {
     try {
-      if (phoneField.text.length == 0)
-        throw Exception('Phone number cannot be empty');
+      if (phoneField.text.length == 0) throw Failure(PHONE_REQUIRED);
 
       _helper.dialog.loading();
 
@@ -44,7 +50,7 @@ class LoginPageController extends GetxController {
           '+62${phoneField.text}', 'ID');
 
       if (await _authLocal.exist(phoneNumber: phoneNumber.toString()))
-        throw Exception('Phone number not yet registered');
+        throw Failure(PHONE_NOT_REGISTERED);
 
       await _authFirebase.signInWithPhone(
         phoneNumber.toString(),
@@ -53,24 +59,63 @@ class LoginPageController extends GetxController {
           print(verificationId);
         },
         verificationFailed: (FirebaseAuthException exception) {
-          throw exception;
+          throw Failure(GENERAL_MESSAGE);
         },
-        codeSent: (String verificationId, int resendToken) {
-          _helper.dialog.close();
-          _routeToOtpPage(verificationId, resendToken);
+        codeSent: (String verificationId, int resendToken) async {
+          var userCredential = await _routeToOtpPage(
+              verificationId, resendToken, phoneNumber.toString());
+
+          if (userCredential == null)
+            _helper.dialog.close();
+          else
+            _authenticate(userCredential.user);
         },
         verificationCompleted: (PhoneAuthCredential credential) async {
-          await _authFirebase.signInWithCredential(credential);
+          await _authFirebase
+              .signInWithCredential(credential)
+              .then((result) => _authenticate(result.user));
         },
       );
+    } on DioError {
+      _helper.dialog.close();
+      _helper.dialog.error(DIOERROR_MESSAGE, dismissible: true);
     } catch (e) {
       _helper.dialog.close();
-      _helper.dialog.error(e.toString(), dismissible: true);
+      _helper.dialog.error(e.message, dismissible: true);
     }
   }
 
-  void _routeToOtpPage(String verificationId, int resendToken) async {
-    Get.toNamed(OTP_PAGE, arguments: [verificationId, resendToken]);
+  void _authenticate(User user) async {
+    try {
+      CustomerModel customerModel = await _authLocal.authenticate(
+        customerId: user.uid,
+        customerName: user.displayName,
+        customerPhone: user.phoneNumber,
+        customerEmail: user.email,
+        customerPassword: user.uid,
+        customerFcm: await _appPreference.getFcmToken(),
+      );
+
+      await _authLocal.saveUserPreference(
+          customerModel.customerId, customerModel.customerToken);
+
+      _globalObs.customerModel(customerModel);
+
+      _routeToAppPage();
+    } on DioError {
+      _helper.dialog.close();
+      _helper.dialog.error(DIOERROR_MESSAGE, dismissible: true);
+    }
+  }
+
+  Future<dynamic> _routeToOtpPage(
+      String verificationId, int resendToken, String phoneNumber) async {
+    return await Get.toNamed(OTP_PAGE,
+        arguments: [verificationId, resendToken, phoneNumber]);
+  }
+
+  void _routeToAppPage() {
+    Get.offAllNamed(APP_PAGE);
   }
 
   @override

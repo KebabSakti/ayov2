@@ -3,4 +3,5 @@ const String ONBOARDING_PAGE = '/onboarding';
 const String LOGIN_PAGE = '/login';
 const String REGISTER_PAGE = '/register';
 const String OTP_PAGE = '/otp';
+const String APP_PAGE = '/app';
 const String HOME_PAGE = '/home';

@@ -1,3 +1,5 @@
+const String HOME_PAGE_API = 'customer/home/';
+
 const String CUSTOMER_EXIST_API = 'customer/auth/exist/';
 const String CUSTOMER_AUTHENTICATE_API = 'customer/auth/authenticate/';
 const String CUSTOMER_UPDATE_API = 'customer/auth/update/';
