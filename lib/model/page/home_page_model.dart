@@ -6,6 +6,8 @@ class HomePageModel {
   List<VoucherModel> voucherModel;
   List<ProductModel> productPopularModel;
   List<ProductModel> productModel;
+  List<ProductModel> mostSearch;
+  ProductPaginateModel productPaginateModel;
 
   HomePageModel({
     this.bannerPrimaryModel,
@@ -13,6 +15,8 @@ class HomePageModel {
     this.voucherModel,
     this.productPopularModel,
     this.productModel,
+    this.mostSearch,
+    this.productPaginateModel,
   });
 
   HomePageModel copyWith({
@@ -21,6 +25,8 @@ class HomePageModel {
     List<VoucherModel> voucherModel,
     List<ProductModel> productPopularModel,
     List<ProductModel> productModel,
+    List<ProductModel> mostSearch,
+    ProductPaginateModel productPaginateModel,
   }) =>
       HomePageModel(
         bannerPrimaryModel: bannerPrimaryModel ?? this.bannerPrimaryModel,
@@ -28,5 +34,7 @@ class HomePageModel {
         voucherModel: voucherModel ?? this.voucherModel,
         productPopularModel: productPopularModel ?? this.productPopularModel,
         productModel: productModel ?? this.productModel,
+        mostSearch: mostSearch ?? this.mostSearch,
+        productPaginateModel: productPaginateModel ?? this.productPaginateModel,
       );
 }

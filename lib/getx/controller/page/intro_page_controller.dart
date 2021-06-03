@@ -95,6 +95,10 @@ class IntroPageController extends GetxController {
         ExactAssetPicture(SvgPicture.svgStringDecoder, COIN_ICON),
         null,
       ),
+      precachePicture(
+        ExactAssetPicture(SvgPicture.svgStringDecoder, ARROW_UP_ICON),
+        null,
+      ),
     ]);
   }
 

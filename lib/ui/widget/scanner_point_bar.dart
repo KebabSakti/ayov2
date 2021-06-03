@@ -1,7 +1,6 @@
 import 'package:ayov2/const/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 
 class ScannerPointBar extends StatelessWidget {
   final VoidCallback onQrTap;
@@ -33,7 +32,6 @@ class ScannerPointBar extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: onQrTap,
-                  splashColor: Get.theme.accentColor.withOpacity(0.3),
                   icon: SvgPicture.asset(QR_ICON, width: 20),
                 ),
                 Text(
@@ -58,7 +56,6 @@ class ScannerPointBar extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: onCoinTap,
-                  splashColor: Get.theme.accentColor.withOpacity(0.3),
                   icon: SvgPicture.asset(COIN_ICON, width: 25),
                 ),
               ],

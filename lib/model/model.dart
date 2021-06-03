@@ -11,3 +11,7 @@ export './voucher/voucher_model.dart';
 export './voucher/voucher_history_model.dart';
 export './product/product_model.dart';
 export './page/home_page_model.dart';
+export './pagination/pagination_model.dart';
+export './product/product_paginate_model.dart';
+export './product/product_filter_item_model.dart';
+export './product/product_filter_model.dart';

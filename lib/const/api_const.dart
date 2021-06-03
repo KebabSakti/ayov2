@@ -1,4 +1,5 @@
-const String HOME_PAGE_API = 'customer/home/';
+const String HOME_PAGE_API = 'customer/page/home/';
+const String PRODUCT_API = 'customer/domain/product/';
 
 const String CUSTOMER_EXIST_API = 'customer/auth/exist/';
 const String CUSTOMER_AUTHENTICATE_API = 'customer/auth/authenticate/';

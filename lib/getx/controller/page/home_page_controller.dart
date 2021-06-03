@@ -12,8 +12,13 @@ class HomePageController extends GetxController {
   final AuthLocal _authLocal = Get.find();
   final Helper _helper = Get.find();
   final GlobalObs _globalObs = Get.find();
-  final AppPage _appPage = AppPage();
+
   final RxBool loading = true.obs;
+  final RxBool loadingPagination = false.obs;
+  final Rx<ProductPaginateModel> productPaginate = ProductPaginateModel().obs;
+
+  final AppPage _appPage = AppPage();
+  final Product _product = Product();
   final ScrollController homePageScrollController = ScrollController();
 
   HomePageModel homePageModel = HomePageModel();
@@ -33,8 +38,35 @@ class HomePageController extends GetxController {
     }
   }
 
-  void _routeToLoginPage() {
-    Get.offAllNamed(LOGIN_PAGE);
+  void _loadMoreProduct(double offset, double maxScroll) async {
+    bool fetch = ((offset == maxScroll) &&
+        !loadingPagination.value &&
+        productPaginate.value.pagination.nextPageUrl != null);
+
+    if (fetch) {
+      loadingPagination(true);
+
+      await _product
+          .product("?page=${productPaginate.value.pagination.currentPage + 1}")
+          .then((model) {
+        ProductPaginateModel productPaginateModel = ProductPaginateModel(
+          pagination: model.pagination,
+          products: productPaginate.value.products + model.products,
+        );
+
+        productPaginate(productPaginateModel);
+
+        loadingPagination(false);
+      });
+    }
+  }
+
+  void _scrollListener() {
+    double offset = homePageScrollController.offset;
+    double maxScroll = homePageScrollController.position.maxScrollExtent;
+
+    //product pagination
+    _loadMoreProduct(offset, maxScroll);
   }
 
   void _homeData() async {
@@ -43,6 +75,8 @@ class HomePageController extends GetxController {
 
       await _appPage.home().then((model) {
         homePageModel = model;
+
+        productPaginate(model.productPaginateModel);
 
         loading(false);
       });
@@ -55,7 +89,12 @@ class HomePageController extends GetxController {
     }
   }
 
+  void _routeToLoginPage() {
+    Get.offAllNamed(LOGIN_PAGE);
+  }
+
   void init() async {
+    homePageScrollController.addListener(_scrollListener);
     _homeData();
   }
 
@@ -63,5 +102,11 @@ class HomePageController extends GetxController {
   void onInit() {
     init();
     super.onInit();
+  }
+
+  @override
+  void onClose() {
+    homePageScrollController.dispose();
+    super.onClose();
   }
 }

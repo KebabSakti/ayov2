@@ -16,8 +16,8 @@ class Network {
   Network() {
     BaseOptions options = BaseOptions(
       baseUrl: '$PROTOCOL://$URL:1001/api/',
-      connectTimeout: 60000,
-      receiveTimeout: 60000,
+      connectTimeout: 30000,
+      receiveTimeout: 30000,
       responseType: ResponseType.plain,
       headers: {
         "Accept": "application/json",
