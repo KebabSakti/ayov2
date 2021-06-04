@@ -1,52 +1,92 @@
 import 'package:ayov2/model/model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class ProductFilterController extends GetxController {
   ProductFilterController(this.onFilter);
 
-  final ValueChanged<ProductFilterModel> onFilter;
+  final Function onFilter;
 
-  final Rx<ProductFilterModel> options = ProductFilterModel(
-    palingLaris:
-        ProductFilterItemModel<bool>(name: 'Paling Laris', value: false),
-    lagiDiskon: ProductFilterItemModel<bool>(name: 'Lagi Diskon', value: false),
-    ratingEmpat:
-        ProductFilterItemModel<bool>(name: 'Rating Tinggi +4', value: false),
-    banyakCoin: ProductFilterItemModel<bool>(name: 'Banyak Coin', value: false),
-    trending: ProductFilterItemModel<bool>(name: 'Trending', value: false),
-    populer: ProductFilterItemModel<bool>(name: 'Populer', value: false),
-    pengirimanLangsung:
-        ProductFilterItemModel<bool>(name: 'Pengiriman Langsung', value: false),
+  ProductFilterModel filterResult = ProductFilterModel(
+    palingLaris: ProductFilterItemModel<bool>(
+        name: 'Paling Laris', value: false, tag: 'filter'),
+    lagiDiskon: ProductFilterItemModel<bool>(
+        name: 'Lagi Diskon', value: false, tag: 'filter'),
+    ratingEmpat: ProductFilterItemModel<bool>(
+        name: 'Rating Tinggi +4', value: false, tag: 'filter'),
+    banyakCoin: ProductFilterItemModel<bool>(
+        name: 'Banyak Coin', value: false, tag: 'filter'),
+    trending: ProductFilterItemModel<bool>(
+        name: 'Trending', value: false, tag: 'filter'),
+    populer: ProductFilterItemModel<bool>(
+        name: 'Populer', value: false, tag: 'filter'),
+    pengirimanLangsung: ProductFilterItemModel<bool>(
+        name: 'Pengiriman Langsung', value: false, tag: 'filter'),
     pengirimanTerjadwal: ProductFilterItemModel<bool>(
-        name: 'Pengiriman Terjadwal', value: false),
-    hargaTertinggi:
-        ProductFilterItemModel<bool>(name: 'Harga Tertinggi', value: false),
-    hargaTerendah:
-        ProductFilterItemModel<bool>(name: 'Harga Terendah', value: false),
-  ).obs;
+        name: 'Pengiriman Terjadwal', value: false, tag: 'filter'),
+    hargaTertinggi: ProductFilterItemModel<bool>(
+        name: 'Harga Tertinggi', value: false, tag: 'sorting'),
+    hargaTerendah: ProductFilterItemModel<bool>(
+        name: 'Harga Terendah', value: false, tag: 'sorting'),
+  );
 
-  void palingLaris(bool value) {
-    options(options.value.copyWith(
-        palingLaris: options.value.palingLaris.copyWith(value: value)));
+  final RxList<ProductFilterItemModel<bool>> filters = [
+    ProductFilterItemModel<bool>(
+        name: 'Paling Laris', value: false, tag: 'filter'),
+    ProductFilterItemModel<bool>(
+        name: 'Lagi Diskon', value: false, tag: 'filter'),
+    ProductFilterItemModel<bool>(
+        name: 'Rating Tinggi +4', value: false, tag: 'filter'),
+    ProductFilterItemModel<bool>(
+        name: 'Banyak Coin', value: false, tag: 'filter'),
+    ProductFilterItemModel<bool>(name: 'Trending', value: false, tag: 'filter'),
+    ProductFilterItemModel<bool>(name: 'Populer', value: false, tag: 'filter'),
+    ProductFilterItemModel<bool>(
+        name: 'Pengiriman Langsung', value: false, tag: 'filter'),
+    ProductFilterItemModel<bool>(
+        name: 'Pengiriman Terjadwal', value: false, tag: 'filter'),
+    ProductFilterItemModel<bool>(
+        name: 'Harga Tertinggi', value: false, tag: 'sorting'),
+    ProductFilterItemModel<bool>(
+        name: 'Harga Terendah', value: false, tag: 'sorting'),
+  ].obs;
+
+  ProductFilterItemModel<bool> _resultHelper(String name) {
+    return filters.firstWhere(
+      (item) {
+        return item.name == name;
+      },
+      orElse: () {
+        return null;
+      },
+    );
   }
 
-  void ratingTinggi(bool value) {
-    options(options.value.copyWith(
-        ratingEmpat: options.value.ratingEmpat.copyWith(value: value)));
+  void onFilterSelected(ProductFilterItemModel<bool> model) {
+    filters(filters.map((item) {
+      if (item.name == model.name) {
+        return model;
+      }
+
+      return item;
+    }).toList());
   }
 
-  void banyakCoin(bool value) {
-    options(options.value
-        .copyWith(banyakCoin: options.value.banyakCoin.copyWith(value: value)));
+  ProductFilterModel _onFilterResult() {
+    return filterResult.copyWith(
+      palingLaris: _resultHelper('Paling Laris'),
+      lagiDiskon: _resultHelper('Lagi Diskon'),
+      ratingEmpat: _resultHelper('Rating Tinggi +4'),
+      banyakCoin: _resultHelper('Banyak Coin'),
+      pengirimanLangsung: _resultHelper('Pengiriman Langsung'),
+      pengirimanTerjadwal: _resultHelper('Pengiriman Terjadwal'),
+    );
   }
 
   @override
   void onInit() {
-    debounce(options, (_) {
-      onFilter(options.value);
+    debounce(filters, (_) {
+      onFilter(_onFilterResult());
     }, time: Duration(milliseconds: 500));
-
     super.onInit();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:ayov2/getx/getx.dart';
+import 'package:ayov2/model/model.dart';
 import 'package:ayov2/ui/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,7 +25,10 @@ class HomeProductSection extends StatelessWidget {
         padding: EdgeInsets.all(10),
         child: Column(
           children: [
-            // ProductFilter(),
+            ProductFilter(
+              tag: "HOME",
+              onFilter: controller.onFilter,
+            ),
             SizedBox(height: 10),
             SizedBox(
               child: MediaQuery.removePadding(

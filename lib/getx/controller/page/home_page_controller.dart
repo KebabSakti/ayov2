@@ -22,6 +22,7 @@ class HomePageController extends GetxController {
   final ScrollController homePageScrollController = ScrollController();
 
   HomePageModel homePageModel = HomePageModel();
+  ProductFilterModel _productFilterModel = ProductFilterModel();
 
   void signOutButton() async {
     try {
@@ -38,6 +39,34 @@ class HomePageController extends GetxController {
     }
   }
 
+  void onFilter(ProductFilterModel model) {
+    _productFilterModel = model;
+    _loadFilteredProduct();
+  }
+
+  void _loadFilteredProduct() async {
+    loading(true);
+
+    await _product
+        .product(
+      "?page=1",
+      highSell: _productFilterModel.palingLaris.value,
+      discount: _productFilterModel.lagiDiskon.value,
+      highRatingValue: _productFilterModel.ratingEmpat.value,
+      highPoint: _productFilterModel.banyakCoin.value,
+    )
+        .then((model) {
+      ProductPaginateModel productPaginateModel = ProductPaginateModel(
+        pagination: model.pagination,
+        products: productPaginate.value.products + model.products,
+      );
+
+      productPaginate(productPaginateModel);
+
+      loading(false);
+    });
+  }
+
   void _loadMoreProduct(double offset, double maxScroll) async {
     bool fetch = ((offset == maxScroll) &&
         !loadingPagination.value &&
@@ -47,7 +76,13 @@ class HomePageController extends GetxController {
       loadingPagination(true);
 
       await _product
-          .product("?page=${productPaginate.value.pagination.currentPage + 1}")
+          .product(
+        "?page=${productPaginate.value.pagination.currentPage + 1}",
+        highSell: _productFilterModel.palingLaris?.value ?? false,
+        discount: _productFilterModel.lagiDiskon?.value ?? false,
+        highRatingValue: _productFilterModel.ratingEmpat?.value ?? false,
+        highPoint: _productFilterModel.banyakCoin?.value ?? false,
+      )
           .then((model) {
         ProductPaginateModel productPaginateModel = ProductPaginateModel(
           pagination: model.pagination,

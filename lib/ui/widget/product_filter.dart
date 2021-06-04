@@ -17,33 +17,42 @@ class ProductFilter extends StatelessWidget {
         Get.put(ProductFilterController(onFilter), tag: tag);
     return SizedBox(
       height: 35,
-      child: ListView.builder(
-        shrinkWrap: true,
-        itemCount: 20,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding:
-                EdgeInsets.only(right: (index >= 0 && index != 19) ? 10 : 0),
-            child: ChoiceChip(
-              backgroundColor: Colors.grey[200],
-              selected: index == 0 ? true : false,
-              selectedColor: Colors.green.withOpacity(0.5),
-              elevation: 0,
-              pressElevation: 0,
-              label: Text(
-                'Pilihan $index',
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black.withOpacity(0.6),
+      child: Obx(() {
+        var filters =
+            controller.filters.where((item) => item.tag == 'filter').toList();
+        return ListView.builder(
+          shrinkWrap: true,
+          itemCount: filters.length,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: EdgeInsets.only(
+                  right:
+                      (index >= 0 && index != (filters.length - 1)) ? 10 : 0),
+              child: ChoiceChip(
+                backgroundColor: Colors.grey[200],
+                selectedColor: Colors.green.withOpacity(0.5),
+                elevation: 0,
+                pressElevation: 0,
+                selected: filters[index].value,
+                onSelected: (value) {
+                  controller.onFilterSelected(
+                    filters[index].copyWith(value: value),
+                  );
+                },
+                label: Text(
+                  controller.filters[index].name,
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black.withOpacity(0.6),
+                  ),
                 ),
               ),
-              onSelected: (value) {},
-            ),
-          );
-        },
-      ),
+            );
+          },
+        );
+      }),
     );
   }
 }
