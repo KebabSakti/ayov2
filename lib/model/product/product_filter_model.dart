@@ -1,51 +1,62 @@
-enum JenisPengiriman { TERJADWAL, INSTANT }
-
 class ProductFilterModel {
-  bool palingLaris;
-  bool lagiDiskon;
-  bool ratingEmpat;
-  bool banyakCoin;
-  bool trending;
-  bool populer;
-  bool hargaTertinggi;
-  bool hargaTerendah;
-  JenisPengiriman jenisPengiriman;
-  String kategori;
-  String subKategori;
+  String deliveryType;
+  String category;
+  String subCategory;
   String productId;
+  String keyword;
+  String productPrice;
+  bool highRatingValue;
+  bool discount;
+  bool highPoint;
+  bool highView;
+  bool highSell;
+  bool highRatingCount;
+  bool highSearch;
 
   ProductFilterModel({
-    this.palingLaris = false,
-    this.lagiDiskon = false,
-    this.ratingEmpat = false,
-    this.banyakCoin = false,
-    this.trending = false,
-    this.populer = false,
-    this.hargaTertinggi = false,
-    this.hargaTerendah = false,
-    this.jenisPengiriman,
+    this.deliveryType,
+    this.category,
+    this.subCategory,
+    this.productId,
+    this.keyword,
+    this.productPrice,
+    this.highRatingValue = false,
+    this.discount = false,
+    this.highPoint = false,
+    this.highView = false,
+    this.highSearch = false,
+    this.highSell = false,
+    this.highRatingCount = false,
   });
 
   ProductFilterModel copyWith({
-    bool palingLaris,
-    bool lagiDiskon,
-    bool ratingEmpat,
-    bool banyakCoin,
-    bool trending,
-    bool populer,
-    bool hargaTertinggi,
-    bool hargaTerendah,
-    JenisPengiriman jenisPengiriman,
+    String deliveryType,
+    String category,
+    String subCategory,
+    String productId,
+    String keyword,
+    String productPrice,
+    bool highRatingValue,
+    bool discount,
+    bool highPoint,
+    bool highView,
+    bool highSell,
+    bool highRatingCount,
+    bool highSearch,
   }) =>
       ProductFilterModel(
-        palingLaris: palingLaris ?? this.palingLaris,
-        lagiDiskon: lagiDiskon ?? this.lagiDiskon,
-        ratingEmpat: ratingEmpat ?? this.ratingEmpat,
-        banyakCoin: banyakCoin ?? this.banyakCoin,
-        trending: trending ?? this.trending,
-        populer: populer ?? this.populer,
-        hargaTerendah: hargaTerendah ?? this.hargaTerendah,
-        hargaTertinggi: hargaTertinggi ?? this.hargaTertinggi,
-        jenisPengiriman: jenisPengiriman ?? this.jenisPengiriman,
+        deliveryType: deliveryType ?? this.deliveryType,
+        category: category ?? this.category,
+        subCategory: subCategory ?? this.subCategory,
+        productId: productId ?? this.productId,
+        keyword: keyword ?? this.keyword,
+        discount: discount ?? this.discount,
+        productPrice: productPrice ?? this.productPrice,
+        highPoint: highPoint ?? this.highPoint,
+        highView: highView ?? this.highView,
+        highRatingCount: highRatingCount ?? highRatingCount,
+        highRatingValue: highRatingValue ?? this.highRatingValue,
+        highSearch: highSearch ?? this.highSearch,
+        highSell: highSell ?? this.highSell,
       );
 }

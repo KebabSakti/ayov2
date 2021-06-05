@@ -40,7 +40,7 @@ class ProductFilter extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               children: [
                 ProductFilterItem(
-                  selected: productFilterModel.value.palingLaris,
+                  selected: productFilterModel.value.highSell,
                   child: Text(
                     'Paling Laris',
                     style: TextStyle(
@@ -51,12 +51,12 @@ class ProductFilter extends StatelessWidget {
                   ),
                   onSelected: (value) {
                     productFilterModel(
-                        productFilterModel.value.copyWith(palingLaris: value));
+                        productFilterModel.value.copyWith(highSell: value));
                   },
                 ),
                 SizedBox(width: 10),
                 ProductFilterItem(
-                  selected: productFilterModel.value.lagiDiskon,
+                  selected: productFilterModel.value.discount,
                   child: Text(
                     'Lagi Diskon',
                     style: TextStyle(
@@ -67,12 +67,12 @@ class ProductFilter extends StatelessWidget {
                   ),
                   onSelected: (value) {
                     productFilterModel(
-                        productFilterModel.value.copyWith(lagiDiskon: value));
+                        productFilterModel.value.copyWith(discount: value));
                   },
                 ),
                 SizedBox(width: 10),
                 ProductFilterItem(
-                  selected: productFilterModel.value.ratingEmpat,
+                  selected: productFilterModel.value.highRatingValue,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -93,13 +93,13 @@ class ProductFilter extends StatelessWidget {
                     ],
                   ),
                   onSelected: (value) {
-                    productFilterModel(
-                        productFilterModel.value.copyWith(ratingEmpat: value));
+                    productFilterModel(productFilterModel.value
+                        .copyWith(highRatingValue: value));
                   },
                 ),
                 SizedBox(width: 10),
                 ProductFilterItem(
-                  selected: productFilterModel.value.banyakCoin,
+                  selected: productFilterModel.value.highPoint,
                   child: Row(
                     children: [
                       Icon(
@@ -120,12 +120,12 @@ class ProductFilter extends StatelessWidget {
                   ),
                   onSelected: (value) {
                     productFilterModel(
-                        productFilterModel.value.copyWith(banyakCoin: value));
+                        productFilterModel.value.copyWith(highPoint: value));
                   },
                 ),
                 SizedBox(width: 10),
                 ProductFilterItem(
-                  selected: productFilterModel.value.trending,
+                  selected: productFilterModel.value.highView,
                   child: Text(
                     'Trending',
                     style: TextStyle(
@@ -136,12 +136,12 @@ class ProductFilter extends StatelessWidget {
                   ),
                   onSelected: (value) {
                     productFilterModel(
-                        productFilterModel.value.copyWith(trending: value));
+                        productFilterModel.value.copyWith(highView: value));
                   },
                 ),
                 SizedBox(width: 10),
                 ProductFilterItem(
-                  selected: productFilterModel.value.populer,
+                  selected: productFilterModel.value.highSearch,
                   child: Text(
                     'Populer',
                     style: TextStyle(
@@ -152,7 +152,7 @@ class ProductFilter extends StatelessWidget {
                   ),
                   onSelected: (value) {
                     productFilterModel(
-                        productFilterModel.value.copyWith(populer: value));
+                        productFilterModel.value.copyWith(highSearch: value));
                   },
                 ),
               ],

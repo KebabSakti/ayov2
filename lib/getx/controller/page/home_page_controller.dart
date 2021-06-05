@@ -40,18 +40,29 @@ class HomePageController extends GetxController {
     }
   }
 
+  Future<ProductPaginateModel> _loadProduct(String urlQuery) async {
+    return await _product.product(
+      urlQuery,
+      category: filterModel.value.category,
+      deliveryType: filterModel.value.deliveryType,
+      discount: filterModel.value.discount,
+      highPoint: filterModel.value.highPoint,
+      highRatingCount: filterModel.value.highRatingCount,
+      highRatingValue: filterModel.value.highRatingValue,
+      highSearch: filterModel.value.highSearch,
+      highSell: filterModel.value.highSell,
+      highView: filterModel.value.highView,
+      keyword: filterModel.value.keyword,
+      productId: filterModel.value.productId,
+      productPrice: filterModel.value.productPrice,
+      subCategory: filterModel.value.subCategory,
+    );
+  }
+
   void _loadFilteredProduct() async {
     loadingFilter(true);
 
-    await _product
-        .product(
-      "?page=1",
-      highSell: filterModel.value.palingLaris,
-      discount: filterModel.value.lagiDiskon,
-      highRatingValue: filterModel.value.ratingEmpat,
-      highPoint: filterModel.value.banyakCoin,
-    )
-        .then((model) {
+    await _loadProduct("?page=1").then((model) {
       productPaginate(model);
 
       loadingFilter(false);
@@ -67,14 +78,8 @@ class HomePageController extends GetxController {
     if (fetch) {
       loadingPagination(true);
 
-      await _product
-          .product(
-        "?page=${productPaginate.value.pagination.currentPage + 1}",
-        highSell: filterModel.value.palingLaris,
-        discount: filterModel.value.lagiDiskon,
-        highRatingValue: filterModel.value.ratingEmpat,
-        highPoint: filterModel.value.banyakCoin,
-      )
+      await _loadProduct(
+              "?page=${productPaginate.value.pagination.currentPage + 1}")
           .then((model) {
         ProductPaginateModel productPaginateModel = ProductPaginateModel(
           pagination: model.pagination,
