@@ -1,41 +1,41 @@
-import 'package:ayov2/model/model.dart';
+enum JenisPengiriman { TERJADWAL, INSTANT }
 
 class ProductFilterModel {
-  ProductFilterItemModel<bool> palingLaris;
-  ProductFilterItemModel<bool> lagiDiskon;
-  ProductFilterItemModel<bool> ratingEmpat;
-  ProductFilterItemModel<bool> banyakCoin;
-  ProductFilterItemModel<bool> trending;
-  ProductFilterItemModel<bool> populer;
-  ProductFilterItemModel<bool> pengirimanLangsung;
-  ProductFilterItemModel<bool> pengirimanTerjadwal;
-  ProductFilterItemModel<bool> hargaTertinggi;
-  ProductFilterItemModel<bool> hargaTerendah;
+  bool palingLaris;
+  bool lagiDiskon;
+  bool ratingEmpat;
+  bool banyakCoin;
+  bool trending;
+  bool populer;
+  bool hargaTertinggi;
+  bool hargaTerendah;
+  JenisPengiriman jenisPengiriman;
+  String kategori;
+  String subKategori;
+  String productId;
 
   ProductFilterModel({
-    this.palingLaris,
-    this.lagiDiskon,
-    this.ratingEmpat,
-    this.banyakCoin,
-    this.trending,
-    this.populer,
-    this.pengirimanLangsung,
-    this.pengirimanTerjadwal,
-    this.hargaTertinggi,
-    this.hargaTerendah,
+    this.palingLaris = false,
+    this.lagiDiskon = false,
+    this.ratingEmpat = false,
+    this.banyakCoin = false,
+    this.trending = false,
+    this.populer = false,
+    this.hargaTertinggi = false,
+    this.hargaTerendah = false,
+    this.jenisPengiriman,
   });
 
   ProductFilterModel copyWith({
-    ProductFilterItemModel<bool> palingLaris,
-    ProductFilterItemModel<bool> lagiDiskon,
-    ProductFilterItemModel<bool> ratingEmpat,
-    ProductFilterItemModel<bool> banyakCoin,
-    ProductFilterItemModel<bool> trending,
-    ProductFilterItemModel<bool> populer,
-    ProductFilterItemModel<bool> pengirimanLangsung,
-    ProductFilterItemModel<bool> pengirimanTerjadwal,
-    ProductFilterItemModel<bool> hargaTertinggi,
-    ProductFilterItemModel<bool> hargaTerendah,
+    bool palingLaris,
+    bool lagiDiskon,
+    bool ratingEmpat,
+    bool banyakCoin,
+    bool trending,
+    bool populer,
+    bool hargaTertinggi,
+    bool hargaTerendah,
+    JenisPengiriman jenisPengiriman,
   }) =>
       ProductFilterModel(
         palingLaris: palingLaris ?? this.palingLaris,
@@ -44,9 +44,8 @@ class ProductFilterModel {
         banyakCoin: banyakCoin ?? this.banyakCoin,
         trending: trending ?? this.trending,
         populer: populer ?? this.populer,
-        pengirimanLangsung: pengirimanLangsung ?? this.pengirimanLangsung,
-        pengirimanTerjadwal: pengirimanTerjadwal ?? this.pengirimanTerjadwal,
         hargaTerendah: hargaTerendah ?? this.hargaTerendah,
         hargaTertinggi: hargaTertinggi ?? this.hargaTertinggi,
+        jenisPengiriman: jenisPengiriman ?? this.jenisPengiriman,
       );
 }

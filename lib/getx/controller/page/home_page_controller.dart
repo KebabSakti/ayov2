@@ -15,14 +15,15 @@ class HomePageController extends GetxController {
 
   final RxBool loading = true.obs;
   final RxBool loadingPagination = false.obs;
+  final RxBool loadingFilter = false.obs;
   final Rx<ProductPaginateModel> productPaginate = ProductPaginateModel().obs;
+  final Rx<ProductFilterModel> filterModel = ProductFilterModel().obs;
 
   final AppPage _appPage = AppPage();
   final Product _product = Product();
   final ScrollController homePageScrollController = ScrollController();
 
   HomePageModel homePageModel = HomePageModel();
-  ProductFilterModel _productFilterModel = ProductFilterModel();
 
   void signOutButton() async {
     try {
@@ -39,37 +40,28 @@ class HomePageController extends GetxController {
     }
   }
 
-  void onFilter(ProductFilterModel model) {
-    _productFilterModel = model;
-    _loadFilteredProduct();
-  }
-
   void _loadFilteredProduct() async {
-    loading(true);
+    loadingFilter(true);
 
     await _product
         .product(
       "?page=1",
-      highSell: _productFilterModel.palingLaris.value,
-      discount: _productFilterModel.lagiDiskon.value,
-      highRatingValue: _productFilterModel.ratingEmpat.value,
-      highPoint: _productFilterModel.banyakCoin.value,
+      highSell: filterModel.value.palingLaris,
+      discount: filterModel.value.lagiDiskon,
+      highRatingValue: filterModel.value.ratingEmpat,
+      highPoint: filterModel.value.banyakCoin,
     )
         .then((model) {
-      ProductPaginateModel productPaginateModel = ProductPaginateModel(
-        pagination: model.pagination,
-        products: productPaginate.value.products + model.products,
-      );
+      productPaginate(model);
 
-      productPaginate(productPaginateModel);
-
-      loading(false);
+      loadingFilter(false);
     });
   }
 
   void _loadMoreProduct(double offset, double maxScroll) async {
     bool fetch = ((offset == maxScroll) &&
         !loadingPagination.value &&
+        !loadingFilter.value &&
         productPaginate.value.pagination.nextPageUrl != null);
 
     if (fetch) {
@@ -78,10 +70,10 @@ class HomePageController extends GetxController {
       await _product
           .product(
         "?page=${productPaginate.value.pagination.currentPage + 1}",
-        highSell: _productFilterModel.palingLaris?.value ?? false,
-        discount: _productFilterModel.lagiDiskon?.value ?? false,
-        highRatingValue: _productFilterModel.ratingEmpat?.value ?? false,
-        highPoint: _productFilterModel.banyakCoin?.value ?? false,
+        highSell: filterModel.value.palingLaris,
+        discount: filterModel.value.lagiDiskon,
+        highRatingValue: filterModel.value.ratingEmpat,
+        highPoint: filterModel.value.banyakCoin,
       )
           .then((model) {
         ProductPaginateModel productPaginateModel = ProductPaginateModel(
@@ -130,12 +122,18 @@ class HomePageController extends GetxController {
 
   void init() async {
     homePageScrollController.addListener(_scrollListener);
+
+    debounce(filterModel, (_) {
+      _loadFilteredProduct();
+    }, time: Duration(milliseconds: 500));
+
     _homeData();
   }
 
   @override
   void onInit() {
     init();
+
     super.onInit();
   }
 

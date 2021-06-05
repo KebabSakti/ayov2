@@ -36,6 +36,7 @@ dependencies:
   fluttertoast: ^7.1.6
   expandable: ^4.1.4
   flutter_sticky_header: ^0.5.0
+  sticky_headers: ^0.1.8+1
   permission_handler: ^5.0.1+1
   flutter_pusher_client: ^0.3.1
   laravel_echo: ^0.2.9

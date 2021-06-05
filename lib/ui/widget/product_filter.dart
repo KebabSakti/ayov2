@@ -1,58 +1,165 @@
-import 'package:ayov2/getx/getx.dart';
+import 'package:ayov2/model/model.dart';
+import 'package:ayov2/ui/ui.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class ProductFilter extends StatelessWidget {
-  final String tag;
-  final Function onFilter;
+  final Rx<ProductFilterModel> productFilterModel;
 
-  ProductFilter({
-    @required this.tag,
-    @required this.onFilter,
-  });
+  ProductFilter({@required this.productFilterModel});
 
   @override
   Widget build(BuildContext context) {
-    final ProductFilterController controller =
-        Get.put(ProductFilterController(onFilter), tag: tag);
-    return SizedBox(
-      height: 35,
-      child: Obx(() {
-        var filters =
-            controller.filters.where((item) => item.tag == 'filter').toList();
-        return ListView.builder(
-          shrinkWrap: true,
-          itemCount: filters.length,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: EdgeInsets.only(
-                  right:
-                      (index >= 0 && index != (filters.length - 1)) ? 10 : 0),
-              child: ChoiceChip(
-                backgroundColor: Colors.grey[200],
-                selectedColor: Colors.green.withOpacity(0.5),
-                elevation: 0,
-                pressElevation: 0,
-                selected: filters[index].value,
-                onSelected: (value) {
-                  controller.onFilterSelected(
-                    filters[index].copyWith(value: value),
-                  );
-                },
-                label: Text(
-                  controller.filters[index].name,
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black.withOpacity(0.6),
-                  ),
+    return Obx(() {
+      return Row(
+        children: [
+          SizedBox(
+            width: 50,
+            height: 35,
+            child: Ink(
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(25),
+              ),
+              child: InkWell(
+                onTap: () {},
+                borderRadius: BorderRadius.circular(25),
+                child: Icon(
+                  FontAwesomeIcons.slidersH,
+                  size: 16,
+                  color: Get.theme.primaryColor,
                 ),
               ),
-            );
-          },
-        );
-      }),
-    );
+            ),
+          ),
+          SizedBox(width: 10),
+          Expanded(
+            child: ListView(
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              children: [
+                ProductFilterItem(
+                  selected: productFilterModel.value.palingLaris,
+                  child: Text(
+                    'Paling Laris',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black.withOpacity(0.6),
+                    ),
+                  ),
+                  onSelected: (value) {
+                    productFilterModel(
+                        productFilterModel.value.copyWith(palingLaris: value));
+                  },
+                ),
+                SizedBox(width: 10),
+                ProductFilterItem(
+                  selected: productFilterModel.value.lagiDiskon,
+                  child: Text(
+                    'Lagi Diskon',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black.withOpacity(0.6),
+                    ),
+                  ),
+                  onSelected: (value) {
+                    productFilterModel(
+                        productFilterModel.value.copyWith(lagiDiskon: value));
+                  },
+                ),
+                SizedBox(width: 10),
+                ProductFilterItem(
+                  selected: productFilterModel.value.ratingEmpat,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.star_rate_rounded,
+                        color: Colors.amber,
+                        size: 18,
+                      ),
+                      SizedBox(width: 4),
+                      Text(
+                        '4 ke atas',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black.withOpacity(0.6),
+                        ),
+                      ),
+                    ],
+                  ),
+                  onSelected: (value) {
+                    productFilterModel(
+                        productFilterModel.value.copyWith(ratingEmpat: value));
+                  },
+                ),
+                SizedBox(width: 10),
+                ProductFilterItem(
+                  selected: productFilterModel.value.banyakCoin,
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.circle,
+                        color: Colors.amber,
+                        size: 18,
+                      ),
+                      SizedBox(width: 4),
+                      Text(
+                        'Banyak Poin',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black.withOpacity(0.6),
+                        ),
+                      ),
+                    ],
+                  ),
+                  onSelected: (value) {
+                    productFilterModel(
+                        productFilterModel.value.copyWith(banyakCoin: value));
+                  },
+                ),
+                SizedBox(width: 10),
+                ProductFilterItem(
+                  selected: productFilterModel.value.trending,
+                  child: Text(
+                    'Trending',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black.withOpacity(0.6),
+                    ),
+                  ),
+                  onSelected: (value) {
+                    productFilterModel(
+                        productFilterModel.value.copyWith(trending: value));
+                  },
+                ),
+                SizedBox(width: 10),
+                ProductFilterItem(
+                  selected: productFilterModel.value.populer,
+                  child: Text(
+                    'Populer',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black.withOpacity(0.6),
+                    ),
+                  ),
+                  onSelected: (value) {
+                    productFilterModel(
+                        productFilterModel.value.copyWith(populer: value));
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
+      );
+    });
   }
 }
