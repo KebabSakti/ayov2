@@ -17,7 +17,7 @@ class HomeCategorySection extends StatelessWidget {
         child: Column(
           children: [
             ScannerPointBar(
-              onQrTap: () {},
+              onQrTap: controller.qrScanner,
               onCoinTap: () {},
             ),
             SizedBox(height: 20),

@@ -20,14 +20,14 @@ class SearchProductViewSection extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 10),
+        SizedBox(height: 18),
         SizedBox(
           height: 60,
           child: Obx(() {
             return ListView.builder(
               itemCount: (controller.loadingPage.value)
                   ? 5
-                  : controller.searchPageModel.productViews.length,
+                  : controller.searchPageModel.value.productViews.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 //loading
@@ -44,13 +44,13 @@ class SearchProductViewSection extends StatelessWidget {
                 }
 
                 //if record exist
-                if (controller.searchPageModel.productViews.length > 0) {
+                if (controller.searchPageModel.value.productViews.length > 0) {
                   return Padding(
                     padding: EdgeInsets.only(
                       right: (index >= 0 &&
                               index !=
-                                  (controller
-                                          .searchPageModel.productViews.length -
+                                  (controller.searchPageModel.value.productViews
+                                          .length -
                                       1))
                           ? 10
                           : 0,
@@ -58,8 +58,8 @@ class SearchProductViewSection extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: CachedNetworkImage(
-                        imageUrl: controller
-                            .searchPageModel.productViews[index].productCover,
+                        imageUrl: controller.searchPageModel.value
+                            .productViews[index].productCover,
                         fit: BoxFit.cover,
                         width: (Get.size.width - 30) / 5,
                         height: 60,

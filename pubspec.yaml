@@ -45,6 +45,7 @@ dependencies:
   intl_phone_number_input: ^0.6.0
   carousel_slider: ^2.2.1
   flutter_switch: ^0.2.2
+  qr_code_scanner: ^0.3.5
 
 dev_dependencies:
   flutter_test:

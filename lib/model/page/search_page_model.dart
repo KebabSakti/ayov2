@@ -2,9 +2,9 @@ import 'package:ayov2/model/model.dart';
 
 class SearchPageModel {
   SearchPageModel({
-    this.productViews,
-    this.searchHistories,
-    this.popularSearches,
+    this.productViews = const [],
+    this.searchHistories = const [],
+    this.popularSearches = const [],
   });
 
   List<ProductViewModel> productViews;

@@ -5,3 +5,4 @@ export './auth_local.dart';
 export './failure.dart';
 export './app_page.dart';
 export './product.dart';
+export './search.dart';

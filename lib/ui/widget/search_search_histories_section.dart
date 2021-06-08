@@ -25,7 +25,7 @@ class SearchHistoriesSection extends StatelessWidget {
             shrinkWrap: true,
             itemCount: (controller.loadingPage.value)
                 ? 5
-                : controller.searchPageModel.searchHistories.length,
+                : controller.searchPageModel.value.searchHistories.length,
             physics: NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               if (controller.loadingPage.value) {
@@ -38,7 +38,7 @@ class SearchHistoriesSection extends StatelessWidget {
                 );
               }
 
-              if (controller.searchPageModel.searchHistories.length > 0) {
+              if (controller.searchPageModel.value.searchHistories.length > 0) {
                 return Row(
                   children: [
                     Icon(
@@ -47,8 +47,8 @@ class SearchHistoriesSection extends StatelessWidget {
                     ),
                     SizedBox(width: 10),
                     Text(
-                      controller
-                          .searchPageModel.searchHistories[index].searchKeyword,
+                      controller.searchPageModel.value.searchHistories[index]
+                          .searchKeyword,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),

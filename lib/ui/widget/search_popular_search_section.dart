@@ -26,7 +26,7 @@ class SearchPopularSearchSection extends StatelessWidget {
             shrinkWrap: true,
             itemCount: (controller.loadingPage.value)
                 ? 5
-                : controller.searchPageModel.popularSearches.length,
+                : controller.searchPageModel.value.popularSearches.length,
             physics: NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               if (controller.loadingPage.value) {
@@ -49,7 +49,7 @@ class SearchPopularSearchSection extends StatelessWidget {
                 );
               }
 
-              if (controller.searchPageModel.popularSearches.length > 0) {
+              if (controller.searchPageModel.value.popularSearches.length > 0) {
                 return ListTile(
                   onTap: () {},
                   dense: true,
@@ -57,16 +57,16 @@ class SearchPopularSearchSection extends StatelessWidget {
                   leading: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: CachedNetworkImage(
-                      imageUrl: controller
-                          .searchPageModel.popularSearches[index].searchImage,
+                      imageUrl: controller.searchPageModel.value
+                          .popularSearches[index].searchImage,
                       fit: BoxFit.cover,
                       height: 50,
                       width: 60,
                     ),
                   ),
                   title: Text(
-                    controller
-                        .searchPageModel.popularSearches[index].searchKeyword,
+                    controller.searchPageModel.value.popularSearches[index]
+                        .searchKeyword,
                     textAlign: TextAlign.left,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
@@ -77,7 +77,7 @@ class SearchPopularSearchSection extends StatelessWidget {
                     ),
                   ),
                   subtitle: Text(
-                    '${controller.searchPageModel.popularSearches[index].searchCount} pencarian',
+                    '${controller.searchPageModel.value.popularSearches[index].searchCount} pencarian',
                     textAlign: TextAlign.left,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,

@@ -1,7 +1,9 @@
+import 'package:ayov2/const/const.dart';
 import 'package:ayov2/getx/getx.dart';
 import 'package:ayov2/model/model.dart';
 import 'package:ayov2/ui/ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -141,7 +143,7 @@ class ProductFilterPage extends GetView<ProductFilterPageController> {
                   Icon(
                     Icons.star_rate_rounded,
                     color: Colors.amber,
-                    size: 18,
+                    size: 20,
                   ),
                   SizedBox(width: 4),
                   Text(
@@ -175,10 +177,10 @@ class ProductFilterPage extends GetView<ProductFilterPageController> {
               contentPadding: EdgeInsets.symmetric(vertical: 2, horizontal: 15),
               title: Row(
                 children: [
-                  Icon(
-                    Icons.circle,
-                    color: Colors.amber,
-                    size: 18,
+                  SvgPicture.asset(
+                    COIN_ICON,
+                    width: 18,
+                    height: 18,
                   ),
                   SizedBox(width: 4),
                   Text(

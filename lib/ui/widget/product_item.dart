@@ -1,8 +1,10 @@
+import 'package:ayov2/const/const.dart';
 import 'package:ayov2/model/model.dart';
 import 'package:ayov2/ui/ui.dart';
 import 'package:ayov2/util/util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class ProductItem extends StatelessWidget {
@@ -25,11 +27,41 @@ class ProductItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
             child: Column(
               children: [
-                CachedNetworkImage(
-                  imageUrl: product.productCover,
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                  height: 250 / 2,
+                Stack(
+                  children: [
+                    CachedNetworkImage(
+                      imageUrl: product.productCover,
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: 250 / 2,
+                    ),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 6, right: 8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(
+                              product.productPoint.toString(),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.amber,
+                              ),
+                            ),
+                            SizedBox(width: 2),
+                            SvgPicture.asset(
+                              COIN_ICON,
+                              width: 13,
+                              height: 13,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 Expanded(
                   child: Padding(

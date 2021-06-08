@@ -18,7 +18,6 @@ export './product_filter_item.dart';
 export './rating.dart';
 export './sliding_panel.dart';
 export './product_delivery_type.dart';
-export './search_appbar_section.dart';
 export './search_popular_search_section.dart';
 export './search_product_view_section.dart';
 export './search_search_histories_section.dart';

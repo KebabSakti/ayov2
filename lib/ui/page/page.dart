@@ -7,3 +7,4 @@ export './home_page.dart';
 export './app_page.dart';
 export './product_filter_page.dart';
 export './search_page.dart';
+export './qr_scanner_page.dart';

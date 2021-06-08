@@ -6,6 +6,7 @@ import 'package:ayov2/model/model.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class HomePageController extends GetxController {
   final AuthFirebase _authFirebase = Get.find();
@@ -38,6 +39,27 @@ class HomePageController extends GetxController {
     } catch (e) {
       _helper.dialog.close();
       _helper.dialog.error(e.toString(), dismissible: true);
+    }
+  }
+
+  void qrScanner() async {
+    if (!await Permission.camera.isGranted) {
+      _helper.dialog.show(
+        'Aplikasi memerlukan izin kamera untuk melanjutkan',
+        buttonText: 'Lanjutkan',
+        headingText: "PERHATIAN",
+        color: Colors.amber[600],
+        headingIcon: Icons.warning_amber_rounded,
+        dismissible: true,
+        onPressed: () async {
+          _helper.dialog.close();
+          await Permission.camera.request().then((status) {
+            _routeToQrPage();
+          });
+        },
+      );
+    } else {
+      _routeToQrPage();
     }
   }
 
@@ -127,6 +149,12 @@ class HomePageController extends GetxController {
     await homeData();
 
     filterModel(ProductFilterModel());
+  }
+
+  void _routeToQrPage() async {
+    var result = await Get.toNamed(QR_PAGE);
+
+    if (result != null) _helper.toast.show(result);
   }
 
   void routeToSearchPage() {

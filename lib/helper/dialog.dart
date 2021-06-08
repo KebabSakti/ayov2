@@ -236,4 +236,105 @@ class AyoDialog {
       barrierDismissible: dismissible,
     );
   }
+
+  void show(
+    String text, {
+    String buttonText = '',
+    String headingText = '',
+    Color color,
+    IconData headingIcon,
+    bool dismissible = false,
+    Function onPressed,
+  }) {
+    Get.dialog(
+      WillPopScope(
+        onWillPop: () async {
+          if (dismissible) Get.back();
+          return false;
+        },
+        child: AlertDialog(
+          titlePadding: EdgeInsets.zero,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          title: Container(
+            width: double.infinity,
+            height: 130,
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+              ),
+            ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    headingIcon,
+                    color: Colors.white,
+                    size: 60,
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    headingText,
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 2,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          content: Container(
+            width: double.maxFinite,
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                Center(
+                  child: Text(
+                    text,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                ),
+                (onPressed != null)
+                    ? Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            FlatButton(
+                              onPressed: onPressed,
+                              color: color,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25),
+                              ),
+                              child: Text(
+                                buttonText,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : SizedBox.shrink(),
+              ],
+            ),
+          ),
+        ),
+      ),
+      barrierDismissible: dismissible,
+    );
+  }
 }
