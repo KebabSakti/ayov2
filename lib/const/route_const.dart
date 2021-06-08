@@ -5,3 +5,5 @@ const String REGISTER_PAGE = '/register';
 const String OTP_PAGE = '/otp';
 const String APP_PAGE = '/app';
 const String HOME_PAGE = '/home';
+const String PRODUCT_FILTER_PAGE = '/product_filter';
+const String SEARCH_PAGE = '/search';

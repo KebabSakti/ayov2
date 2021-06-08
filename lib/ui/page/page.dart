@@ -5,3 +5,5 @@ export './otp_page.dart';
 export './register_page.dart';
 export './home_page.dart';
 export './app_page.dart';
+export './product_filter_page.dart';
+export './search_page.dart';

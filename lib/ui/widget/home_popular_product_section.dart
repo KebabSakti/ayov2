@@ -12,14 +12,14 @@ class HomePopularProductSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Padding(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(15),
         child: Column(
           children: [
             SectionHeading(heading: 'Paling Laris'),
             SizedBox(height: 15),
             Obx(() {
               return SizedBox(
-                height: 250,
+                height: 265,
                 child: ListView.builder(
                   itemCount: (controller.loading.value)
                       ? 2
@@ -33,7 +33,7 @@ class HomePopularProductSection extends StatelessWidget {
                             ),
                             child: ShimmerLoader(
                               radius: 15,
-                              width: (Get.size.width - 30) / 2,
+                              width: (Get.size.width - 40) / 2,
                             ),
                           )
                         : Padding(

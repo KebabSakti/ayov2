@@ -43,4 +43,40 @@ class ProductRepo {
 
     return response;
   }
+
+  Future<dynamic> productTotal({
+    String deliveryType,
+    String category,
+    String subCategory,
+    String productId,
+    String keyword,
+    String productPrice,
+    bool highRatingValue,
+    bool discount,
+    bool highPoint,
+    bool highView,
+    bool highSell,
+    bool highRatingCount,
+    bool highSearch,
+  }) async {
+    var response = await _network.action(Methods.POST, PRODUCT_TOTAL_API,
+        authToken: await _appPreference.getUserToken(),
+        data: {
+          "delivery_type": deliveryType,
+          "category": category,
+          "sub_category": subCategory,
+          "product_id": productId,
+          "keyword": keyword,
+          "discount": discount,
+          "product_price": productPrice,
+          "high_point": highPoint,
+          "high_view": highView,
+          "high_sell": highSell,
+          "high_rating_count": highRatingCount,
+          "high_rating_value": highRatingValue,
+          "high_search": highSearch,
+        });
+
+    return response;
+  }
 }

@@ -7,4 +7,8 @@ class AppPage {
   Future<HomePageModel> home() async {
     return await _appPageData.home();
   }
+
+  Future<SearchPageModel> search() async {
+    return await _appPageData.search();
+  }
 }

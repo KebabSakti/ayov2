@@ -16,4 +16,14 @@ class AppPageRepo {
 
     return response;
   }
+
+  Future<dynamic> search() async {
+    var response = await _network.action(
+      Methods.GET,
+      SEARCH_PAGE_API,
+      authToken: await _appPreference.getUserToken(),
+    );
+
+    return response;
+  }
 }

@@ -22,10 +22,10 @@ class HomeMostSearchSection extends StatelessWidget {
 
     return SliverToBoxAdapter(
       child: Padding(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(15),
         child: Column(
           children: [
-            SectionHeading(heading: 'Lagi Trending'),
+            SectionHeading(heading: 'Pencarian Terbanyak'),
             SizedBox(height: 15),
             SizedBox(
               child: MediaQuery.removePadding(
@@ -53,16 +53,14 @@ class HomeMostSearchSection extends StatelessWidget {
                                 onTap: () {},
                                 borderRadius: BorderRadius.circular(15),
                                 child: Ink(
-                                  width: (Get.size.width - 30) / 2,
+                                  width: (Get.size.width - 40) / 2,
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(15),
                                     child: Row(
                                       children: [
                                         CachedNetworkImage(
-                                          imageUrl: controller
-                                              .homePageModel
-                                              .productPopularModel[index]
-                                              .productCover,
+                                          imageUrl: controller.homePageModel
+                                              .mostSearch[index].searchImage,
                                           fit: BoxFit.cover,
                                           width: _width / 3,
                                           height: double.infinity,
@@ -80,14 +78,13 @@ class HomeMostSearchSection extends StatelessWidget {
                                                 Text(
                                                   controller
                                                       .homePageModel
-                                                      .productPopularModel[
-                                                          index]
-                                                      .productName,
+                                                      .mostSearch[index]
+                                                      .searchKeyword,
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   maxLines: 2,
                                                   style: TextStyle(
-                                                    fontSize: 10,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.w600,
                                                   ),
                                                 ),
@@ -95,9 +92,8 @@ class HomeMostSearchSection extends StatelessWidget {
                                                 Text(
                                                   controller
                                                           .homePageModel
-                                                          .productPopularModel[
-                                                              index]
-                                                          .productSearch
+                                                          .mostSearch[index]
+                                                          .searchCount
                                                           .toString() +
                                                       ' pencarian',
                                                   overflow:
@@ -106,8 +102,7 @@ class HomeMostSearchSection extends StatelessWidget {
                                                   style: TextStyle(
                                                     fontSize: 10,
                                                     fontWeight: FontWeight.w600,
-                                                    color:
-                                                        Get.theme.primaryColor,
+                                                    color: Colors.green,
                                                   ),
                                                 ),
                                               ],

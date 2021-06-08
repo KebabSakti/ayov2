@@ -6,8 +6,12 @@ import 'package:get/get.dart';
 
 class ProductFilter extends StatelessWidget {
   final Rx<ProductFilterModel> productFilterModel;
+  final VoidCallback onFilterTap;
 
-  ProductFilter({@required this.productFilterModel});
+  ProductFilter({
+    @required this.productFilterModel,
+    @required this.onFilterTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,14 +20,14 @@ class ProductFilter extends StatelessWidget {
         children: [
           SizedBox(
             width: 50,
-            height: 35,
+            height: 33,
             child: Ink(
               decoration: BoxDecoration(
-                color: Colors.grey[200],
+                color: Colors.grey[100],
                 borderRadius: BorderRadius.circular(25),
               ),
               child: InkWell(
-                onTap: () {},
+                onTap: onFilterTap,
                 borderRadius: BorderRadius.circular(25),
                 child: Icon(
                   FontAwesomeIcons.slidersH,

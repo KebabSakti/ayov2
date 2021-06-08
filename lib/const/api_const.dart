@@ -1,5 +1,7 @@
 const String HOME_PAGE_API = 'customer/page/home/';
+const String SEARCH_PAGE_API = 'customer/page/search/';
 const String PRODUCT_API = 'customer/domain/product/';
+const String PRODUCT_TOTAL_API = 'customer/domain/product/total';
 
 const String CUSTOMER_EXIST_API = 'customer/auth/exist/';
 const String CUSTOMER_AUTHENTICATE_API = 'customer/auth/authenticate/';

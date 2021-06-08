@@ -21,7 +21,7 @@ class StaticSearchField extends StatelessWidget {
         borderRadius: BorderRadius.circular(borderRadius),
         child: Container(
           color: color ?? Colors.grey[50],
-          height: 35,
+          height: 38,
           padding: EdgeInsets.symmetric(horizontal: 15),
           child: Row(
             children: [

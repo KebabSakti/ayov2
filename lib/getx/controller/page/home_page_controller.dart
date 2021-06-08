@@ -12,6 +12,7 @@ class HomePageController extends GetxController {
   final AuthLocal _authLocal = Get.find();
   final Helper _helper = Get.find();
   final GlobalObs _globalObs = Get.find();
+  final AppPageController appPageController = Get.find();
 
   final RxBool loading = true.obs;
   final RxBool loadingPagination = false.obs;
@@ -73,6 +74,7 @@ class HomePageController extends GetxController {
     bool fetch = ((offset == maxScroll) &&
         !loadingPagination.value &&
         !loadingFilter.value &&
+        !loading.value &&
         productPaginate.value.pagination.nextPageUrl != null);
 
     if (fetch) {
@@ -101,7 +103,7 @@ class HomePageController extends GetxController {
     _loadMoreProduct(offset, maxScroll);
   }
 
-  void _homeData() async {
+  Future homeData() async {
     try {
       loading(true);
 
@@ -116,9 +118,26 @@ class HomePageController extends GetxController {
       _helper.dialog.error(DIOERROR_MESSAGE,
           buttonText: 'Coba Lagi', dismissible: false, onPressed: () {
         _helper.dialog.close();
-        _homeData();
+        homeData();
       });
     }
+  }
+
+  void refresh() async {
+    await homeData();
+
+    filterModel(ProductFilterModel());
+  }
+
+  void routeToSearchPage() {
+    Get.toNamed(SEARCH_PAGE, arguments: '');
+  }
+
+  void routeToFilterPage() async {
+    var result =
+        await Get.toNamed(PRODUCT_FILTER_PAGE, arguments: filterModel.value);
+
+    if (result != null) filterModel(result);
   }
 
   void _routeToLoginPage() {
@@ -132,7 +151,7 @@ class HomePageController extends GetxController {
       _loadFilteredProduct();
     }, time: Duration(milliseconds: 500));
 
-    _homeData();
+    homeData();
   }
 
   @override

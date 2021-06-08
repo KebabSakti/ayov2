@@ -13,7 +13,7 @@ class HomeCategorySection extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Padding(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(15),
         child: Column(
           children: [
             ScannerPointBar(
@@ -38,7 +38,7 @@ class HomeCategorySection extends StatelessWidget {
                                 right: (index >= 0 && index != 1) ? 10 : 0),
                             child: ShimmerLoader(
                               radius: 15,
-                              width: (Get.size.width - 30) / 2,
+                              width: (Get.size.width - 40) / 2,
                             ),
                           )
                         : Padding(
@@ -57,7 +57,7 @@ class HomeCategorySection extends StatelessWidget {
                                 onTap: () {},
                                 borderRadius: BorderRadius.circular(15),
                                 child: Ink(
-                                  width: (Get.size.width - 30) / 2,
+                                  width: (Get.size.width - 40) / 2,
                                   padding: EdgeInsets.only(left: 10, right: 10),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,

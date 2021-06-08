@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage>
           children: [
             RefreshIndicator(
               onRefresh: () async {
-                controller.init();
+                controller.refresh();
               },
               child: CustomScrollView(
                 controller: controller.homePageScrollController,

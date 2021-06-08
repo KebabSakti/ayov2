@@ -39,7 +39,7 @@ class ProductModel {
   @JsonKey(name: 'product_rating_count', nullable: true)
   int productRatingCount;
   @JsonKey(name: 'product_rating_value', nullable: true)
-  double productRatingValue;
+  String productRatingValue;
   @JsonKey(name: 'product_active', nullable: true)
   int productActive;
 
@@ -83,7 +83,7 @@ class ProductModel {
     int productSold,
     int productSearch,
     int productRatingCount,
-    double productRatingValue,
+    String productRatingValue,
     int productActive,
   }) =>
       ProductModel(

@@ -46,9 +46,9 @@ class AppPageData {
     PaginationModel paginateProduct =
         PaginationModel.fromJson(await parsedData['data']['product']);
 
-    List<ProductModel> mostSearch = List<ProductModel>.from(
+    List<SearchModel> mostSearch = List<SearchModel>.from(
       await parsedData['data']['most_search'].map(
-        (item) => ProductModel.fromJson(item),
+        (item) => SearchModel.fromJson(item),
       ),
     );
 
@@ -66,6 +66,38 @@ class AppPageData {
       productModel: products,
       mostSearch: mostSearch,
       productPaginateModel: productPaginateModel,
+    );
+  }
+
+  Future<SearchPageModel> search() async {
+    var response = await _appPageRepo.search();
+
+    var parsedData = await jsonDecode(response.data);
+
+    if (!parsedData['success']) throw Exception(parsedData['message']);
+
+    List<ProductViewModel> productViews = List<ProductViewModel>.from(
+      await parsedData['data']['view_history'].map(
+        (item) => ProductViewModel.fromJson(item),
+      ),
+    );
+
+    List<SearchModel> searchHistories = List<SearchModel>.from(
+      await parsedData['data']['search_history'].map(
+        (item) => SearchModel.fromJson(item),
+      ),
+    );
+
+    List<SearchModel> popularSearches = List<SearchModel>.from(
+      await parsedData['data']['popular_search'].map(
+        (item) => SearchModel.fromJson(item),
+      ),
+    );
+
+    return SearchPageModel(
+      productViews: productViews,
+      searchHistories: searchHistories,
+      popularSearches: popularSearches,
     );
   }
 }

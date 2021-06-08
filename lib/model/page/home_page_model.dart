@@ -6,7 +6,7 @@ class HomePageModel {
   List<VoucherModel> voucherModel;
   List<ProductModel> productPopularModel;
   List<ProductModel> productModel;
-  List<ProductModel> mostSearch;
+  List<SearchModel> mostSearch;
   ProductPaginateModel productPaginateModel;
 
   HomePageModel({
@@ -25,7 +25,7 @@ class HomePageModel {
     List<VoucherModel> voucherModel,
     List<ProductModel> productPopularModel,
     List<ProductModel> productModel,
-    List<ProductModel> mostSearch,
+    List<SearchModel> mostSearch,
     ProductPaginateModel productPaginateModel,
   }) =>
       HomePageModel(

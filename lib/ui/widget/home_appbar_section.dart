@@ -38,7 +38,7 @@ class HomeAppbarSection extends StatelessWidget {
       title: Padding(
         padding: const EdgeInsets.only(left: 15),
         child: StaticSearchField(
-          onTap: () {},
+          onTap: controller.routeToSearchPage,
           text: 'mau belanja apa kak?',
         ),
       ),

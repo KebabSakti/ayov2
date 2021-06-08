@@ -35,5 +35,17 @@ class AppRoute {
       binding: AppPageBinding(),
       page: () => AppPage(),
     ),
+    GetPage(
+      transition: Transition.downToUp,
+      name: PRODUCT_FILTER_PAGE,
+      binding: ProductFilterPageBinding(),
+      page: () => ProductFilterPage(),
+    ),
+    GetPage(
+      transition: Transition.fadeIn,
+      name: SEARCH_PAGE,
+      binding: SearchPageBinding(),
+      page: () => SearchPage(),
+    ),
   ];
 }

@@ -25,7 +25,7 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) {
     productSold: json['product_sold'] as int,
     productSearch: json['product_search'] as int,
     productRatingCount: json['product_rating_count'] as int,
-    productRatingValue: (json['product_rating_value'] as num)?.toDouble(),
+    productRatingValue: json['product_rating_value'] as String,
     productActive: json['product_active'] as int,
   );
 }

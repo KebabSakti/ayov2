@@ -1,7 +1,8 @@
 import 'package:ayov2/model/model.dart';
+import 'package:ayov2/ui/ui.dart';
+import 'package:ayov2/util/util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
 class ProductItem extends StatelessWidget {
@@ -19,7 +20,7 @@ class ProductItem extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(15),
         child: Ink(
-          width: (Get.size.width - 30) / 2,
+          width: (Get.size.width - 40) / 2,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: Column(
@@ -45,77 +46,35 @@ class ProductItem extends StatelessWidget {
                             fontSize: 12,
                           ),
                         ),
-                        SizedBox(height: 5),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              'Rp ${product.productPrice}',
-                              style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.grey[400],
-                                decoration: TextDecoration.lineThrough,
+                        Spacer(),
+                        (double.parse(product.productDiscount) == 0)
+                            ? SizedBox.shrink()
+                            : Text(
+                                Utility().currency(product.productPrice),
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.grey[400],
+                                  decoration: TextDecoration.lineThrough,
+                                ),
                               ),
-                            ),
-                            Text(
-                              'Rp ${product.productFinalPrice}',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                color: Get.theme.primaryColor,
-                              ),
-                            ),
-                          ],
+                        Text(
+                          Utility().currency(product.productFinalPrice),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.green,
+                          ),
                         ),
                         Spacer(),
-                        RatingBar(
-                          initialRating: 0,
-                          minRating: 0,
-                          direction: Axis.horizontal,
-                          allowHalfRating: true,
-                          itemCount: 5,
-                          ignoreGestures: true,
-                          itemSize: 12,
-                          itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-                          ratingWidget: RatingWidget(
-                              empty: Icon(
-                                Icons.star,
-                                color: Colors.grey,
-                              ),
-                              half: Icon(
-                                Icons.star_half,
-                                color: Colors.amber,
-                              ),
-                              full: Icon(
-                                Icons.star,
-                                color: Colors.amber,
-                              )),
-                          onRatingUpdate: (_) {},
-                        ),
+                        Rating(double.parse(product.productRatingValue)),
                         Spacer(),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 6,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(6),
-                            border: Border.all(
-                              width: 1,
-                              color: Colors.green,
-                            ),
-                          ),
-                          child: Text(
-                            'Pengiriman Instan',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 8,
-                              color: Colors.green,
-                              fontWeight: FontWeight.w800,
-                            ),
-                          ),
+                        ProductDeliveryType(
+                          name: 'PENGIRIMAN ${product.productDeliveryType}',
+                          color: (product.productDeliveryType == 'LANGSUNG')
+                              ? Colors.green
+                              : Colors.amber,
                         ),
                       ],
                     ),

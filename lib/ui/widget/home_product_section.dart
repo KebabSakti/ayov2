@@ -17,7 +17,7 @@ class HomeProductSection extends StatelessWidget {
     var _crossAxisCount = 2;
     var _width = (_screenWidth - ((_crossAxisCount - 1) * _crossAxisSpacing)) /
         _crossAxisCount;
-    var _cellHeight = 510 / 2;
+    var _cellHeight = 560 / 2;
     var _aspectRatio = _width / _cellHeight;
 
     return SliverStickyHeader(
@@ -26,13 +26,16 @@ class HomeProductSection extends StatelessWidget {
         child: SizedBox(
             height: 50,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: ProductFilter(productFilterModel: controller.filterModel),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: ProductFilter(
+                productFilterModel: controller.filterModel,
+                onFilterTap: controller.routeToFilterPage,
+              ),
             )),
       ),
       sliver: SliverToBoxAdapter(
         child: Padding(
-          padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+          padding: const EdgeInsets.only(left: 15, right: 15, bottom: 10),
           child: MediaQuery.removePadding(
             context: context,
             removeTop: true,
@@ -68,8 +71,15 @@ class HomeProductSection extends StatelessWidget {
                       ? SizedBox.shrink()
                       : Padding(
                           padding: const EdgeInsets.symmetric(vertical: 15),
-                          child: Center(
-                            child: Text('Loading..'),
+                          child: SizedBox(
+                            height: 30,
+                            width: 30,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 3,
+                              backgroundColor: Colors.grey[100],
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                  Theme.of(context).primaryColor),
+                            ),
                           ),
                         ),
                 ],

@@ -13,7 +13,7 @@ class HomeVoucherSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Padding(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(15),
         child: Column(
           children: [
             SectionHeading(heading: 'Voucher Belanja'),
@@ -39,7 +39,7 @@ class HomeVoucherSection extends StatelessWidget {
                         return (controller.loading.value)
                             ? ShimmerLoader(
                                 radius: 15,
-                                width: Get.size.width - 20,
+                                width: Get.size.width - 30,
                               )
                             : Material(
                                 color: Colors.grey[100],
@@ -48,7 +48,7 @@ class HomeVoucherSection extends StatelessWidget {
                                   onTap: () {},
                                   borderRadius: BorderRadius.circular(15),
                                   child: Ink(
-                                    width: Get.size.width - 20,
+                                    width: Get.size.width - 30,
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(15),
                                       child: CachedNetworkImage(

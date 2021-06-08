@@ -14,7 +14,7 @@ class ProductFilterItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChoiceChip(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.grey[100],
       selectedColor: Colors.green.withOpacity(0.5),
       elevation: 0,
       pressElevation: 0,
