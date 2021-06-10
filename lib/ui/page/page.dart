@@ -8,3 +8,5 @@ export './app_page.dart';
 export './product_filter_page.dart';
 export './search_page.dart';
 export './qr_scanner_page.dart';
+export './category_page.dart';
+export './category_detail_page.dart';

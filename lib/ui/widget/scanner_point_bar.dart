@@ -35,7 +35,7 @@ class ScannerPointBar extends StatelessWidget {
                   icon: SvgPicture.asset(QR_ICON, width: 20),
                 ),
                 Text(
-                  'scan kode promo',
+                  'scan qr',
                   style: TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.w600,

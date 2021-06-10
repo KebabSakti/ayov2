@@ -8,3 +8,5 @@ const String HOME_PAGE = '/home';
 const String PRODUCT_FILTER_PAGE = '/product_filter';
 const String SEARCH_PAGE = '/search';
 const String QR_PAGE = '/qr';
+const String CATEGORY_PAGE = '/category';
+const String CATEGORY_DETAIL_PAGE = '/category_detail';

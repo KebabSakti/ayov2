@@ -19,3 +19,5 @@ export './product/product_filter_model.dart';
 export './product/product_view_model.dart';
 export './search/search_model.dart';
 export './search/search_result_model.dart';
+export './page/category_page_model.dart';
+export './page/category_detail_page_model.dart';

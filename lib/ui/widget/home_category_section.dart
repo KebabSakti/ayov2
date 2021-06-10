@@ -21,7 +21,10 @@ class HomeCategorySection extends StatelessWidget {
               onCoinTap: () {},
             ),
             SizedBox(height: 20),
-            SectionHeading(heading: 'Kategori'),
+            SectionHeading(
+              heading: 'Kategori',
+              onPressed: controller.routeToCategoryPage,
+            ),
             SizedBox(height: 15),
             Obx(() {
               return SizedBox(
@@ -54,7 +57,11 @@ class HomeCategorySection extends StatelessWidget {
                               color: Colors.grey[100],
                               borderRadius: BorderRadius.circular(15),
                               child: InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  controller.routeToCategoryDetailPage(
+                                      controller
+                                          .homePageModel.categoryModel[index]);
+                                },
                                 borderRadius: BorderRadius.circular(15),
                                 child: Ink(
                                   width: (Get.size.width - 40) / 2,

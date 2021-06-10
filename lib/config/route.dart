@@ -52,5 +52,15 @@ class AppRoute {
       binding: QrScannerPageBinding(),
       page: () => QrScannerPage(),
     ),
+    GetPage(
+      name: CATEGORY_PAGE,
+      binding: CategoryPageBinding(),
+      page: () => CategoryPage(),
+    ),
+    GetPage(
+      name: CATEGORY_DETAIL_PAGE,
+      binding: CategoryDetailPageBinding(),
+      page: () => CategoryDetailPage(),
+    ),
   ];
 }

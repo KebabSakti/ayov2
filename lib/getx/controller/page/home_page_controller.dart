@@ -157,6 +157,27 @@ class HomePageController extends GetxController {
     if (result != null) _helper.toast.show(result);
   }
 
+  void routeToCategoryPage() {
+    Get.toNamed(
+      CATEGORY_PAGE,
+      arguments: CategoryPageModel(
+        categories: homePageModel.categoryModel,
+        subCategories: homePageModel.subCategoryModel,
+      ),
+    );
+  }
+
+  void routeToCategoryDetailPage(CategoryModel category) {
+    Get.toNamed(
+      CATEGORY_DETAIL_PAGE,
+      arguments: CategoryDetailPageModel(
+        bannerSecondaries: homePageModel.bannerSecondaryModel,
+        category: category,
+        subCategories: homePageModel.subCategoryModel,
+      ),
+    );
+  }
+
   void routeToSearchPage() {
     Get.toNamed(SEARCH_PAGE, arguments: '');
   }

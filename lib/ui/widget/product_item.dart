@@ -37,16 +37,26 @@ class ProductItem extends StatelessWidget {
                     ),
                     Align(
                       alignment: Alignment.topRight,
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 6, right: 8),
+                      child: Container(
+                        width: 50,
+                        height: 40,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.5),
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(15),
+                          ),
+                        ),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              product.productPoint.toString(),
+                              product.productPoint.toString().length > 3
+                                  ? product.productPoint.toString() + '+'
+                                  : product.productPoint.toString(),
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontSize: 14,
+                                fontSize: 12,
                                 fontWeight: FontWeight.w600,
                                 color: Colors.amber,
                               ),
@@ -54,8 +64,8 @@ class ProductItem extends StatelessWidget {
                             SizedBox(width: 2),
                             SvgPicture.asset(
                               COIN_ICON,
-                              width: 13,
-                              height: 13,
+                              width: 10,
+                              height: 10,
                             ),
                           ],
                         ),

@@ -19,9 +19,22 @@ class AppPageData {
       ),
     );
 
+    List<BannerSecondaryModel> bannerSecondaries =
+        List<BannerSecondaryModel>.from(
+      await parsedData['data']['banner_secondary'].map(
+        (item) => BannerSecondaryModel.fromJson(item),
+      ),
+    );
+
     List<CategoryModel> categories = List<CategoryModel>.from(
       await parsedData['data']['category'].map(
         (item) => CategoryModel.fromJson(item),
+      ),
+    );
+
+    List<SubCategoryModel> subCategories = List<SubCategoryModel>.from(
+      await parsedData['data']['sub_category'].map(
+        (item) => SubCategoryModel.fromJson(item),
       ),
     );
 
@@ -60,7 +73,9 @@ class AppPageData {
 
     return HomePageModel(
       bannerPrimaryModel: bannerPrimaries,
+      bannerSecondaryModel: bannerSecondaries,
       categoryModel: categories,
+      subCategoryModel: subCategories,
       voucherModel: vouchers,
       productPopularModel: productPopulars,
       productModel: products,
