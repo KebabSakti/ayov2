@@ -61,7 +61,10 @@ class HomeProductSection extends StatelessWidget {
                               controller.loadingFilter.value)
                           ? ShimmerLoader(radius: 15)
                           : ProductItem(
-                              onTap: () {},
+                              onTap: () {
+                                controller.routeToProductDetailPage(controller
+                                    .productPaginate.value.products[index]);
+                              },
                               product: controller
                                   .productPaginate.value.products[index],
                             );

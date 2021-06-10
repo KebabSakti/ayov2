@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ayov2/model/model.dart';
 import 'package:ayov2/repo/repo.dart';
+import 'package:flutter/cupertino.dart';
 
 class AppPageData {
   final AppPageRepo _appPageRepo = AppPageRepo();
@@ -113,6 +114,35 @@ class AppPageData {
       productViews: productViews,
       searchHistories: searchHistories,
       popularSearches: popularSearches,
+    );
+  }
+
+  Future<ProductDetailPageModel> product({@required String productId}) async {
+    var response = await _appPageRepo.product(productId: productId);
+
+    var parsedData = await jsonDecode(response.data);
+
+    if (!parsedData['success']) throw Exception(parsedData['message']);
+
+    ProductModel product =
+        ProductModel.fromJson(await parsedData['data']['product']);
+
+    List<RatingProductModel> reviews = List<RatingProductModel>.from(
+      await parsedData['data']['reviews'].map(
+        (item) => RatingProductModel.fromJson(item),
+      ),
+    );
+
+    List<ProductModel> relatedProducts = List<ProductModel>.from(
+      await parsedData['data']['related_products'].map(
+        (item) => ProductModel.fromJson(item),
+      ),
+    );
+
+    return ProductDetailPageModel(
+      product: product,
+      reviews: reviews,
+      relatedProducts: relatedProducts,
     );
   }
 }

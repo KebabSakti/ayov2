@@ -193,6 +193,10 @@ class HomePageController extends GetxController {
     Get.toNamed(PRODUCT_PAGE, arguments: filter);
   }
 
+  void routeToProductDetailPage(ProductModel product) async {
+    Get.toNamed(PRODUCT_DETAIL_PAGE, arguments: product);
+  }
+
   void _routeToLoginPage() {
     Get.offAllNamed(LOGIN_PAGE);
   }

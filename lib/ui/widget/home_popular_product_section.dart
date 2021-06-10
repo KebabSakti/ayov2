@@ -54,7 +54,10 @@ class HomePopularProductSection extends StatelessWidget {
                                   : 0,
                             ),
                             child: ProductItem(
-                              onTap: () {},
+                              onTap: () {
+                                controller.routeToProductDetailPage(controller
+                                    .homePageModel.productPopularModel[index]);
+                              },
                               product: controller
                                   .homePageModel.productPopularModel[index],
                             ),
