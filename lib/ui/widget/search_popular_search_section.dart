@@ -1,4 +1,5 @@
 import 'package:ayov2/getx/getx.dart';
+import 'package:ayov2/model/model.dart';
 import 'package:ayov2/ui/ui.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +52,11 @@ class SearchPopularSearchSection extends StatelessWidget {
 
               if (controller.searchPageModel.value.popularSearches.length > 0) {
                 return ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    controller.routeToProductPage(ProductFilterModel(
+                        keyword: controller.searchPageModel.value
+                            .popularSearches[index].searchKeyword));
+                  },
                   dense: true,
                   contentPadding: EdgeInsets.all(0),
                   leading: ClipRRect(

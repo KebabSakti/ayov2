@@ -8,21 +8,7 @@ class ProductPageController extends GetxController {
   final RxBool loadingFilter = false.obs;
   final RxBool loadingPagination = false.obs;
   final Rx<ProductPaginateModel> productPaginate = ProductPaginateModel().obs;
-  final Rx<ProductFilterModel> filterModel = ProductFilterModel(
-    category: Get.arguments.category,
-    deliveryType: Get.arguments.deliveryType,
-    discount: Get.arguments.discount,
-    highPoint: Get.arguments.highPoint,
-    highRatingCount: Get.arguments.highRatingCount,
-    highRatingValue: Get.arguments.highRatingValue,
-    highSearch: Get.arguments.highSearch,
-    highSell: Get.arguments.highSell,
-    highView: Get.arguments.highView,
-    keyword: Get.arguments.keyword,
-    productId: Get.arguments.productId,
-    productPrice: Get.arguments.productPrice,
-    subCategory: Get.arguments.subCategory,
-  ).obs;
+  final Rx<ProductFilterModel> filterModel = ProductFilterModel().obs;
 
   final Product _product = Product();
   final ScrollController scrollController = ScrollController();
@@ -117,7 +103,7 @@ class ProductPageController extends GetxController {
 
   @override
   void onClose() {
-    scrollController.dispose();
+    // scrollController.dispose();
     super.onClose();
   }
 }

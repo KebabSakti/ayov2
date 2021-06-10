@@ -1,10 +1,11 @@
 import 'package:ayov2/getx/getx.dart';
 import 'package:ayov2/ui/ui.dart';
+import 'package:ayov2/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 import 'package:get/get.dart';
 
-class ProductPage extends GetView<ProductPageController> {
+class ProductPage extends GetWidget<ProductPageController> {
   @override
   Widget build(BuildContext context) {
     var _crossAxisSpacing = 10.0;
@@ -136,7 +137,7 @@ class ProductPage extends GetView<ProductPageController> {
                 bottom: 5,
               ),
               child: ScrollTopButton(
-                tag: 'PRODUCT_PAGE',
+                tag: Utility().randomString(10),
                 scrollController: controller.scrollController,
               ),
             ),

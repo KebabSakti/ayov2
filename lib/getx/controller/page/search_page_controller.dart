@@ -70,7 +70,7 @@ class SearchPageController extends GetxController {
 
   @override
   void onClose() {
-    searchField.dispose();
+    // searchField.dispose();
     super.onClose();
   }
 }

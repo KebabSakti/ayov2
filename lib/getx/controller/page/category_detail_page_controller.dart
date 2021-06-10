@@ -90,6 +90,10 @@ class CategoryDetailPageController extends GetxController {
     Get.toNamed(PRODUCT_PAGE, arguments: filter);
   }
 
+  void routeToCategoryPage({String categoryId}) async {
+    Get.toNamed(CATEGORY_PAGE, arguments: categoryId);
+  }
+
   void _init() {
     scrollController.addListener(_scrollListener);
 

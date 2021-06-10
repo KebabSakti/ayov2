@@ -100,7 +100,6 @@ class CategoryDetailPage extends GetView<CategoryDetailPageController> {
                       children: [
                         SectionHeading(
                           heading: controller.pageModel.category.categoryName,
-                          onPressed: () {},
                         ),
                         SizedBox(height: 15),
                         SizedBox(

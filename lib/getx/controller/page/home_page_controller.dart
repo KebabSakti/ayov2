@@ -189,6 +189,10 @@ class HomePageController extends GetxController {
     if (result != null) filterModel(result);
   }
 
+  void routeToProductPage(ProductFilterModel filter) async {
+    Get.toNamed(PRODUCT_PAGE, arguments: filter);
+  }
+
   void _routeToLoginPage() {
     Get.offAllNamed(LOGIN_PAGE);
   }

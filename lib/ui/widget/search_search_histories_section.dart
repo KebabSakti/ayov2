@@ -40,35 +40,23 @@ class SearchHistoriesSection extends StatelessWidget {
               }
 
               if (controller.searchPageModel.value.searchHistories.length > 0) {
-                return GestureDetector(
+                return ListTile(
                   onTap: () {
                     controller.routeToProductPage(ProductFilterModel(
                         keyword: controller.searchPageModel.value
                             .searchHistories[index].searchKeyword));
                   },
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.history_rounded,
-                        color: Colors.grey[600],
-                      ),
-                      SizedBox(width: 10),
-                      Text(
-                        controller.searchPageModel.value.searchHistories[index]
-                            .searchKeyword,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                      ),
-                      Spacer(),
-                      IconButton(
-                        onPressed: () {},
-                        visualDensity: VisualDensity.compact,
-                        icon: Icon(
-                          Icons.close_rounded,
-                          color: Colors.grey[600],
-                        ),
-                      ),
-                    ],
+                  visualDensity: VisualDensity.compact,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 0),
+                  leading: Icon(
+                    Icons.history_rounded,
+                    color: Colors.grey[600],
+                  ),
+                  title: Text(
+                    controller.searchPageModel.value.searchHistories[index]
+                        .searchKeyword,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
                 );
               }

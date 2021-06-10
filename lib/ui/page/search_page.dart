@@ -1,10 +1,11 @@
 import 'package:ayov2/getx/getx.dart';
+import 'package:ayov2/model/model.dart';
 import 'package:ayov2/ui/ui.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SearchPage extends GetView<SearchPageController> {
+class SearchPage extends GetWidget<SearchPageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +74,11 @@ class SearchPage extends GetView<SearchPageController> {
                         if (controller.searchResultModel.value.keywords.length >
                             0) {
                           return ListTile(
-                            onTap: () {},
+                            onTap: () {
+                              controller.routeToProductPage(ProductFilterModel(
+                                  keyword: controller.searchResultModel.value
+                                      .keywords[index].searchKeyword));
+                            },
                             visualDensity: VisualDensity.compact,
                             contentPadding:
                                 EdgeInsets.symmetric(horizontal: 15),

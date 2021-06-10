@@ -1,4 +1,5 @@
 import 'package:ayov2/getx/getx.dart';
+import 'package:ayov2/model/model.dart';
 import 'package:ayov2/ui/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,7 +16,13 @@ class HomePopularProductSection extends StatelessWidget {
         padding: EdgeInsets.all(15),
         child: Column(
           children: [
-            SectionHeading(heading: 'Paling Laris'),
+            SectionHeading(
+              heading: 'Paling Laris',
+              onPressed: () {
+                controller
+                    .routeToProductPage(ProductFilterModel(highSell: true));
+              },
+            ),
             SizedBox(height: 15),
             Obx(() {
               return SizedBox(

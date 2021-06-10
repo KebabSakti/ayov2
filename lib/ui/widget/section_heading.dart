@@ -21,17 +21,19 @@ class SectionHeading extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
-        GestureDetector(
-          onTap: onPressed,
-          child: Text(
-            'Lihat Semua',
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 10,
-              color: Get.theme.primaryColor,
-            ),
-          ),
-        ),
+        (onPressed == null)
+            ? SizedBox.shrink()
+            : GestureDetector(
+                onTap: onPressed,
+                child: Text(
+                  'Lihat Semua',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 10,
+                    color: Get.theme.primaryColor,
+                  ),
+                ),
+              ),
       ],
     );
   }
