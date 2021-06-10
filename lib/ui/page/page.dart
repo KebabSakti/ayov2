@@ -10,3 +10,4 @@ export './search_page.dart';
 export './qr_scanner_page.dart';
 export './category_page.dart';
 export './category_detail_page.dart';
+export './product_page.dart';

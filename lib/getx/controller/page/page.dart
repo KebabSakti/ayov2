@@ -10,3 +10,4 @@ export './search_page_controller.dart';
 export './qr_scanner_page_controller.dart';
 export './category_page_controller.dart';
 export './category_detail_page_controller.dart';
+export './product_page_controller.dart';

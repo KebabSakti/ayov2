@@ -1,4 +1,5 @@
 import 'package:ayov2/getx/getx.dart';
+import 'package:ayov2/model/model.dart';
 import 'package:ayov2/ui/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -39,29 +40,36 @@ class SearchHistoriesSection extends StatelessWidget {
               }
 
               if (controller.searchPageModel.value.searchHistories.length > 0) {
-                return Row(
-                  children: [
-                    Icon(
-                      Icons.history_rounded,
-                      color: Colors.grey[600],
-                    ),
-                    SizedBox(width: 10),
-                    Text(
-                      controller.searchPageModel.value.searchHistories[index]
-                          .searchKeyword,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                    ),
-                    Spacer(),
-                    IconButton(
-                      onPressed: () {},
-                      visualDensity: VisualDensity.compact,
-                      icon: Icon(
-                        Icons.close_rounded,
+                return GestureDetector(
+                  onTap: () {
+                    controller.routeToProductPage(ProductFilterModel(
+                        keyword: controller.searchPageModel.value
+                            .searchHistories[index].searchKeyword));
+                  },
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.history_rounded,
                         color: Colors.grey[600],
                       ),
-                    ),
-                  ],
+                      SizedBox(width: 10),
+                      Text(
+                        controller.searchPageModel.value.searchHistories[index]
+                            .searchKeyword,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                      Spacer(),
+                      IconButton(
+                        onPressed: () {},
+                        visualDensity: VisualDensity.compact,
+                        icon: Icon(
+                          Icons.close_rounded,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                    ],
+                  ),
                 );
               }
 

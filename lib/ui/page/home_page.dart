@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage>
                   bottom: 5,
                 ),
                 child: ScrollTopButton(
-                  tag: 'HOME',
+                  tag: 'HOME_PAGE',
                   scrollController: controller.homePageScrollController,
                 ),
               ),

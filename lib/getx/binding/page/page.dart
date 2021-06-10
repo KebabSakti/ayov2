@@ -10,3 +10,4 @@ export './search_page_binding.dart';
 export './qr_scanner_page_binding.dart';
 export './category_page_binding.dart';
 export './category_detail_page_binding.dart';
+export './product_page_binding.dart';

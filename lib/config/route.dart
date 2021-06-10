@@ -62,5 +62,10 @@ class AppRoute {
       binding: CategoryDetailPageBinding(),
       page: () => CategoryDetailPage(),
     ),
+    GetPage(
+      name: PRODUCT_PAGE,
+      binding: ProductPageBinding(),
+      page: () => ProductPage(),
+    ),
   ];
 }

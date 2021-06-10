@@ -4,14 +4,27 @@ import 'package:ayov2/model/model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CategoryDetailPageController extends GetxController {
+class ProductPageController extends GetxController {
   final RxBool loadingFilter = false.obs;
   final RxBool loadingPagination = false.obs;
-  final Rx<ProductFilterModel> filterModel = ProductFilterModel().obs;
   final Rx<ProductPaginateModel> productPaginate = ProductPaginateModel().obs;
+  final Rx<ProductFilterModel> filterModel = ProductFilterModel(
+    category: Get.arguments.category,
+    deliveryType: Get.arguments.deliveryType,
+    discount: Get.arguments.discount,
+    highPoint: Get.arguments.highPoint,
+    highRatingCount: Get.arguments.highRatingCount,
+    highRatingValue: Get.arguments.highRatingValue,
+    highSearch: Get.arguments.highSearch,
+    highSell: Get.arguments.highSell,
+    highView: Get.arguments.highView,
+    keyword: Get.arguments.keyword,
+    productId: Get.arguments.productId,
+    productPrice: Get.arguments.productPrice,
+    subCategory: Get.arguments.subCategory,
+  ).obs;
 
   final Product _product = Product();
-  final CategoryDetailPageModel pageModel = Get.arguments;
   final ScrollController scrollController = ScrollController();
 
   Future<ProductPaginateModel> _loadProduct(String urlQuery) async {
@@ -76,7 +89,7 @@ class CategoryDetailPageController extends GetxController {
   }
 
   void routeToSearchPage() {
-    Get.toNamed(SEARCH_PAGE, arguments: '');
+    Get.toNamed(SEARCH_PAGE, arguments: filterModel.value.keyword ?? '');
   }
 
   void routeToFilterPage() async {
@@ -86,10 +99,6 @@ class CategoryDetailPageController extends GetxController {
     if (result != null) filterModel(result);
   }
 
-  void routeToProductPage(ProductFilterModel filter) async {
-    Get.toNamed(PRODUCT_PAGE, arguments: filter);
-  }
-
   void _init() {
     scrollController.addListener(_scrollListener);
 
@@ -97,8 +106,7 @@ class CategoryDetailPageController extends GetxController {
       loadFilteredProduct();
     }, time: Duration(milliseconds: 500));
 
-    filterModel(
-        filterModel.value.copyWith(category: pageModel.category.categoryId));
+    filterModel(Get.arguments);
   }
 
   @override

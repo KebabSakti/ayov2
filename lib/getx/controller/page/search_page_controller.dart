@@ -1,3 +1,4 @@
+import 'package:ayov2/const/const.dart';
 import 'package:ayov2/core/core.dart';
 import 'package:ayov2/model/model.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +41,10 @@ class SearchPageController extends GetxController {
 
       loading(false);
     });
+  }
+
+  void routeToProductPage(ProductFilterModel filter) async {
+    Get.toNamed(PRODUCT_PAGE, arguments: filter);
   }
 
   void _init() {

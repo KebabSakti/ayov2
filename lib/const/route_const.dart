@@ -10,3 +10,4 @@ const String SEARCH_PAGE = '/search';
 const String QR_PAGE = '/qr';
 const String CATEGORY_PAGE = '/category';
 const String CATEGORY_DETAIL_PAGE = '/category_detail';
+const String PRODUCT_PAGE = '/product';

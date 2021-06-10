@@ -119,7 +119,12 @@ class CategoryDetailPage extends GetView<CategoryDetailPageController> {
                                   color: Colors.grey[100],
                                   borderRadius: BorderRadius.circular(15),
                                   child: InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      controller.routeToProductPage(
+                                          ProductFilterModel(
+                                              subCategory: subCategories[index]
+                                                  .subCategoryId));
+                                    },
                                     borderRadius: BorderRadius.circular(15),
                                     child: Ink(
                                       width: (Get.size.width - 60) / 4,
@@ -240,6 +245,19 @@ class CategoryDetailPage extends GetView<CategoryDetailPageController> {
                   ),
                 ),
               ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                right: 5,
+                bottom: 5,
+              ),
+              child: ScrollTopButton(
+                tag: 'CATEGORY_DETAIL_PAGE',
+                scrollController: controller.scrollController,
+              ),
             ),
           ),
         ],
