@@ -23,3 +23,6 @@ export './page/category_page_model.dart';
 export './page/category_detail_page_model.dart';
 export './page/product_detail_page_model.dart';
 export './rating/rating_product_model.dart';
+export './cart/cart_item_model.dart';
+export './cart/cart_summary_model.dart';
+export './cart/cart_model.dart';

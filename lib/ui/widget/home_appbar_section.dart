@@ -19,17 +19,17 @@ class HomeAppbarSection extends StatelessWidget {
         IconButton(
           onPressed: () {},
           iconSize: 30,
-          padding: EdgeInsets.only(left: 8),
+          padding: EdgeInsets.only(left: 6),
           visualDensity: VisualDensity.compact,
           icon: IconWithDot(
-            showDot: true,
-            icon: Icon(Icons.shopping_bag_rounded),
+            icon: Icon(Icons.notifications),
           ),
         ),
         IconButton(
           onPressed: () {},
           iconSize: 30,
-          padding: EdgeInsets.only(right: 8, left: 0),
+          padding: EdgeInsets.only(right: 6),
+          visualDensity: VisualDensity.compact,
           icon: IconWithDot(
             icon: Icon(Icons.account_circle_rounded),
           ),

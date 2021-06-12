@@ -1,5 +1,6 @@
 import 'package:ayov2/const/const.dart';
 import 'package:ayov2/getx/getx.dart';
+import 'package:ayov2/ui/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -23,7 +24,7 @@ class IntroPage extends GetView<IntroPageController> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CircularProgressIndicator(),
+                  CircularLoader(),
                   SizedBox(
                     height: 16,
                   ),

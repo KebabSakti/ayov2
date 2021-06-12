@@ -3,6 +3,7 @@ const String SEARCH_PAGE_API = 'customer/page/search/';
 const String PRODUCT_DETAIL_PAGE_API = 'customer/page/product/';
 const String PRODUCT_API = 'customer/domain/product/';
 const String PRODUCT_TOTAL_API = 'customer/domain/product/total';
+const String PRODUCT_FAVOURITE_API = 'customer/domain/product/favourite';
 const String SEARCH_API = 'customer/domain/search';
 
 const String CUSTOMER_EXIST_API = 'customer/auth/exist/';

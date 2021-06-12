@@ -1,6 +1,7 @@
 import 'package:ayov2/const/const.dart';
 import 'package:ayov2/core/core.dart';
 import 'package:ayov2/service/service.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProductRepo {
@@ -76,6 +77,14 @@ class ProductRepo {
           "high_rating_value": highRatingValue,
           "high_search": highSearch,
         });
+
+    return response;
+  }
+
+  Future<dynamic> favourite({@required String productId}) async {
+    var response = await _network.action(Methods.POST, PRODUCT_FAVOURITE_API,
+        authToken: await _appPreference.getUserToken(),
+        data: {"product_id": productId});
 
     return response;
   }

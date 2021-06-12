@@ -8,10 +8,18 @@ class AppPage extends GetView<AppPageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: PageView(
         controller: controller.pageController,
         children: controller.pages,
         physics: NeverScrollableScrollPhysics(),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(
+          Icons.shopping_bag_rounded,
+          size: 30,
+        ),
       ),
       bottomNavigationBar: Obx(
         () {

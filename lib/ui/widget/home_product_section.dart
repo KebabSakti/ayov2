@@ -74,16 +74,7 @@ class HomeProductSection extends StatelessWidget {
                       ? SizedBox.shrink()
                       : Padding(
                           padding: const EdgeInsets.symmetric(vertical: 15),
-                          child: SizedBox(
-                            height: 30,
-                            width: 30,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 3,
-                              backgroundColor: Colors.grey[100],
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                  Theme.of(context).primaryColor),
-                            ),
-                          ),
+                          child: CircularLoader(),
                         ),
                 ],
               );

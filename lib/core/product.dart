@@ -1,5 +1,6 @@
 import 'package:ayov2/data/data.dart';
 import 'package:ayov2/model/model.dart';
+import 'package:flutter/cupertino.dart';
 
 class Product {
   final ProductData _productData = ProductData();
@@ -68,5 +69,9 @@ class Product {
       highRatingValue: highRatingValue,
       highSearch: highSearch,
     );
+  }
+
+  Future<ProductModel> favourite({@required String productId}) async {
+    return await _productData.favourite(productId: productId);
   }
 }
