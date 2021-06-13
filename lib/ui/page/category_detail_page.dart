@@ -91,68 +91,60 @@ class CategoryDetailPage extends GetView<CategoryDetailPageController> {
                   child: Padding(
                     padding: const EdgeInsets.all(15),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SectionHeading(
                           heading: controller.pageModel.category.categoryName,
                         ),
                         SizedBox(height: 15),
-                        SizedBox(
-                          height: 80,
-                          child: ListView.builder(
-                            itemCount: subCategories.length,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: EdgeInsets.only(
-                                    right: (index >= 0 &&
-                                            index != (subCategories.length - 1))
-                                        ? 10
-                                        : 0),
-                                child: Material(
-                                  color: Colors.grey[100],
+                        Wrap(
+                          spacing: 10,
+                          runSpacing: 10,
+                          children: List<Widget>.from(
+                            subCategories.map(
+                              (item) => Material(
+                                color: Colors.grey[100],
+                                borderRadius: BorderRadius.circular(15),
+                                child: InkWell(
+                                  onTap: () {
+                                    controller.routeToProductPage(
+                                        ProductFilterModel(
+                                            subCategory: item.subCategoryId));
+                                  },
                                   borderRadius: BorderRadius.circular(15),
-                                  child: InkWell(
-                                    onTap: () {
-                                      controller.routeToProductPage(
-                                          ProductFilterModel(
-                                              subCategory: subCategories[index]
-                                                  .subCategoryId));
-                                    },
-                                    borderRadius: BorderRadius.circular(15),
-                                    child: Ink(
-                                      width: (Get.size.width - 60) / 4,
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 15),
-                                      child: Center(
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            SvgPicture.network(
-                                              subCategories[index]
-                                                  .subCategoryImage,
-                                              width: 30,
-                                              height: 30,
-                                            ),
-                                            SizedBox(height: 4),
-                                            Text(
-                                              subCategories[index]
-                                                  .subCategoryName,
-                                              maxLines: 2,
-                                              overflow: TextOverflow.ellipsis,
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(fontSize: 8),
-                                            ),
-                                          ],
-                                        ),
+                                  child: Ink(
+                                    width: (Get.size.width - 60) / 4,
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 15,
+                                      vertical: 10,
+                                    ),
+                                    child: Center(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.network(
+                                            item.subCategoryImage,
+                                            width: 30,
+                                            height: 30,
+                                          ),
+                                          SizedBox(height: 4),
+                                          Text(
+                                            item.subCategoryName,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(fontSize: 8),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),
                                 ),
-                              );
-                            },
+                              ),
+                            ),
                           ),
                         ),
                       ],
