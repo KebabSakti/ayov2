@@ -27,8 +27,7 @@ class ProductPage extends GetWidget<ProductPageController> {
             padding: EdgeInsets.only(left: 8),
             visualDensity: VisualDensity.compact,
             icon: IconWithDot(
-              showDot: true,
-              icon: Icon(Icons.shopping_bag_rounded),
+              Icon(Icons.shopping_bag_rounded),
             ),
           ),
           IconButton(
@@ -36,7 +35,7 @@ class ProductPage extends GetWidget<ProductPageController> {
             iconSize: 30,
             padding: EdgeInsets.only(right: 8, left: 0),
             icon: IconWithDot(
-              icon: Icon(Icons.account_circle_rounded),
+              Icon(Icons.account_circle_rounded),
             ),
           ),
         ],

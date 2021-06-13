@@ -6,3 +6,4 @@ export './failure.dart';
 export './app_page.dart';
 export './product.dart';
 export './search.dart';
+export './cart.dart';

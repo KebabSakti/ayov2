@@ -24,7 +24,10 @@ class IntroPage extends GetView<IntroPageController> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CircularLoader(),
+                  CircularLoader(
+                    height: 40,
+                    width: 40,
+                  ),
                   SizedBox(
                     height: 16,
                   ),

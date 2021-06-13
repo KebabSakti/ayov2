@@ -2,6 +2,7 @@ import 'package:ayov2/const/const.dart';
 import 'package:ayov2/getx/getx.dart';
 import 'package:ayov2/ui/ui.dart';
 import 'package:ayov2/util/util.dart';
+import 'package:ayov2/model/model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
@@ -23,18 +24,28 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                 centerTitle: true,
                 title: Obx(() {
                   return (controller.loading.value)
-                      ? Text(controller.productModel.productName)
-                      : Text(controller.pageModel.product.productName);
+                      ? Text(
+                          controller.productModel.productName,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        )
+                      : Text(
+                          controller.pageModel.product.productName,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        );
                 }),
                 actions: [
-                  IconButton(
-                    onPressed: () {},
-                    iconSize: 30,
-                    padding: EdgeInsets.symmetric(horizontal: 15),
-                    visualDensity: VisualDensity.compact,
-                    icon: IconWithDot(
-                      showDot: true,
-                      icon: Icon(Icons.shopping_basket_rounded),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: IconButtonWithDot(
+                      Icon(Icons.shopping_cart_rounded),
+                      value: controller.cart.getCartQty(),
+                      onPressed: () {},
                     ),
                   ),
                 ],
@@ -753,8 +764,12 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                             child: Ink(
                               child: Obx(() {
                                 return InkWell(
-                                  onTap:
-                                      (controller.loading.value) ? null : () {},
+                                  onTap: (controller.loading.value)
+                                      ? null
+                                      : () {
+                                          controller.cart.addQty(
+                                              CartItemModel(cartItemQty: 1));
+                                        },
                                   child: Center(
                                     child: Icon(
                                       Icons.add_rounded,

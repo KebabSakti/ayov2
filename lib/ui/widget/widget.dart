@@ -22,3 +22,4 @@ export './search_popular_search_section.dart';
 export './search_product_view_section.dart';
 export './search_search_histories_section.dart';
 export './circular_loader.dart';
+export './icon_button_with_dot.dart';

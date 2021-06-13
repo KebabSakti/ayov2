@@ -9,6 +9,7 @@ class HomePageModel {
   List<ProductModel> productPopularModel;
   List<ProductModel> productModel;
   List<SearchModel> mostSearch;
+  List<CartItemModel> cartItems;
   ProductPaginateModel productPaginateModel;
 
   HomePageModel({
@@ -20,6 +21,7 @@ class HomePageModel {
     this.productPopularModel,
     this.productModel,
     this.mostSearch,
+    this.cartItems,
     this.productPaginateModel,
   });
 
@@ -32,6 +34,7 @@ class HomePageModel {
     List<ProductModel> productPopularModel,
     List<ProductModel> productModel,
     List<SearchModel> mostSearch,
+    List<CartItemModel> cartItems,
     ProductPaginateModel productPaginateModel,
   }) =>
       HomePageModel(
@@ -43,6 +46,7 @@ class HomePageModel {
         productPopularModel: productPopularModel ?? this.productPopularModel,
         productModel: productModel ?? this.productModel,
         mostSearch: mostSearch ?? this.mostSearch,
+        cartItems: cartItems ?? this.cartItems,
         productPaginateModel: productPaginateModel ?? this.productPaginateModel,
       );
 }

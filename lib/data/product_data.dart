@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:ayov2/model/model.dart';
 import 'package:ayov2/repo/repo.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class ProductData {
   final ProductRepo _productRepo = ProductRepo();

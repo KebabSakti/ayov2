@@ -2,27 +2,41 @@ import 'package:flutter/material.dart';
 
 class IconWithDot extends StatelessWidget {
   final Icon icon;
-  final bool showDot;
+  final int value;
 
-  IconWithDot({@required this.icon, this.showDot = false});
+  IconWithDot(
+    this.icon, {
+    this.value = 0,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        icon,
-        (showDot)
+        Align(
+          alignment: Alignment.center,
+          child: icon,
+        ),
+        (value > 0)
             ? Positioned(
-                right: 0,
+                right: 20,
                 child: Container(
-                  height: 10,
-                  width: 10,
+                  width: 16,
+                  height: 16,
                   decoration: BoxDecoration(
                     color: Colors.red,
-                    border: Border.all(
-                      color: Colors.white,
+                    borderRadius: BorderRadius.circular(18),
+                    border: Border.all(color: Colors.white),
+                  ),
+                  child: Center(
+                    child: Text(
+                      '$value',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 7,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    borderRadius: BorderRadius.circular(5),
                   ),
                 ),
               )

@@ -1,3 +1,4 @@
+const String INTRO_PAGE_API = 'customer/page/intro/';
 const String HOME_PAGE_API = 'customer/page/home/';
 const String SEARCH_PAGE_API = 'customer/page/search/';
 const String PRODUCT_DETAIL_PAGE_API = 'customer/page/product/';

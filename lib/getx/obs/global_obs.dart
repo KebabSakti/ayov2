@@ -6,5 +6,5 @@ class GlobalObs {
   final Rx<CustomerModel> customerModel = CustomerModel().obs;
   final Rx<FcmModel> fcmModel = FcmModel().obs;
   final Rx<AuthStateModel> authState = AuthStateModel().obs;
-  final Rx<CartModel> cart = CartModel().obs;
+  final RxList<CartItemModel> cartItems = List<CartItemModel>().obs;
 }

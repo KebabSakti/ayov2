@@ -66,6 +66,12 @@ class AppPageData {
       ),
     );
 
+    List<CartItemModel> cartItems = List<CartItemModel>.from(
+      await parsedData['data']['cart_items'].map(
+        (item) => CartItemModel.fromJson(item),
+      ),
+    );
+
     //PRODUCT WITH PAGINATION DATA
     ProductPaginateModel productPaginateModel = ProductPaginateModel(
       products: products,
@@ -81,6 +87,7 @@ class AppPageData {
       productPopularModel: productPopulars,
       productModel: products,
       mostSearch: mostSearch,
+      cartItems: cartItems,
       productPaginateModel: productPaginateModel,
     );
   }

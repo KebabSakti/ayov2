@@ -8,18 +8,10 @@ class AppPage extends GetView<AppPageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: PageView(
         controller: controller.pageController,
         children: controller.pages,
         physics: NeverScrollableScrollPhysics(),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(
-          Icons.shopping_bag_rounded,
-          size: 30,
-        ),
       ),
       bottomNavigationBar: Obx(
         () {
@@ -30,7 +22,7 @@ class AppPage extends GetView<AppPageController> {
             selectedItemColor: Get.theme.primaryColor,
             selectedFontSize: 12,
             unselectedFontSize: 10,
-            selectedIconTheme: IconThemeData(size: 30),
+            // selectedIconTheme: IconThemeData(size: 30),
             currentIndex: controller.activePage.value,
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
@@ -38,26 +30,31 @@ class AppPage extends GetView<AppPageController> {
                 label: 'Belanja',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.assistant_rounded),
-                label: 'Souvenir',
-              ),
-              BottomNavigationBarItem(
                 icon: IconWithDot(
-                  icon: Icon(Icons.assignment_rounded),
-                  showDot: true,
+                  Icon(Icons.assignment_rounded),
+                  value: 1,
                 ),
                 label: 'Pesanan',
               ),
               BottomNavigationBarItem(
+                label: 'Keranjang',
                 icon: IconWithDot(
-                  icon: Icon(Icons.notifications_rounded),
-                  showDot: true,
+                  Icon(Icons.shopping_cart_rounded),
+                  value: controller.cart.getCartQty(),
                 ),
-                label: 'Notif',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.ballot_rounded),
+                icon: IconWithDot(
+                  Icon(Icons.ballot_rounded),
+                  value: 4,
+                ),
                 label: 'Voucher',
+              ),
+              BottomNavigationBarItem(
+                icon: IconWithDot(
+                  Icon(Icons.assistant_rounded),
+                ),
+                label: 'Souvenir',
               ),
             ],
             onTap: controller.navigateTo,

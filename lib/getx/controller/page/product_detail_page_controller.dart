@@ -8,6 +8,7 @@ class ProductDetailPageControlller extends GetxController {
   final AppPage _appPage = AppPage();
   final Product _productCore = Product();
   final TextEditingController qtyField = TextEditingController();
+  final Cart cart = Cart();
 
   final RxBool loading = false.obs;
   final RxBool loadingFavourite = false.obs;

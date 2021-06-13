@@ -45,23 +45,17 @@ class CategoryDetailPage extends GetView<CategoryDetailPageController> {
                   pinned: true,
                   titleSpacing: 0,
                   actions: [
-                    IconButton(
+                    IconButtonWithDot(
+                      Icon(Icons.notifications_rounded),
+                      value: 22,
                       onPressed: () {},
-                      iconSize: 30,
-                      padding: EdgeInsets.only(left: 8),
-                      visualDensity: VisualDensity.compact,
-                      icon: IconWithDot(
-                        showDot: true,
-                        icon: Icon(Icons.shopping_bag_rounded),
-                      ),
                     ),
                     IconButton(
                       onPressed: () {},
                       iconSize: 30,
-                      padding: EdgeInsets.only(right: 8, left: 0),
-                      icon: IconWithDot(
-                        icon: Icon(Icons.account_circle_rounded),
-                      ),
+                      visualDensity: VisualDensity.compact,
+                      padding: EdgeInsets.only(right: 12, left: 0),
+                      icon: Icon(Icons.account_circle_rounded),
                     ),
                   ],
                   title: StaticSearchField(
