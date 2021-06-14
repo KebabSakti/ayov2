@@ -40,7 +40,7 @@ class AppPage extends GetView<AppPageController> {
                 label: 'Keranjang',
                 icon: IconWithDot(
                   Icon(Icons.shopping_cart_rounded),
-                  value: controller.cart.getCartQty(),
+                  value: controller.cartController.cartQtyTotal.value,
                 ),
               ),
               BottomNavigationBarItem(

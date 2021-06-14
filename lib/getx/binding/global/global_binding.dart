@@ -13,5 +13,6 @@ class GlobalBinding extends Bindings {
     Get.put(AuthFirebase());
     Get.put(AuthLocal());
     Get.put(Helper());
+    Get.put(CartController());
   }
 }

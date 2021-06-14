@@ -2,7 +2,6 @@ import 'package:ayov2/const/const.dart';
 import 'package:ayov2/getx/getx.dart';
 import 'package:ayov2/ui/ui.dart';
 import 'package:ayov2/util/util.dart';
-import 'package:ayov2/model/model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
@@ -42,11 +41,13 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                 actions: [
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: IconButtonWithDot(
-                      Icon(Icons.shopping_cart_rounded),
-                      value: controller.cart.getCartQty(),
-                      onPressed: () {},
-                    ),
+                    child: Obx(() {
+                      return IconButtonWithDot(
+                        Icon(Icons.shopping_cart_rounded),
+                        value: controller.cartController.cartQtyTotal.value,
+                        onPressed: () {},
+                      );
+                    }),
                   ),
                 ],
                 flexibleSpace: FlexibleSpaceBar(
@@ -395,7 +396,7 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                                       controller
                                           .pageModel.product.productDescription,
                                       softWrap: true,
-                                      maxLines: 6,
+                                      maxLines: 3,
                                       overflow: TextOverflow.ellipsis,
                                       textAlign: TextAlign.justify,
                                     ),
@@ -558,7 +559,7 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                                           controller.pageModel.reviews[0]
                                               .ratingProductComment,
                                           softWrap: true,
-                                          maxLines: 6,
+                                          maxLines: 3,
                                           overflow: TextOverflow.ellipsis,
                                           textAlign: TextAlign.justify,
                                         ),
@@ -596,7 +597,7 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                               );
                             }
 
-                            return Text('Tidak ada data');
+                            return Text('Belum ada ulasan');
                           },
                         ),
                       ],
@@ -716,8 +717,11 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                             child: Ink(
                               child: Obx(() {
                                 return InkWell(
-                                  onTap:
-                                      (controller.loading.value) ? null : () {},
+                                  onTap: (controller.loading.value)
+                                      ? null
+                                      : () {
+                                          controller.minus();
+                                        },
                                   child: Center(
                                     child: Icon(
                                       Icons.remove_rounded,
@@ -767,8 +771,7 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                                   onTap: (controller.loading.value)
                                       ? null
                                       : () {
-                                          controller.cart.addQty(
-                                              CartItemModel(cartItemQty: 1));
+                                          controller.plus();
                                         },
                                   child: Center(
                                     child: Icon(

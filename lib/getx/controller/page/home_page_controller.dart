@@ -23,7 +23,6 @@ class HomePageController extends GetxController {
 
   final AppPage _appPage = AppPage();
   final Product _product = Product();
-  final Cart _cart = Cart();
   final ScrollController homePageScrollController = ScrollController();
 
   HomePageModel homePageModel = HomePageModel();
@@ -132,8 +131,6 @@ class HomePageController extends GetxController {
 
       await _appPage.home().then((model) {
         homePageModel = model;
-
-        _cart.setCart(model.cartItems);
 
         productPaginate(model.productPaginateModel);
 

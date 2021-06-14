@@ -1,4 +1,3 @@
-import 'package:ayov2/core/core.dart';
 import 'package:ayov2/getx/getx.dart';
 import 'package:ayov2/ui/ui.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +7,9 @@ class AppPageController extends GetxController {
   final RxInt activePage = 0.obs;
 
   final GlobalObs globalObs = Get.find();
+  final CartController cartController = Get.find();
 
   final PageController pageController = PageController();
-  final Cart cart = Cart();
 
   final List<Widget> pages = [
     HomePage(),
