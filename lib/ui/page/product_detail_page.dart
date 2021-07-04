@@ -760,7 +760,6 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                                         errorBorder: InputBorder.none,
                                         disabledBorder: InputBorder.none,
                                       ),
-                                      onSubmitted: (value) {},
                                     );
                             }),
                           ),

@@ -32,6 +32,16 @@ class ProductDetailPageControlller extends GetxController {
     });
   }
 
+  void _initialProductQty() {
+    int index = cartController.getProductIndex(productModel);
+
+    if (index >= 0) {
+      qtyField.text = cartController.cartItems[index].cartItemQty.toString();
+    } else {
+      qtyField.text = '0';
+    }
+  }
+
   void addProductFavourite(String productId) async {
     loadingFavourite(true);
 
@@ -56,25 +66,16 @@ class ProductDetailPageControlller extends GetxController {
       qtyField.text = (int.parse(qtyField.text) - 1).toString();
   }
 
-  void _qtyFieldListener() {
-    print('CART : QTY FIELD LISTENER ${qtyField.text}');
-    cartController.setQty(product.value, int.parse(qtyField.text));
+  void qtyFieldListener() {
+    cartController.setQty(productModel, int.parse(qtyField.text));
   }
 
-  void _init() {
+  Future<void> _init() async {
     loadPageData();
 
-    int index = cartController.getProductIndex(productModel);
+    _initialProductQty();
 
-    print('CART : DETAIL PAGE INDEX $index');
-
-    if (index >= 0) {
-      qtyField.text = cartController.cartItems[index].cartItemQty.toString();
-    } else {
-      qtyField.text = '0';
-    }
-
-    qtyField.addListener(_qtyFieldListener);
+    qtyField.addListener(qtyFieldListener);
   }
 
   @override

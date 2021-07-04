@@ -22,7 +22,7 @@ class ProductItem extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(15),
         child: Ink(
-          width: (Get.size.width - 40) / 2,
+          width: (Get.size.width - 70) / 2,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: Column(
@@ -33,7 +33,7 @@ class ProductItem extends StatelessWidget {
                       imageUrl: product.productCover,
                       fit: BoxFit.cover,
                       width: double.infinity,
-                      height: 250 / 2,
+                      height: 260 / 2,
                     ),
                     Align(
                       alignment: Alignment.topRight,
@@ -111,7 +111,7 @@ class ProductItem extends StatelessWidget {
                         ),
                         Spacer(),
                         Rating(double.parse(product.productRatingValue)),
-                        Spacer(),
+                        SizedBox(height: 10),
                         ProductDeliveryType(
                           name: 'PENGIRIMAN ${product.productDeliveryType}',
                           color: (product.productDeliveryType == 'LANGSUNG')

@@ -39,7 +39,7 @@ class HomeVoucherSection extends StatelessWidget {
                         return (controller.loading.value)
                             ? ShimmerLoader(
                                 radius: 15,
-                                width: Get.size.width - 30,
+                                width: Get.size.width - 60,
                               )
                             : Material(
                                 color: Colors.grey[100],
@@ -48,7 +48,7 @@ class HomeVoucherSection extends StatelessWidget {
                                   onTap: () {},
                                   borderRadius: BorderRadius.circular(15),
                                   child: Ink(
-                                    width: Get.size.width - 30,
+                                    width: Get.size.width - 60,
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(15),
                                       child: CachedNetworkImage(
