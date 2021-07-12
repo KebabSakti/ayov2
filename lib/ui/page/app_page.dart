@@ -52,9 +52,9 @@ class AppPage extends GetView<AppPageController> {
               ),
               BottomNavigationBarItem(
                 icon: IconWithDot(
-                  Icon(Icons.assistant_rounded),
+                  Icon(Icons.account_circle_rounded),
                 ),
-                label: 'Souvenir',
+                label: 'Akun',
               ),
             ],
             onTap: controller.navigateTo,

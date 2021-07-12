@@ -6,6 +6,8 @@ const String PRODUCT_API = 'customer/domain/product/';
 const String PRODUCT_TOTAL_API = 'customer/domain/product/total';
 const String PRODUCT_FAVOURITE_API = 'customer/domain/product/favourite';
 const String SEARCH_API = 'customer/domain/search';
+const String CART_API = 'customer/domain/cart';
+const String CART_UPDATE_API = 'customer/domain/cart/update';
 
 const String CUSTOMER_EXIST_API = 'customer/auth/exist/';
 const String CUSTOMER_AUTHENTICATE_API = 'customer/auth/authenticate/';

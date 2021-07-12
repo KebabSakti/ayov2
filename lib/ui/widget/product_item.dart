@@ -35,19 +35,61 @@ class ProductItem extends StatelessWidget {
                       width: double.infinity,
                       height: 260 / 2,
                     ),
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: Container(
-                        width: 50,
-                        height: 40,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.5),
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(15),
+                    // Align(
+                    //   alignment: Alignment.topRight,
+                    //   child: Container(
+                    //     width: 50,
+                    //     height: 40,
+                    //     alignment: Alignment.center,
+                    //     decoration: BoxDecoration(
+                    //       color: Colors.black.withOpacity(0.5),
+                    //       borderRadius: BorderRadius.only(
+                    //         bottomLeft: Radius.circular(15),
+                    //       ),
+                    //     ),
+                    //     child: Row(
+                    //       mainAxisAlignment: MainAxisAlignment.center,
+                    //       children: [
+                    //         Text(
+                    //           product.productPoint.toString().length > 3
+                    //               ? product.productPoint.toString() + '+'
+                    //               : product.productPoint.toString(),
+                    //           textAlign: TextAlign.center,
+                    //           style: TextStyle(
+                    //             fontSize: 12,
+                    //             fontWeight: FontWeight.w600,
+                    //             color: Colors.amber,
+                    //           ),
+                    //         ),
+                    //         SizedBox(width: 2),
+                    //         SvgPicture.asset(
+                    //           COIN_ICON,
+                    //           width: 10,
+                    //           height: 10,
+                    //         ),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
+                  ],
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Column(
+                      children: [
+                        Text(
+                          product.productName,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12,
                           ),
                         ),
-                        child: Row(
+                        Spacer(),
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
@@ -69,26 +111,6 @@ class ProductItem extends StatelessWidget {
                             ),
                           ],
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Column(
-                      children: [
-                        Text(
-                          product.productName,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 12,
-                          ),
-                        ),
-                        Spacer(),
                         (double.parse(product.productDiscount) == 0)
                             ? SizedBox.shrink()
                             : Text(

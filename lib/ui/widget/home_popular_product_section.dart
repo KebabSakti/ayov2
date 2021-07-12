@@ -26,7 +26,7 @@ class HomePopularProductSection extends StatelessWidget {
             SizedBox(height: 15),
             Obx(() {
               return SizedBox(
-                height: 265,
+                height: 280,
                 child: ListView.builder(
                   itemCount: (controller.loading.value)
                       ? 2

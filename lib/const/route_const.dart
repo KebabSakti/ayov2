@@ -12,3 +12,4 @@ const String CATEGORY_PAGE = '/category';
 const String CATEGORY_DETAIL_PAGE = '/category_detail';
 const String PRODUCT_PAGE = '/product';
 const String PRODUCT_DETAIL_PAGE = '/product_detail';
+const String CART_PAGE = '/cart';

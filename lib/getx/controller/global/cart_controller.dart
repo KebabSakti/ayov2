@@ -1,3 +1,4 @@
+import 'package:ayov2/core/core.dart';
 import 'package:ayov2/model/model.dart';
 import 'package:get/get.dart';
 
@@ -5,6 +6,8 @@ class CartController extends GetxController {
   final RxList<CartItemModel> cartItems = List<CartItemModel>().obs;
   final RxInt cartQtyTotal = 0.obs;
   final RxDouble cartPriceTotal = 0.0.obs;
+
+  final Cart _cart = Cart();
 
   void setQty(ProductModel product, int qty) {
     int index = getProductIndex(product);
@@ -45,7 +48,9 @@ class CartController extends GetxController {
         0, (sum, item) => sum + double.parse(item.cartItemPrice)));
   }
 
-  void _updateCart() {}
+  void _updateCart() {
+    _cart.cartUpdate(cartItems: cartItems);
+  }
 
   void _init() {
     ever(cartItems, (_) {

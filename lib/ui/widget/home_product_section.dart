@@ -17,7 +17,7 @@ class HomeProductSection extends StatelessWidget {
     var _crossAxisCount = 2;
     var _width = (_screenWidth - ((_crossAxisCount - 1) * _crossAxisSpacing)) /
         _crossAxisCount;
-    var _cellHeight = 580 / 2;
+    var _cellHeight = 620 / 2;
     var _aspectRatio = _width / _cellHeight;
 
     return SliverStickyHeader(
