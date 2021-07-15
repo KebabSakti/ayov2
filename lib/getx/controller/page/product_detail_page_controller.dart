@@ -1,6 +1,6 @@
 import 'package:ayov2/const/const.dart';
 import 'package:ayov2/core/core.dart';
-import 'package:ayov2/getx/controller/controller.dart';
+import 'package:ayov2/getx/getx.dart';
 import 'package:ayov2/model/model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -68,6 +68,11 @@ class ProductDetailPageControlller extends GetxController {
 
   void qtyFieldListener() {
     cartController.setQty(productModel, int.parse(qtyField.text));
+  }
+
+  void routeToCartPage() async {
+    await Get.toNamed(CART_PAGE);
+    _initialProductQty();
   }
 
   Future<void> _init() async {

@@ -17,12 +17,16 @@ class HomeAppbarSection extends StatelessWidget {
       titleSpacing: 0,
       actions: [
         Padding(
-          padding: const EdgeInsets.only(right: 6),
-          child: IconButtonWithDot(
-            Icon(Icons.notifications_rounded),
-            value: 22,
-            onPressed: () {},
-          ),
+          padding: const EdgeInsets.only(right: 4),
+          child: Obx(() {
+            return IconButtonWithDot(
+              Icon(Icons.shopping_cart_rounded),
+              value: controller.cartController.cartQtyTotal.value,
+              onPressed: () {
+                controller.routeToCartPage();
+              },
+            );
+          }),
         ),
       ],
       title: Padding(

@@ -14,7 +14,7 @@ class ProductPage extends GetWidget<ProductPageController> {
     var _crossAxisCount = 2;
     var _width = (_screenWidth - ((_crossAxisCount - 1) * _crossAxisSpacing)) /
         _crossAxisCount;
-    var _cellHeight = 570 / 2;
+    var _cellHeight = 620 / 2;
     var _aspectRatio = _width / _cellHeight;
 
     return Scaffold(
@@ -95,7 +95,11 @@ class ProductPage extends GetWidget<ProductPageController> {
                                   return (controller.loadingFilter.value)
                                       ? ShimmerLoader(radius: 15)
                                       : ProductItem(
-                                          onTap: () {},
+                                          onTap: () {
+                                            controller.routeToProductDetailPage(
+                                                controller.productPaginate.value
+                                                    .products[index]);
+                                          },
                                           product: controller.productPaginate
                                               .value.products[index],
                                         );

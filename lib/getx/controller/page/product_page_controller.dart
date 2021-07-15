@@ -85,6 +85,10 @@ class ProductPageController extends GetxController {
     if (result != null) filterModel(result);
   }
 
+  void routeToProductDetailPage(ProductModel product) async {
+    Get.toNamed(PRODUCT_DETAIL_PAGE, arguments: product);
+  }
+
   void _init() {
     scrollController.addListener(_scrollListener);
 

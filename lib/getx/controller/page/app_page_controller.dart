@@ -16,14 +16,16 @@ class AppPageController extends GetxController {
   final List<Widget> pages = [
     HomePage(),
     Center(
-      child: Text('Souvenir'),
+      child: Text('Order'),
     ),
-    CartPage(),
+    Center(
+      child: Text('Voucher'),
+    ),
     Center(
       child: Text('Notif'),
     ),
     Center(
-      child: Text('Voucher'),
+      child: Text('Akun'),
     ),
   ];
 

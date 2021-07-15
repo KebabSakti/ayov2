@@ -72,5 +72,9 @@ class AppRoute {
       binding: ProductDetailPageBinding(),
       page: () => ProductDetailPage(),
     ),
+    GetPage(
+      name: CART_PAGE,
+      page: () => CartPage(),
+    ),
   ];
 }

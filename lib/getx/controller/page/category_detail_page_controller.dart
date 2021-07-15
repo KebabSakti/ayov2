@@ -1,10 +1,13 @@
 import 'package:ayov2/const/const.dart';
 import 'package:ayov2/core/core.dart';
+import 'package:ayov2/getx/getx.dart';
 import 'package:ayov2/model/model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CategoryDetailPageController extends GetxController {
+  final CartController cartController = Get.find();
+
   final RxBool loadingFilter = false.obs;
   final RxBool loadingPagination = false.obs;
   final Rx<ProductFilterModel> filterModel = ProductFilterModel().obs;
@@ -90,8 +93,16 @@ class CategoryDetailPageController extends GetxController {
     Get.toNamed(PRODUCT_PAGE, arguments: filter);
   }
 
+  void routeToProductDetailPage(ProductModel product) async {
+    Get.toNamed(PRODUCT_DETAIL_PAGE, arguments: product);
+  }
+
   void routeToCategoryPage({String categoryId}) async {
     Get.toNamed(CATEGORY_PAGE, arguments: categoryId);
+  }
+
+  void routeToCartPage() {
+    Get.toNamed(CART_PAGE);
   }
 
   void _init() {

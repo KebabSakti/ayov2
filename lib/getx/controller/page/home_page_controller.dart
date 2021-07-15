@@ -13,6 +13,7 @@ class HomePageController extends GetxController {
   final AuthLocal _authLocal = Get.find();
   final Helper _helper = Get.find();
   final GlobalObs _globalObs = Get.find();
+  final CartController cartController = Get.find();
   final AppPageController appPageController = Get.find();
 
   final RxBool loading = true.obs;
@@ -199,6 +200,10 @@ class HomePageController extends GetxController {
 
   void _routeToLoginPage() {
     Get.offAllNamed(LOGIN_PAGE);
+  }
+
+  void routeToCartPage() {
+    Get.toNamed(CART_PAGE);
   }
 
   void init() async {

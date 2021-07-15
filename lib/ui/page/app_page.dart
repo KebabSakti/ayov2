@@ -37,18 +37,18 @@ class AppPage extends GetView<AppPageController> {
                 label: 'Pesanan',
               ),
               BottomNavigationBarItem(
-                label: 'Keranjang',
-                icon: IconWithDot(
-                  Icon(Icons.shopping_cart_rounded),
-                  value: controller.cartController.cartQtyTotal.value,
-                ),
-              ),
-              BottomNavigationBarItem(
                 icon: IconWithDot(
                   Icon(Icons.ballot_rounded),
                   value: 4,
                 ),
                 label: 'Voucher',
+              ),
+              BottomNavigationBarItem(
+                icon: IconWithDot(
+                  Icon(Icons.notifications_rounded),
+                  value: 10,
+                ),
+                label: 'Notifikasi',
               ),
               BottomNavigationBarItem(
                 icon: IconWithDot(

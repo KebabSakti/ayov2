@@ -45,7 +45,9 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                       return IconButtonWithDot(
                         Icon(Icons.shopping_cart_rounded),
                         value: controller.cartController.cartQtyTotal.value,
-                        onPressed: () {},
+                        onPressed: () {
+                          controller.routeToCartPage();
+                        },
                       );
                     }),
                   ),
@@ -630,7 +632,7 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                       SizedBox(height: 15),
                       Obx(() {
                         return SizedBox(
-                          height: 265,
+                          height: 280,
                           child: ListView.builder(
                             itemCount: (controller.loading.value)
                                 ? 2
@@ -663,7 +665,8 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                                       child: ProductItem(
                                         onTap: () {
                                           controller.routeToProductDetailPage(
-                                              controller.pageModel.product);
+                                              controller.pageModel
+                                                  .relatedProducts[index]);
                                         },
                                         product: controller
                                             .pageModel.relatedProducts[index],

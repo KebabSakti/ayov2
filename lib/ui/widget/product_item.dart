@@ -35,6 +35,30 @@ class ProductItem extends StatelessWidget {
                       width: double.infinity,
                       height: 260 / 2,
                     ),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 5, top: 5),
+                        child: SizedBox.fromSize(
+                          size: Size(25, 25),
+                          child: ClipOval(
+                            child: Material(
+                              color: Colors.white.withOpacity(0.8),
+                              child: InkWell(
+                                onTap: () {},
+                                child: Center(
+                                  child: Icon(
+                                    Icons.favorite_rounded,
+                                    size: 18,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                     // Align(
                     //   alignment: Alignment.topRight,
                     //   child: Container(
@@ -137,7 +161,7 @@ class ProductItem extends StatelessWidget {
                         ProductDeliveryType(
                           name: 'PENGIRIMAN ${product.productDeliveryType}',
                           color: (product.productDeliveryType == 'LANGSUNG')
-                              ? Colors.green
+                              ? Get.theme.primaryColor
                               : Colors.amber,
                         ),
                       ],

@@ -27,7 +27,7 @@ class CategoryDetailPage extends GetView<CategoryDetailPageController> {
     var _crossAxisCount = 2;
     var _width = (_screenWidth - ((_crossAxisCount - 1) * _crossAxisSpacing)) /
         _crossAxisCount;
-    var _cellHeight = 570 / 2;
+    var _cellHeight = 620 / 2;
     var _aspectRatio = _width / _cellHeight;
 
     return Scaffold(
@@ -45,17 +45,17 @@ class CategoryDetailPage extends GetView<CategoryDetailPageController> {
                   pinned: true,
                   titleSpacing: 0,
                   actions: [
-                    IconButtonWithDot(
-                      Icon(Icons.notifications_rounded),
-                      value: 22,
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      iconSize: 30,
-                      visualDensity: VisualDensity.compact,
-                      padding: EdgeInsets.only(right: 12, left: 0),
-                      icon: Icon(Icons.account_circle_rounded),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 4),
+                      child: Obx(() {
+                        return IconButtonWithDot(
+                          Icon(Icons.shopping_cart_rounded),
+                          value: controller.cartController.cartQtyTotal.value,
+                          onPressed: () {
+                            controller.routeToCartPage();
+                          },
+                        );
+                      }),
                     ),
                   ],
                   title: StaticSearchField(
@@ -199,7 +199,11 @@ class CategoryDetailPage extends GetView<CategoryDetailPageController> {
                                   return (controller.loadingFilter.value)
                                       ? ShimmerLoader(radius: 15)
                                       : ProductItem(
-                                          onTap: () {},
+                                          onTap: () {
+                                            controller.routeToProductDetailPage(
+                                                controller.productPaginate.value
+                                                    .products[index]);
+                                          },
                                           product: controller.productPaginate
                                               .value.products[index],
                                         );
