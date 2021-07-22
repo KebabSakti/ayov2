@@ -34,64 +34,32 @@ class ProductItem extends StatelessWidget {
                       fit: BoxFit.cover,
                       width: double.infinity,
                       height: 260 / 2,
-                    ),
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 5, top: 5),
-                        child: SizedBox.fromSize(
-                          size: Size(25, 25),
-                          child: ClipOval(
-                            child: Material(
-                              color: Colors.white.withOpacity(0.8),
-                              child: InkWell(
-                                onTap: () {},
-                                child: Center(
-                                  child: Icon(
-                                    Icons.favorite_rounded,
-                                    size: 18,
-                                    color: Colors.red,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                      placeholder: (context, url) =>
+                          ShimmerLoader(height: 260 / 2),
                     ),
                     // Align(
                     //   alignment: Alignment.topRight,
-                    //   child: Container(
-                    //     width: 50,
-                    //     height: 40,
-                    //     alignment: Alignment.center,
-                    //     decoration: BoxDecoration(
-                    //       color: Colors.black.withOpacity(0.5),
-                    //       borderRadius: BorderRadius.only(
-                    //         bottomLeft: Radius.circular(15),
-                    //       ),
-                    //     ),
-                    //     child: Row(
-                    //       mainAxisAlignment: MainAxisAlignment.center,
-                    //       children: [
-                    //         Text(
-                    //           product.productPoint.toString().length > 3
-                    //               ? product.productPoint.toString() + '+'
-                    //               : product.productPoint.toString(),
-                    //           textAlign: TextAlign.center,
-                    //           style: TextStyle(
-                    //             fontSize: 12,
-                    //             fontWeight: FontWeight.w600,
-                    //             color: Colors.amber,
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.only(right: 5, top: 5),
+                    //     child: SizedBox.fromSize(
+                    //       size: Size(25, 25),
+                    //       child: ClipOval(
+                    //         child: Material(
+                    //           color: Colors.white.withOpacity(0.8),
+                    //           child: InkWell(
+                    //             onTap: () {},
+                    //             child: Center(
+                    //               child: Icon(
+                    //                 Icons.favorite_rounded,
+                    //                 size: 18,
+                    //                 color: (product.productFavourite == 0)
+                    //                     ? Colors.grey[400]
+                    //                     : Colors.red,
+                    //               ),
+                    //             ),
                     //           ),
                     //         ),
-                    //         SizedBox(width: 2),
-                    //         SvgPicture.asset(
-                    //           COIN_ICON,
-                    //           width: 10,
-                    //           height: 10,
-                    //         ),
-                    //       ],
+                    //       ),
                     //     ),
                     //   ),
                     // ),

@@ -54,7 +54,7 @@ class HomeCategorySection extends StatelessWidget {
                                     ? 10
                                     : 0),
                             child: Material(
-                              color: Colors.grey[100],
+                              color: Colors.grey[50],
                               borderRadius: BorderRadius.circular(15),
                               child: InkWell(
                                 onTap: () {

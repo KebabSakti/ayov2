@@ -1,3 +1,4 @@
+import 'package:ayov2/const/const.dart';
 import 'package:ayov2/getx/getx.dart';
 import 'package:ayov2/model/model.dart';
 import 'package:get/get.dart';
@@ -30,6 +31,10 @@ class CartPageController extends GetxController {
 
   void setQty(ProductModel productModel, String value) {
     cartController.setQty(productModel, int.parse(value));
+  }
+
+  void routeToOrderSummaryPage() {
+    Get.toNamed(ORDER_SUMMARY_PAGE);
   }
 
   @override

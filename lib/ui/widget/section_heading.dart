@@ -19,6 +19,7 @@ class SectionHeading extends StatelessWidget {
           heading,
           style: TextStyle(
             fontWeight: FontWeight.w600,
+            fontSize: 16,
           ),
         ),
         (onPressed == null)

@@ -94,12 +94,35 @@ class CartPage extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Expanded(
-                                            child: Text(
-                                              products[index]
-                                                  .product
-                                                  .productName,
-                                              maxLines: 2,
-                                              overflow: TextOverflow.ellipsis,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  products[index]
+                                                      .product
+                                                      .productName,
+                                                  maxLines: 2,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                                SizedBox(height: 6),
+                                                Text(
+                                                  Utility().currency(products[
+                                                              index]
+                                                          .product
+                                                          .productFinalPrice) +
+                                                      ' / ' +
+                                                      products[index]
+                                                          .product
+                                                          .productUnit,
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w800,
+                                                    color: Colors.green,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                           SizedBox(width: 15),
@@ -126,19 +149,6 @@ class CartPage extends StatelessWidget {
                                             ),
                                           ),
                                         ],
-                                      ),
-                                      SizedBox(height: 6),
-                                      Text(
-                                        Utility().currency(products[index]
-                                                .product
-                                                .productFinalPrice) +
-                                            ' / ' +
-                                            products[index].product.productUnit,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w800,
-                                          color: Colors.green,
-                                        ),
                                       ),
                                       SizedBox(height: 10),
                                       Row(
@@ -311,7 +321,9 @@ class CartPage extends StatelessWidget {
                           ),
                         ),
                         FlatButton(
-                          onPressed: () async {},
+                          onPressed: () {
+                            controller.routeToOrderSummaryPage();
+                          },
                           materialTapTargetSize:
                               MaterialTapTargetSize.shrinkWrap,
                           color: Get.theme.primaryColor,

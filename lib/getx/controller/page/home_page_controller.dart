@@ -22,6 +22,8 @@ class HomePageController extends GetxController {
   final Rx<ProductPaginateModel> productPaginate = ProductPaginateModel().obs;
   final Rx<ProductFilterModel> filterModel = ProductFilterModel().obs;
 
+  final RxList<ProductModel> productPopular = List<ProductModel>().obs;
+
   final AppPage _appPage = AppPage();
   final Product _product = Product();
   final ScrollController homePageScrollController = ScrollController();

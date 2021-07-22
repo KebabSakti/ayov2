@@ -76,5 +76,9 @@ class AppRoute {
       name: CART_PAGE,
       page: () => CartPage(),
     ),
+    GetPage(
+      name: ORDER_SUMMARY_PAGE,
+      page: () => OrderSummaryPage(),
+    ),
   ];
 }
