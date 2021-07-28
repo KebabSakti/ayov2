@@ -28,3 +28,4 @@ export './cart/cart_summary_model.dart';
 export './cart/cart_model.dart';
 export './cart/cart_item_model.dart';
 export './page/intro_page_model.dart';
+export './payment/payment_channel_model.dart';

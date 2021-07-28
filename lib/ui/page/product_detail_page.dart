@@ -105,16 +105,38 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Text(
-                                              Utility().currency(controller
-                                                      .pageModel
-                                                      .product
-                                                      .productFinalPrice) +
-                                                  ' ( ${controller.pageModel.product.productUnit} )',
-                                              style: TextStyle(
-                                                color: Colors.green,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 18,
+                                            RichText(
+                                              text: TextSpan(
+                                                style: TextStyle(
+                                                  fontFamily: 'Montserrat',
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                                children: [
+                                                  TextSpan(
+                                                    text: Utility().currency(
+                                                      controller
+                                                          .pageModel
+                                                          .product
+                                                          .productFinalPrice,
+                                                    ),
+                                                    style: TextStyle(
+                                                      color: Colors.green,
+                                                      fontSize: 18,
+                                                    ),
+                                                  ),
+                                                  TextSpan(
+                                                    text:
+                                                        '  ( 1 ${controller.pageModel.product.productUnit} )',
+                                                    style: TextStyle(
+                                                      color: Colors.grey[400],
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontSize: 10,
+                                                      fontStyle:
+                                                          FontStyle.italic,
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                             SizedBox(height: 6),
@@ -347,7 +369,7 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                                       color: (controller.pageModel.product
                                                   .productDeliveryType ==
                                               'LANGSUNG')
-                                          ? Colors.green
+                                          ? Colors.redAccent
                                           : Colors.amber,
                                     ),
                                   ],

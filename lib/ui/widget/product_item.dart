@@ -37,32 +37,29 @@ class ProductItem extends StatelessWidget {
                       placeholder: (context, url) =>
                           ShimmerLoader(height: 260 / 2),
                     ),
-                    // Align(
-                    //   alignment: Alignment.topRight,
-                    //   child: Padding(
-                    //     padding: const EdgeInsets.only(right: 5, top: 5),
-                    //     child: SizedBox.fromSize(
-                    //       size: Size(25, 25),
-                    //       child: ClipOval(
-                    //         child: Material(
-                    //           color: Colors.white.withOpacity(0.8),
-                    //           child: InkWell(
-                    //             onTap: () {},
-                    //             child: Center(
-                    //               child: Icon(
-                    //                 Icons.favorite_rounded,
-                    //                 size: 18,
-                    //                 color: (product.productFavourite == 0)
-                    //                     ? Colors.grey[400]
-                    //                     : Colors.red,
-                    //               ),
-                    //             ),
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 5, top: 5),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(6),
+                          child: Container(
+                            color: Colors.black38,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 6, vertical: 4),
+                            child: Text(
+                              '1 ' + product.productUnit,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 10,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                 Expanded(

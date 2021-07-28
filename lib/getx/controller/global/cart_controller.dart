@@ -52,9 +52,38 @@ class CartController extends GetxController {
     _cart.cartUpdate(cartItems: cartItems);
   }
 
+  void _evaluateItems() {
+    bool _gas = false;
+    bool _sayur = false;
+    bool _lain = false;
+    String _message = '';
+
+    cartItems.forEach((item) {
+      if (item.product.productIsExclusive == 1 &&
+          item.product.productDeliveryType == 'LANGSUNG') _gas = true;
+
+      if (item.product.productIsExclusive == 0 &&
+          item.product.productDeliveryType == 'TERJADWAL') _sayur = true;
+
+      if (item.product.productIsExclusive == 0 &&
+          item.product.productDeliveryType == 'LANGSUNG') _lain = true;
+    });
+
+    if (_gas == true && _lain == true || _gas == false && _lain == true) {
+      _message = 'Pakai kurir gas kantor';
+    } else if (_gas == true) {
+      _message = 'Pakai kurir gas mitra';
+    }
+
+    if (_sayur == true) _message += ' Pakai kurir sayur kantor';
+
+    print('DEBUGG : $_message');
+  }
+
   void _init() {
     ever(cartItems, (_) {
       _calculateTotal();
+      _evaluateItems();
     });
 
     debounce(cartItems, (_) {

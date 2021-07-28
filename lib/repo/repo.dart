@@ -4,3 +4,4 @@ export './app_page_repo.dart';
 export './product_repo.dart';
 export './search_repo.dart';
 export './cart_repo.dart';
+export './payment_repo.dart';

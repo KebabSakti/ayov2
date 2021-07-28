@@ -107,19 +107,39 @@ class CartPage extends StatelessWidget {
                                                       TextOverflow.ellipsis,
                                                 ),
                                                 SizedBox(height: 6),
-                                                Text(
-                                                  Utility().currency(products[
-                                                              index]
-                                                          .product
-                                                          .productFinalPrice) +
-                                                      ' / ' +
-                                                      products[index]
-                                                          .product
-                                                          .productUnit,
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w800,
-                                                    color: Colors.green,
+                                                RichText(
+                                                  text: TextSpan(
+                                                    style: TextStyle(
+                                                      fontFamily: 'Montserrat',
+                                                    ),
+                                                    children: [
+                                                      TextSpan(
+                                                        text:
+                                                            Utility().currency(
+                                                          products[index]
+                                                              .product
+                                                              .productFinalPrice,
+                                                        ),
+                                                        style: TextStyle(
+                                                          color: Colors.green,
+                                                          fontWeight:
+                                                              FontWeight.w800,
+                                                        ),
+                                                      ),
+                                                      TextSpan(
+                                                        text:
+                                                            '  ( 1 ${products[index].product.productUnit} )',
+                                                        style: TextStyle(
+                                                          color:
+                                                              Colors.grey[400],
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 10,
+                                                          fontStyle:
+                                                              FontStyle.italic,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                               ],
