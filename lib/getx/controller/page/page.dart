@@ -13,3 +13,5 @@ export './category_detail_page_controller.dart';
 export './product_page_controller.dart';
 export './product_detail_page_controller.dart';
 export './cart_page_controller.dart';
+export './order_summary_page_controller.dart';
+export './delivery_detail_page_controller.dart';

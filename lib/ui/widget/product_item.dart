@@ -48,7 +48,7 @@ class ProductItem extends StatelessWidget {
                             padding: EdgeInsets.symmetric(
                                 horizontal: 6, vertical: 4),
                             child: Text(
-                              '1 ' + product.productUnit,
+                              '${product.productUnitValue} ${product.productUnit}',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w600,

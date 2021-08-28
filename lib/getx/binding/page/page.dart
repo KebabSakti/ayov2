@@ -12,3 +12,6 @@ export './category_page_binding.dart';
 export './category_detail_page_binding.dart';
 export './product_page_binding.dart';
 export './product_detail_page_binding.dart';
+export './cart_page_binding.dart';
+export './order_summary_page_binding.dart';
+export './delivery_Detail_page_binding.dart';

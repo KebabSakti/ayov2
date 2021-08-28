@@ -30,6 +30,8 @@ class ProductModel {
   String productFinalPrice;
   @JsonKey(name: 'product_unit', nullable: true)
   String productUnit;
+  @JsonKey(name: 'product_unit_value', nullable: true)
+  int productUnitValue;
   @JsonKey(name: 'product_point', nullable: true)
   int productPoint;
   @JsonKey(name: 'product_view', nullable: true)
@@ -61,6 +63,7 @@ class ProductModel {
     this.productDiscount,
     this.productFinalPrice,
     this.productUnit,
+    this.productUnitValue,
     this.productPoint,
     this.productView,
     this.productSold,
@@ -85,6 +88,7 @@ class ProductModel {
     String productDiscount,
     String productFinalPrice,
     String productUnit,
+    int productUnitValue,
     int productPoint,
     int productView,
     int productSold,
@@ -108,6 +112,7 @@ class ProductModel {
         productDiscount: productDiscount ?? this.productDiscount,
         productFinalPrice: productFinalPrice ?? this.productFinalPrice,
         productUnit: productUnit ?? this.productUnit,
+        productUnitValue: productUnitValue ?? this.productUnitValue,
         productPoint: productPoint ?? this.productPoint,
         productView: productView ?? this.productView,
         productSold: productSold ?? this.productSold,

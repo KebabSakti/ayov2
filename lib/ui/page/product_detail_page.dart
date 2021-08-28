@@ -126,7 +126,7 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                                                   ),
                                                   TextSpan(
                                                     text:
-                                                        '  ( 1 ${controller.pageModel.product.productUnit} )',
+                                                        '  ( ${controller.pageModel.product.productUnitValue} ${controller.pageModel.product.productUnit} )',
                                                     style: TextStyle(
                                                       color: Colors.grey[400],
                                                       fontWeight:

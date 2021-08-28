@@ -1,3 +1,4 @@
+import 'package:ayov2/getx/getx.dart';
 import 'package:ayov2/ui/ui.dart';
 import 'package:ayov2/util/util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -5,7 +6,7 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class OrderSummaryPage extends StatelessWidget {
+class OrderSummaryPage extends GetView<OrderSummaryPageController> {
   @override
   Widget build(BuildContext context) {
     List<Widget> _widgets = [
@@ -26,7 +27,7 @@ class OrderSummaryPage extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: controller.navigateToDeliveryDetailPage,
                   child: Text(
                     'Edit',
                     style: TextStyle(
@@ -38,96 +39,101 @@ class OrderSummaryPage extends StatelessWidget {
               ],
             ),
             SizedBox(height: 15),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: 35,
-                  height: 35,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.grey[100],
-                    child: Icon(
-                      Icons.location_on_rounded,
-                      color: Colors.redAccent,
-                      size: 20,
-                    ),
-                  ),
-                ),
-                SizedBox(width: 15),
-                Expanded(
-                  child: Column(
+            (false)
+                ? Text(
+                    'Alamat pengiriman belum di set',
+                    style: TextStyle(color: Colors.grey[600]),
+                  )
+                : Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Julian Aryo',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
+                      SizedBox(
+                        width: 35,
+                        height: 35,
+                        child: CircleAvatar(
+                          backgroundColor: Colors.grey[100],
+                          child: Icon(
+                            Icons.location_on_rounded,
+                            color: Colors.redAccent,
+                            size: 20,
+                          ),
                         ),
                       ),
-                      SizedBox(height: 2),
-                      Text(
-                        '+6281254982664',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          color: Colors.green,
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan malesuada gravida. Integer in ante leo. Vivamus orci diam, varius eget placerat ac, pretium nec est',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      (false)
-                          ? SizedBox.shrink()
-                          : Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 8,
-                                vertical: 5,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.grey[50],
-                                border: Border(
-                                  left: BorderSide(
-                                    color: Colors.redAccent,
-                                    width: 4,
-                                  ),
-                                ),
-                              ),
-                              child: Text(
-                                'Masuk ikut jalan aspal, di rumah ujung ke dua dari kanan',
-                                style: TextStyle(
-                                  color: Colors.grey[600],
-                                  fontSize: 12,
-                                ),
+                      SizedBox(width: 15),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Julian Aryo',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
-                      SizedBox(height: 10),
-                      DeliveryGroup(
-                        color: Colors.redAccent,
-                        name: 'PENGIRIMAN LANGSUNG',
-                        distance: '5 km',
-                        price: '12000',
-                        time: 'Langsung',
-                        helpButton: () {},
-                      ),
-                      SizedBox(height: 10),
-                      DeliveryGroup(
-                        color: Colors.amber,
-                        name: 'PENGIRIMAN TERJADWAL',
-                        distance: '10 km',
-                        price: '10000',
-                        time: '10:00 AM',
-                        helpButton: () {},
-                        timeButton: () {},
+                            SizedBox(height: 2),
+                            Text(
+                              '+6281254982664',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.green,
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            Text(
+                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan malesuada gravida. Integer in ante leo. Vivamus orci diam, varius eget placerat ac, pretium nec est',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            (false)
+                                ? SizedBox.shrink()
+                                : Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                      vertical: 5,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey[50],
+                                      border: Border(
+                                        left: BorderSide(
+                                          color: Colors.redAccent,
+                                          width: 4,
+                                        ),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      'Masuk ikut jalan aspal, di rumah ujung ke dua dari kanan',
+                                      style: TextStyle(
+                                        color: Colors.grey[600],
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ),
+                            SizedBox(height: 10),
+                            DeliveryGroup(
+                              color: Colors.redAccent,
+                              name: 'PENGIRIMAN LANGSUNG',
+                              distance: '5 km',
+                              price: '12000',
+                              time: 'Langsung',
+                              helpButton: () {},
+                            ),
+                            SizedBox(height: 10),
+                            DeliveryGroup(
+                              color: Colors.amber,
+                              name: 'PENGIRIMAN TERJADWAL',
+                              distance: '10 km',
+                              price: '10000',
+                              time: '10:00 AM',
+                              helpButton: () {},
+                              timeButton: () {},
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
           ],
         ),
       ),

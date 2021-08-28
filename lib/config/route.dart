@@ -74,11 +74,18 @@ class AppRoute {
     ),
     GetPage(
       name: CART_PAGE,
+      binding: CartPageBinding(),
       page: () => CartPage(),
     ),
     GetPage(
       name: ORDER_SUMMARY_PAGE,
+      binding: OrderSummaryPageBinding(),
       page: () => OrderSummaryPage(),
+    ),
+    GetPage(
+      name: DELIVERY_DETAIL_PAGE,
+      binding: DeliveryDetailPageBinding(),
+      page: () => DeliveryDetailPage(),
     ),
   ];
 }
