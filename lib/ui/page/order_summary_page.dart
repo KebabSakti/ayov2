@@ -27,7 +27,7 @@ class OrderSummaryPage extends GetView<OrderSummaryPageController> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: controller.navigateToDeliveryDetailPage,
+                  onTap: controller.navigateToMapPage,
                   child: Text(
                     'Edit',
                     style: TextStyle(

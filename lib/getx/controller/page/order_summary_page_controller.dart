@@ -71,8 +71,12 @@ class OrderSummaryPageController extends GetxController {
     Get.toNamed(DELIVERY_DETAIL_PAGE);
   }
 
+  void navigateToMapPage() {
+    Get.toNamed(MAP_PAGE);
+  }
+
   void _init() {
-    _deviceLocation();
+    // _deviceLocation();
   }
 
   @override

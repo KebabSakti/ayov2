@@ -1,60 +1,76 @@
-import 'dart:async';
-
-import 'package:geolocator/geolocator.dart';
+import 'package:ayov2/core/core.dart';
+import 'package:ayov2/data/data.dart';
+import 'package:ayov2/model/model.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class DeliveryDetailPageController extends GetxController {
-  final PanelController panelController = PanelController();
-  final Completer<GoogleMapController> _completer = Completer();
+  final PlacesCore _placesCore = PlacesCore();
+  final PlacesData _placesData = PlacesData();
+  final TextEditingController searchField = TextEditingController();
 
-  LatLng _myLocation =
-      LatLng(-0.49732531314209866, 117.14187383609166); //Samarinda
-  GoogleMapController _mapController;
+  final RxBool loading = false.obs;
+  final RxString keywords = ''.obs;
+  final RxList<PlacesModel> suggestedPlaces = <PlacesModel>[].obs;
 
-  void onCameraMoveStarted() {
-    panelController.close();
+  void _searchFieldListener() {
+    keywords(searchField.text);
   }
 
-  void onCameraMove(CameraPosition cameraPosition) {}
+  void _placeAutoComplete() async {
+    try {
+      loading(true);
 
-  void onCameraIdle() {
-    panelController.open();
+      List<PlacesModel> _places = <PlacesModel>[];
+
+      _places =
+          await _placesCore.placeAutoCompleteCache(keyword: keywords.value);
+
+      if (_places.length == 0) {
+        _places = await _placesCore
+            .placeAutoComplete(keyword: keywords.value)
+            .then((results) async {
+          await _placesData.store(places: results);
+
+          return results;
+        });
+      }
+
+      suggestedPlaces.assignAll(_places);
+
+      loading(false);
+    } catch (e) {
+      print(e);
+
+      loading(false);
+    }
   }
 
-  void onMapCreated(GoogleMapController controller) async {
-    _completer.complete(controller);
-
-    _mapController = await _completer.future;
-
-    _deviceLocation();
+  void clearSearchField() {
+    searchField.text = '';
+    keywords('');
+    suggestedPlaces([]);
   }
 
-  void _deviceLocation() async {
-    Position _position = await Geolocator.getCurrentPosition();
-
-    LatLng _newPosition = LatLng(
-      _position.latitude,
-      _position.longitude,
-    );
-
-    CameraPosition _cameraPosition = CameraPosition(
-      target: _newPosition,
-      zoom: 16,
-    );
-
-    _mapController
-        ?.animateCamera(CameraUpdate.newCameraPosition(_cameraPosition));
-
-    _myLocation = _newPosition;
+  String placeName(String description) {
+    return description.substring(0, description.indexOf(','));
   }
 
-  void deviceLocationButton() {
-    _deviceLocation();
+  void _init() {
+    searchField.addListener(_searchFieldListener);
+
+    debounce(keywords, (value) {
+      if (value.length > 0) {
+        _placeAutoComplete();
+      } else {
+        clearSearchField();
+      }
+    }, time: Duration(milliseconds: 500));
   }
 
-  CameraPosition initialCamera() {
-    return CameraPosition(target: _myLocation, zoom: 12.0);
+  @override
+  void onInit() {
+    _init();
+    super.onInit();
   }
 }

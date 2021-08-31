@@ -87,5 +87,10 @@ class AppRoute {
       binding: DeliveryDetailPageBinding(),
       page: () => DeliveryDetailPage(),
     ),
+    GetPage(
+      name: MAP_PAGE,
+      binding: MapPageBinding(),
+      page: () => MapPage(),
+    ),
   ];
 }

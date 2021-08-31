@@ -5,3 +5,4 @@ export './product_repo.dart';
 export './search_repo.dart';
 export './cart_repo.dart';
 export './payment_repo.dart';
+export './places_repo.dart';

@@ -9,6 +9,8 @@ const String SEARCH_API = 'customer/domain/search';
 const String CART_API = 'customer/domain/cart';
 const String CART_UPDATE_API = 'customer/domain/cart/update';
 const String PAYMENT_CHANNEL_API = 'customer/domain/payment/channel';
+const String PLACES_INDEX_API = 'customer/domain/places';
+const String PLACES_STORE_API = 'customer/domain/places/store';
 
 const String CUSTOMER_EXIST_API = 'customer/auth/exist/';
 const String CUSTOMER_AUTHENTICATE_API = 'customer/auth/authenticate/';
