@@ -52,8 +52,8 @@ class DeliveryDetailPageController extends GetxController {
     suggestedPlaces([]);
   }
 
-  String placeName(String description) {
-    return description.substring(0, description.indexOf(','));
+  String placeName(String value) {
+    return value.substring(0, value.indexOf(','));
   }
 
   void _init() {

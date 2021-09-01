@@ -2,6 +2,7 @@ import 'package:ayov2/const/const.dart';
 import 'package:ayov2/data/data.dart';
 import 'package:ayov2/model/model.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart' as geocoding;
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_webservice/distance.dart';
 import 'package:google_maps_webservice/geocoding.dart';
@@ -103,5 +104,11 @@ class PlacesCore {
     }
 
     return _distance;
+  }
+
+  Future<List<geocoding.Placemark>> addressFromLocationOffline(
+      double latitude, double longitude) async {
+    return await geocoding.placemarkFromCoordinates(latitude, longitude,
+        localeIdentifier: 'id_ID');
   }
 }

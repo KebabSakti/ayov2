@@ -1,4 +1,5 @@
 import 'package:ayov2/getx/controller/controller.dart';
+import 'package:ayov2/ui/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -38,8 +39,8 @@ class MapPage extends GetView<MapPageController> {
       body: SlidingUpPanel(
         controller: controller.panelController,
         parallaxEnabled: true,
-        // parallaxOffset: 0.5,
-        minHeight: Get.size.height * 0.25,
+        parallaxOffset: 0.5,
+        minHeight: Get.size.height * 0.2,
         maxHeight: Get.size.height * 0.5,
         header: Container(
           width: Get.size.width,
@@ -97,9 +98,75 @@ class MapPage extends GetView<MapPageController> {
           child: Column(
             children: [
               Container(
-                height: (Get.size.height * 0.25) - 30,
+                height: (Get.size.height * 0.2) - 30,
                 width: double.infinity,
-                color: Colors.green,
+                child: Obx(() {
+                  return (controller.loading.value)
+                      ? Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ShimmerLoader(
+                              height: 40,
+                              width: 40,
+                              radius: 20,
+                            ),
+                            SizedBox(width: 15),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ShimmerLoader(
+                                    height: 12,
+                                    radius: 10,
+                                  ),
+                                  SizedBox(height: 5),
+                                  ShimmerLoader(
+                                    height: 12,
+                                    radius: 10,
+                                    width: 250,
+                                  ),
+                                  SizedBox(height: 5),
+                                  ShimmerLoader(
+                                    height: 12,
+                                    radius: 10,
+                                    width: 200,
+                                  ),
+                                  SizedBox(height: 5),
+                                  ShimmerLoader(
+                                    height: 12,
+                                    radius: 10,
+                                    width: 180,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )
+                      : Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: Colors.grey[100],
+                              child: Icon(
+                                Icons.place_rounded,
+                                color: Colors.redAccent,
+                              ),
+                            ),
+                            SizedBox(width: 15),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    controller.address.value,
+                                    // style: TextStyle(fontSize: 12),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        );
+                }),
               ),
             ],
           ),

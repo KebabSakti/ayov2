@@ -8,7 +8,7 @@ class OrderSummaryPageController extends GetxController {
   Future<List<Placemark>> _getAddressFromLocation(
       double latitude, double longitude) async {
     return await placemarkFromCoordinates(latitude, longitude,
-        localeIdentifier: 'id');
+        localeIdentifier: 'id_ID');
   }
 
   Future _deviceLocation() async {
