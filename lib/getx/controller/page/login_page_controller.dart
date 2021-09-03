@@ -55,7 +55,6 @@ class LoginPageController extends GetxController {
       await _authFirebase.signInWithPhone(
         phoneNumber.toString(),
         codeAutoRetrievalTimeout: (String verificationId) {
-          print('TIMEOUT');
           print(verificationId);
         },
         verificationFailed: (FirebaseAuthException exception) {

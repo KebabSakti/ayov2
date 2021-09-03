@@ -31,3 +31,4 @@ export './page/intro_page_model.dart';
 export './payment/payment_channel_model.dart';
 export './places/places_model.dart';
 export './places/distance_model.dart';
+export './response/response_model.dart';
