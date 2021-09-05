@@ -12,7 +12,7 @@ class HomeAppbarSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      expandedHeight: Get.size.height / 2.5,
+      expandedHeight: Get.size.height / 3.5,
       pinned: true,
       titleSpacing: 0,
       actions: [
