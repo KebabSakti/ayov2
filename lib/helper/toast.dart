@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class AyoToast {
@@ -10,6 +11,8 @@ class AyoToast {
       msg: message,
       toastLength: length,
       gravity: position,
+      backgroundColor: Colors.grey[100],
+      textColor: Colors.black,
     );
   }
 }

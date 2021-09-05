@@ -37,14 +37,12 @@ class OtpPageController extends GetxController {
           //
         },
       );
-    } on FirebaseAuthException catch (e) {
-      print(e.toString());
-
+    } on FirebaseAuthException catch (_) {
       _helper.dialog.close();
-      _helper.dialog.error(GENERAL_MESSAGE, dismissible: true);
+      _helper.toast.show(GENERAL_MESSAGE);
     } catch (e) {
       _helper.dialog.close();
-      _helper.dialog.error(e.message, dismissible: true);
+      _helper.toast.show(e.message);
     }
   }
 
@@ -62,12 +60,12 @@ class OtpPageController extends GetxController {
     } on FirebaseAuthException catch (e) {
       _helper.dialog.close();
       if (e.code == 'invalid-verification-code')
-        _helper.dialog.error(INVALID_OTP_CODE, dismissible: true);
+        _helper.toast.show(INVALID_OTP_CODE);
       else
-        _helper.dialog.error(GENERAL_MESSAGE, dismissible: true);
+        _helper.toast.show(GENERAL_MESSAGE);
     } catch (e) {
       _helper.dialog.close();
-      _helper.dialog.error(e.message, dismissible: true);
+      _helper.toast.show(e.message);
     }
   }
 

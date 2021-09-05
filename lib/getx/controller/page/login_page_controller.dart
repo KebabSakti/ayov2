@@ -36,7 +36,7 @@ class LoginPageController extends GetxController {
       }
     } catch (_) {
       _helper.dialog.close();
-      _helper.dialog.error(GENERAL_MESSAGE, dismissible: true);
+      _helper.toast.show(GENERAL_MESSAGE);
     }
   }
 
@@ -49,8 +49,11 @@ class LoginPageController extends GetxController {
       PhoneNumber phoneNumber = await PhoneNumber.getRegionInfoFromPhoneNumber(
           '+62${phoneField.text}', 'ID');
 
-      if (await _authLocal.exist(phoneNumber: phoneNumber.toString()))
-        throw Failure(PHONE_NOT_REGISTERED);
+      var result = await _authLocal.exist(phoneNumber: phoneNumber.toString());
+
+      if (result is DioError) throw Failure(DIOERROR_MESSAGE);
+
+      if (result is! DioError && result) throw Failure(PHONE_NOT_REGISTERED);
 
       await _authFirebase.signInWithPhone(
         phoneNumber.toString(),
@@ -75,25 +78,24 @@ class LoginPageController extends GetxController {
               .then((result) => _authenticate(result.user));
         },
       );
-    } on DioError {
+    } on Failure catch (e) {
       _helper.dialog.close();
-      _helper.dialog.error(DIOERROR_MESSAGE, dismissible: true);
-    } catch (e) {
-      _helper.dialog.close();
-      _helper.dialog.error(e.message, dismissible: true);
+      _helper.toast.show(e.message);
     }
   }
 
   void _authenticate(User user) async {
     try {
-      CustomerModel customerModel = await _authLocal.authenticate(
-        customerId: user.uid,
-        customerName: user.displayName,
-        customerPhone: user.phoneNumber,
-        customerEmail: user.email,
-        customerPassword: user.uid,
-        customerFcm: await _appPreference.getFcmToken(),
-      );
+      CustomerModel customerModel = await _authLocal
+          .authenticate(
+            customerId: user.uid,
+            customerName: user.displayName,
+            customerPhone: user.phoneNumber,
+            customerEmail: user.email,
+            customerPassword: user.uid,
+            customerFcm: await _appPreference.getFcmToken(),
+          )
+          .catchError((e, t) => throw Failure(DIOERROR_MESSAGE));
 
       await _authLocal.saveUserPreference(
           customerModel.customerId, customerModel.customerToken);
@@ -101,9 +103,9 @@ class LoginPageController extends GetxController {
       _globalObs.customerModel(customerModel);
 
       _routeToAppPage();
-    } on DioError {
+    } on Failure catch (e) {
       _helper.dialog.close();
-      _helper.dialog.error(DIOERROR_MESSAGE, dismissible: true);
+      _helper.toast.show(e.message);
     }
   }
 
