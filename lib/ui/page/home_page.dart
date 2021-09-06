@@ -153,7 +153,18 @@ class _HomePageState extends State<HomePage>
                                                 width:
                                                     (Get.size.width - 20) / 4,
                                                 child: InkWell(
-                                                  onTap: () {},
+                                                  onTap: () {
+                                                    if (index == 7) {
+                                                      controller.allCategory();
+                                                    } else {
+                                                      controller.categoryOnClick(
+                                                          controller
+                                                              .homePageModel
+                                                              .categoryModel[
+                                                                  index]
+                                                              .categoryId);
+                                                    }
+                                                  },
                                                   child: Padding(
                                                     padding: const EdgeInsets
                                                             .symmetric(

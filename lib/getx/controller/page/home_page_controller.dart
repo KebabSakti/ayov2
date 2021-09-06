@@ -135,6 +135,8 @@ class HomePageController extends GetxController {
       await _appPage.home().then((model) {
         homePageModel = model;
 
+        _globalObs.categoryModel(model.categoryModel);
+
         productPaginate(model.productPaginateModel);
 
         loading(false);
@@ -152,6 +154,18 @@ class HomePageController extends GetxController {
     await homeData();
 
     filterModel(ProductFilterModel());
+  }
+
+  void allCategory() {
+    appPageController.openPanel(PanelBody.category);
+  }
+
+  void sliderOnClick(String tag) {
+    routeToProductPage(ProductFilterModel(productTag: tag));
+  }
+
+  void categoryOnClick(String category) {
+    routeToProductPage(ProductFilterModel(category: category));
   }
 
   void _routeToQrPage() async {

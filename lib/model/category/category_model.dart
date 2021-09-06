@@ -16,6 +16,12 @@ class CategoryModel {
   String categoryDeeplink;
   @JsonKey(name: 'category_active', nullable: true)
   int categoryActive;
+  @JsonKey(name: 'category_order', nullable: true)
+  int categoryOrder;
+  @JsonKey(name: 'category_group', nullable: true)
+  String categoryGroup;
+  @JsonKey(name: 'category_description', nullable: true)
+  String categoryDescription;
 
   CategoryModel({
     this.categoryId,
@@ -24,6 +30,9 @@ class CategoryModel {
     this.categoryView,
     this.categoryDeeplink,
     this.categoryActive,
+    this.categoryGroup,
+    this.categoryOrder,
+    this.categoryDescription,
   });
 
   CategoryModel copyWith({
@@ -33,6 +42,9 @@ class CategoryModel {
     int categoryView,
     String categoryDeeplink,
     int categoryActive,
+    int categoryOrder,
+    String categoryGroup,
+    String categoryDescription,
   }) =>
       CategoryModel(
         categoryId: categoryId ?? this.categoryId,
@@ -41,6 +53,9 @@ class CategoryModel {
         categoryView: categoryView ?? this.categoryView,
         categoryDeeplink: categoryDeeplink ?? this.categoryDeeplink,
         categoryActive: categoryActive ?? this.categoryActive,
+        categoryGroup: categoryGroup ?? this.categoryGroup,
+        categoryOrder: categoryOrder ?? this.categoryOrder,
+        categoryDescription: categoryDescription ?? this.categoryDescription,
       );
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) =>

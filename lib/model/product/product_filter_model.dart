@@ -5,6 +5,7 @@ class ProductFilterModel {
   String productId;
   String keyword;
   String productPrice;
+  String productTag;
   bool highRatingValue;
   bool discount;
   bool highPoint;
@@ -20,6 +21,7 @@ class ProductFilterModel {
     this.productId,
     this.keyword,
     this.productPrice,
+    this.productTag,
     this.highRatingValue = false,
     this.discount = false,
     this.highPoint = false,
@@ -36,6 +38,7 @@ class ProductFilterModel {
     String productId,
     String keyword,
     String productPrice,
+    String productTag,
     bool highRatingValue,
     bool discount,
     bool highPoint,
@@ -52,6 +55,7 @@ class ProductFilterModel {
         keyword: keyword ?? this.keyword,
         discount: discount ?? this.discount,
         productPrice: productPrice ?? this.productPrice,
+        productTag: productTag ?? this.productTag,
         highPoint: highPoint ?? this.highPoint,
         highView: highView ?? this.highView,
         highRatingCount: highRatingCount ?? highRatingCount,

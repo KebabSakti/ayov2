@@ -29,6 +29,9 @@ class MainActivity: FlutterActivity() {
                 else{
                     result.error("Error Code", "Error Message", null)
                 }
+            } else if (call.method == "moveTaskToBack") {
+                moveTaskToBack(true)
+                result.success(null)
             } else {
                 result.notImplemented()
             }

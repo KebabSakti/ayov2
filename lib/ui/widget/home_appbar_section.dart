@@ -47,7 +47,11 @@ class HomeAppbarSection extends StatelessWidget {
                     itemBuilder: (_, int index) {
                       return GestureDetector(
                         onTap: () {
-                          print(index);
+                          if (controller.homePageModel.bannerPrimaryModel[index]
+                                  .bannerPrimaryLink !=
+                              null)
+                            controller.sliderOnClick(controller.homePageModel
+                                .bannerPrimaryModel[index].bannerPrimaryLink);
                         },
                         child: CachedNetworkImage(
                           imageUrl: controller.homePageModel

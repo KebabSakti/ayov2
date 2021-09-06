@@ -29,6 +29,7 @@ class ProductPageController extends GetxController {
       productId: filterModel.value.productId,
       productPrice: filterModel.value.productPrice,
       subCategory: filterModel.value.subCategory,
+      productTag: filterModel.value.productTag,
     );
   }
 

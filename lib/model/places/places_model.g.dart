@@ -9,6 +9,7 @@ part of 'places_model.dart';
 PlacesModel _$PlacesModelFromJson(Map<String, dynamic> json) {
   return PlacesModel(
     placeSuggestionId: json['place_suggestion_id'] as String,
+    placeSuggestionPlaceId: json['place_suggestion_place_id'] as String,
     placeSuggestionLatitude: json['place_suggestion_latitude'] as String,
     placeSuggestionLongitude: json['place_suggestion_longitude'] as String,
     placeSuggestionStreet: json['place_suggestion_street'] as String,
@@ -25,6 +26,7 @@ PlacesModel _$PlacesModelFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$PlacesModelToJson(PlacesModel instance) =>
     <String, dynamic>{
       'place_suggestion_id': instance.placeSuggestionId,
+      'place_suggestion_place_id': instance.placeSuggestionPlaceId,
       'place_suggestion_latitude': instance.placeSuggestionLatitude,
       'place_suggestion_longitude': instance.placeSuggestionLongitude,
       'place_suggestion_street': instance.placeSuggestionStreet,
