@@ -1,4 +1,6 @@
+import 'package:ayov2/const/const.dart';
 import 'package:ayov2/getx/getx.dart';
+import 'package:ayov2/model/model.dart';
 import 'package:ayov2/ui/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -98,14 +100,10 @@ class AppPage extends GetView<AppPageController> {
             padding: EdgeInsets.only(top: 30),
             child: Obx(() {
               if (controller.panelBody() == PanelBody.category) {
-                return MediaQuery.removePadding(
-                  context: context,
-                  removeTop: true,
-                  child: ListView.separated(
-                    itemCount: controller.globalObs.categoryModel.length,
-                    separatorBuilder: (context, index) => Divider(height: 1),
-                    itemBuilder: (context, index) {
-                      return Ink(
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Ink(
                         color: Colors.white,
                         child: InkWell(
                           child: Padding(
@@ -129,11 +127,8 @@ class AppPage extends GetView<AppPageController> {
                                     ),
                                     Positioned.fill(
                                       child: Center(
-                                        child: SvgPicture.network(
-                                          controller
-                                              .globalObs
-                                              .categoryModel[index]
-                                              .categoryImage,
+                                        child: SvgPicture.asset(
+                                          ALL_CATEGORY,
                                           width: 40,
                                           height: 40,
                                           placeholderBuilder: (context) =>
@@ -155,8 +150,7 @@ class AppPage extends GetView<AppPageController> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        controller.globalObs
-                                            .categoryModel[index].categoryName,
+                                        'Semua Produk',
                                         style: TextStyle(
                                           color: Colors.grey[800],
                                           fontWeight: FontWeight.bold,
@@ -165,10 +159,7 @@ class AppPage extends GetView<AppPageController> {
                                       ),
                                       SizedBox(height: 3),
                                       Text(
-                                        controller
-                                            .globalObs
-                                            .categoryModel[index]
-                                            .categoryDescription,
+                                        'Solusi segala keperluan dapur kamu',
                                         style: TextStyle(fontSize: 12),
                                       ),
                                     ],
@@ -177,10 +168,112 @@ class AppPage extends GetView<AppPageController> {
                               ],
                             ),
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            controller.routeToProductPage(ProductFilterModel());
+                          },
                         ),
-                      );
-                    },
+                      ),
+                      Divider(height: 1),
+                      MediaQuery.removePadding(
+                        context: context,
+                        removeTop: true,
+                        child: ListView.separated(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: controller.globalObs.categoryModel.length,
+                          separatorBuilder: (context, index) =>
+                              Divider(height: 1),
+                          itemBuilder: (context, index) {
+                            return Ink(
+                              color: Colors.white,
+                              child: InkWell(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Stack(
+                                        children: [
+                                          Center(
+                                            child: Container(
+                                              width: 55,
+                                              height: 55,
+                                              decoration: BoxDecoration(
+                                                color: Colors.green[50],
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(100),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned.fill(
+                                            child: Center(
+                                              child: SvgPicture.network(
+                                                controller
+                                                    .globalObs
+                                                    .categoryModel[index]
+                                                    .categoryImage,
+                                                width: 40,
+                                                height: 40,
+                                                placeholderBuilder: (context) =>
+                                                    ShimmerLoader(
+                                                  width: 40,
+                                                  height: 40,
+                                                  radius: 40,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(width: 15),
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              controller
+                                                  .globalObs
+                                                  .categoryModel[index]
+                                                  .categoryName,
+                                              style: TextStyle(
+                                                color: Colors.grey[800],
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 14,
+                                              ),
+                                            ),
+                                            SizedBox(height: 3),
+                                            Text(
+                                              controller
+                                                  .globalObs
+                                                  .categoryModel[index]
+                                                  .categoryDescription,
+                                              style: TextStyle(fontSize: 12),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                onTap: () {
+                                  controller.routeToProductPage(
+                                    ProductFilterModel(
+                                      category: controller.globalObs
+                                          .categoryModel[index].categoryId,
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 );
               }

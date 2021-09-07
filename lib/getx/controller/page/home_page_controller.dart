@@ -160,8 +160,8 @@ class HomePageController extends GetxController {
     appPageController.openPanel(PanelBody.category);
   }
 
-  void sliderOnClick(String tag) {
-    routeToProductPage(ProductFilterModel(productTag: tag));
+  void sliderOnClick(String link) {
+    routeToProductPage(ProductFilterModel(productBundleId: link));
   }
 
   void categoryOnClick(String category) {

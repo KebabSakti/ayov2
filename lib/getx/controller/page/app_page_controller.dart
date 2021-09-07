@@ -1,5 +1,7 @@
+import 'package:ayov2/const/const.dart';
 import 'package:ayov2/core/core.dart';
 import 'package:ayov2/getx/getx.dart';
+import 'package:ayov2/model/model.dart';
 import 'package:ayov2/ui/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -49,6 +51,10 @@ class AppPageController extends GetxController {
     panelBody(body);
     panelController.animatePanelToPosition(1.0,
         duration: Duration(milliseconds: 100));
+  }
+
+  void routeToProductPage(ProductFilterModel filter) async {
+    Get.toNamed(PRODUCT_PAGE, arguments: filter);
   }
 
   Future<bool> backButtonHandler() async {

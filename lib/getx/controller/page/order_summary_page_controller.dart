@@ -11,7 +11,7 @@ class OrderSummaryPageController extends GetxController {
         localeIdentifier: 'id_ID');
   }
 
-  Future _deviceLocation() async {
+  Future deviceLocation() async {
     final _geocoding = google.GoogleMapsGeocoding(apiKey: KEY);
 
     bool serviceEnabled;

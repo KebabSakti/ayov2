@@ -75,54 +75,70 @@ class ProductPage extends GetWidget<ProductPageController> {
                         removeTop: true,
                         removeBottom: true,
                         child: Obx(() {
-                          return Column(
-                            children: [
-                              GridView.builder(
-                                shrinkWrap: true,
-                                itemCount: (controller.loadingFilter.value)
-                                    ? 4
-                                    : controller
-                                        .productPaginate.value.products.length,
-                                physics: NeverScrollableScrollPhysics(),
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: _crossAxisCount,
-                                  crossAxisSpacing: _crossAxisSpacing,
-                                  mainAxisSpacing: _mainAxisSpacing,
-                                  childAspectRatio: _aspectRatio,
+                          if (!controller.loadingFilter() &&
+                              controller.productPaginate().products.length >
+                                  0) {
+                            return Column(
+                              children: [
+                                GridView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: controller
+                                      .productPaginate.value.products.length,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: _crossAxisCount,
+                                    crossAxisSpacing: _crossAxisSpacing,
+                                    mainAxisSpacing: _mainAxisSpacing,
+                                    childAspectRatio: _aspectRatio,
+                                  ),
+                                  itemBuilder: (context, index) {
+                                    return ProductItem(
+                                      onTap: () {
+                                        controller.routeToProductDetailPage(
+                                            controller.productPaginate.value
+                                                .products[index]);
+                                      },
+                                      product: controller.productPaginate.value
+                                          .products[index],
+                                    );
+                                  },
                                 ),
-                                itemBuilder: (context, index) {
-                                  return (controller.loadingFilter.value)
-                                      ? ShimmerLoader(radius: 15)
-                                      : ProductItem(
-                                          onTap: () {
-                                            controller.routeToProductDetailPage(
-                                                controller.productPaginate.value
-                                                    .products[index]);
-                                          },
-                                          product: controller.productPaginate
-                                              .value.products[index],
-                                        );
-                                },
-                              ),
-                              (!controller.loadingPagination.value)
-                                  ? SizedBox.shrink()
-                                  : Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 15),
-                                      child: SizedBox(
-                                        height: 30,
-                                        width: 30,
-                                        child: CircularProgressIndicator(
-                                          strokeWidth: 3,
-                                          backgroundColor: Colors.grey[100],
-                                          valueColor: AlwaysStoppedAnimation<
-                                                  Color>(
-                                              Theme.of(context).primaryColor),
+                                (!controller.loadingPagination())
+                                    ? SizedBox.shrink()
+                                    : Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 15),
+                                        child: SizedBox(
+                                          height: 30,
+                                          width: 30,
+                                          child: CircularProgressIndicator(
+                                            strokeWidth: 3,
+                                            backgroundColor: Colors.grey[100],
+                                            valueColor: AlwaysStoppedAnimation<
+                                                    Color>(
+                                                Theme.of(context).primaryColor),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                            ],
+                              ],
+                            );
+                          }
+
+                          return GridView.builder(
+                            shrinkWrap: true,
+                            itemCount: 4,
+                            physics: NeverScrollableScrollPhysics(),
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: _crossAxisCount,
+                              crossAxisSpacing: _crossAxisSpacing,
+                              mainAxisSpacing: _mainAxisSpacing,
+                              childAspectRatio: _aspectRatio,
+                            ),
+                            itemBuilder: (context, index) {
+                              return ShimmerLoader(radius: 15);
+                            },
                           );
                         }),
                       ),

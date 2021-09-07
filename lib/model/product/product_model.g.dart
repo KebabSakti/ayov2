@@ -31,6 +31,7 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) {
     productActive: json['product_active'] as int,
     productFavourite: json['product_favourite'] as int,
     productTag: json['product_tag'] as String,
+    productBundleId: json['product_bundle_id'] as String,
   );
 }
 
@@ -59,4 +60,5 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
       'product_active': instance.productActive,
       'product_favourite': instance.productFavourite,
       'product_tag': instance.productTag,
+      'product_bundle_id': instance.productBundleId,
     };

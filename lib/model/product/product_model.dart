@@ -50,6 +50,8 @@ class ProductModel {
   int productFavourite;
   @JsonKey(name: 'product_tag', nullable: true)
   String productTag;
+  @JsonKey(name: 'product_bundle_id', nullable: true)
+  String productBundleId;
 
   ProductModel({
     this.categoryId,
@@ -75,6 +77,7 @@ class ProductModel {
     this.productActive,
     this.productFavourite,
     this.productTag,
+    this.productBundleId,
   });
 
   ProductModel copyWith({
@@ -101,6 +104,7 @@ class ProductModel {
     int productActive,
     int productFavourite,
     String productTag,
+    String productBundleId,
   }) =>
       ProductModel(
         categoryId: categoryId ?? this.categoryId,
@@ -126,6 +130,7 @@ class ProductModel {
         productActive: productActive ?? this.productActive,
         productFavourite: productActive ?? this.productActive,
         productTag: productTag ?? this.productTag,
+        productBundleId: productBundleId ?? this.productBundleId,
       );
 
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
