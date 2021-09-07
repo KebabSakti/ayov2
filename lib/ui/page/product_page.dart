@@ -1,5 +1,6 @@
 import 'package:ayov2/getx/getx.dart';
 import 'package:ayov2/ui/ui.dart';
+import 'package:ayov2/util/enums.dart';
 import 'package:ayov2/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
@@ -75,15 +76,52 @@ class ProductPage extends GetWidget<ProductPageController> {
                         removeTop: true,
                         removeBottom: true,
                         child: Obx(() {
-                          if (!controller.loadingFilter() &&
-                              controller.productPaginate().products.length >
-                                  0) {
+                          if (controller.pageState().state == States.loading) {
+                            return GridView.builder(
+                              shrinkWrap: true,
+                              itemCount: 4,
+                              physics: NeverScrollableScrollPhysics(),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: _crossAxisCount,
+                                crossAxisSpacing: _crossAxisSpacing,
+                                mainAxisSpacing: _mainAxisSpacing,
+                                childAspectRatio: _aspectRatio,
+                              ),
+                              itemBuilder: (context, index) {
+                                return ShimmerLoader(radius: 15);
+                              },
+                            );
+                          }
+
+                          if (controller.pageState().state == States.empty) {
+                            return Container(
+                              height: Get.size.height - 150,
+                              padding: EdgeInsets.symmetric(horizontal: 15),
+                              child: EmptyData(),
+                            );
+                          }
+
+                          if (controller.pageState().state == States.error) {
+                            return Container(
+                              height: Get.size.height - 150,
+                              padding: EdgeInsets.symmetric(horizontal: 15),
+                              child: PageError(
+                                onPressed: controller.loadFilteredProduct,
+                              ),
+                            );
+                          }
+
+                          if (controller.pageState().data.products.length > 0) {
                             return Column(
                               children: [
                                 GridView.builder(
                                   shrinkWrap: true,
                                   itemCount: controller
-                                      .productPaginate.value.products.length,
+                                      .pageState()
+                                      .data
+                                      .products
+                                      .length,
                                   physics: NeverScrollableScrollPhysics(),
                                   gridDelegate:
                                       SliverGridDelegateWithFixedCrossAxisCount(
@@ -96,17 +134,20 @@ class ProductPage extends GetWidget<ProductPageController> {
                                     return ProductItem(
                                       onTap: () {
                                         controller.routeToProductDetailPage(
-                                            controller.productPaginate.value
+                                            controller
+                                                .pageState()
+                                                .data
                                                 .products[index]);
                                       },
-                                      product: controller.productPaginate.value
+                                      product: controller
+                                          .pageState()
+                                          .data
                                           .products[index],
                                     );
                                   },
                                 ),
-                                (!controller.loadingPagination())
-                                    ? SizedBox.shrink()
-                                    : Padding(
+                                (controller.pageState().state == States.paging)
+                                    ? Padding(
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 15),
                                         child: SizedBox(
@@ -120,26 +161,13 @@ class ProductPage extends GetWidget<ProductPageController> {
                                                 Theme.of(context).primaryColor),
                                           ),
                                         ),
-                                      ),
+                                      )
+                                    : SizedBox.shrink(),
                               ],
                             );
                           }
 
-                          return GridView.builder(
-                            shrinkWrap: true,
-                            itemCount: 4,
-                            physics: NeverScrollableScrollPhysics(),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: _crossAxisCount,
-                              crossAxisSpacing: _crossAxisSpacing,
-                              mainAxisSpacing: _mainAxisSpacing,
-                              childAspectRatio: _aspectRatio,
-                            ),
-                            itemBuilder: (context, index) {
-                              return ShimmerLoader(radius: 15);
-                            },
-                          );
+                          return SizedBox.shrink();
                         }),
                       ),
                     ),

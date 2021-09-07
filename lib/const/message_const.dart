@@ -18,3 +18,9 @@ const String EMAIL_ALREADY_REGISTERED =
 
 const String INVALID_OTP_CODE =
     'Kode otp yang anda masukkan salah, masukkan kode yang telah kami kirimkan ke nomor telp anda';
+
+const String NO_DATA_MESSAGE =
+    'Produk tidak ditemukan, gunakan filter untuk pencarian lebih detail';
+
+const String ERROR_MESSAGE =
+    'Yahh, terjadi kesalahan, sentuh tombol di bawah untuk mencoba lagi';

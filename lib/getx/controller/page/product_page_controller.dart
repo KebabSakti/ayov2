@@ -1,14 +1,18 @@
 import 'package:ayov2/const/const.dart';
 import 'package:ayov2/core/core.dart';
 import 'package:ayov2/model/model.dart';
+import 'package:ayov2/util/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProductPageController extends GetxController {
-  final RxBool loadingFilter = false.obs;
-  final RxBool loadingPagination = false.obs;
-  final Rx<ProductPaginateModel> productPaginate = ProductPaginateModel().obs;
   final Rx<ProductFilterModel> filterModel = ProductFilterModel().obs;
+
+  final Rx<StateModel<ProductPaginateModel>> pageState =
+      StateModel<ProductPaginateModel>(
+    state: States.loading,
+    data: ProductPaginateModel(),
+  ).obs;
 
   final Product _product = Product();
   final ScrollController scrollController = ScrollController();
@@ -35,36 +39,51 @@ class ProductPageController extends GetxController {
   }
 
   void loadFilteredProduct() async {
-    loadingFilter(true);
+    try {
+      pageState(StateModel(state: States.loading));
 
-    await _loadProduct("?page=1").then((model) {
-      productPaginate(model);
-
-      loadingFilter(false);
-    });
+      await _loadProduct("?page=1").then((model) {
+        pageState(
+          StateModel(
+            data: model,
+            state:
+                (model.products.length == 0) ? States.empty : States.complete,
+          ),
+        );
+      }).catchError((e, k) => throw Failure(DIOERROR_MESSAGE));
+    } on Failure catch (_) {
+      pageState(StateModel(state: States.error));
+    }
   }
 
   void _loadMoreProduct(double offset, double maxScroll) async {
-    bool fetch = ((offset == maxScroll) &&
-        !loadingPagination.value &&
-        !loadingFilter.value &&
-        productPaginate.value.pagination.nextPageUrl != null);
+    try {
+      bool fetch = ((offset == maxScroll) &&
+          pageState().state == States.complete &&
+          pageState().data.products.length > 0 &&
+          pageState().data.pagination.nextPageUrl != null);
 
-    if (fetch) {
-      loadingPagination(true);
+      if (fetch) {
+        pageState(pageState().copyWith(state: States.paging));
 
-      await _loadProduct(
-              "?page=${productPaginate.value.pagination.currentPage + 1}")
-          .then((model) {
-        ProductPaginateModel productPaginateModel = ProductPaginateModel(
-          pagination: model.pagination,
-          products: productPaginate.value.products + model.products,
-        );
+        await _loadProduct(
+                "?page=${pageState().data.pagination.currentPage + 1}")
+            .then((model) {
+          ProductPaginateModel productPaginateModel = ProductPaginateModel(
+            pagination: model.pagination,
+            products: pageState().data.products + model.products,
+          );
 
-        productPaginate(productPaginateModel);
-
-        loadingPagination(false);
-      });
+          pageState(
+            StateModel(
+              data: productPaginateModel,
+              state: States.complete,
+            ),
+          );
+        }).catchError((e, k) => throw Failure(DIOERROR_MESSAGE));
+      }
+    } on Failure catch (_) {
+      pageState(StateModel(state: States.error));
     }
   }
 

@@ -6,5 +6,7 @@ const String COIN_ICON = 'assets/images/coin.svg';
 const String ARROW_UP_ICON = 'assets/images/arrow-up.svg';
 const String EMPTY_CART = 'assets/images/empty-cart.svg';
 const String ALL_CATEGORY = 'assets/images/groceries.svg';
+const String NO_DATA = 'assets/images/no_data.svg';
+const String ERROR = 'assets/images/error.svg';
 
 const String QR_SCAN_ANIMATION = 'assets/animations/qr-scan.json';

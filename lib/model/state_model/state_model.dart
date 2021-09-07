@@ -1,17 +1,17 @@
-enum States { init, loading, moreLoading, complete, error }
+import 'package:ayov2/util/enums.dart';
 
-class StateModel {
+class StateModel<T> {
   States state;
-  dynamic data;
+  T data;
 
   StateModel({
     this.state,
     this.data,
   });
 
-  StateModel copyWith({
+  StateModel<T> copyWith({
     States state,
-    dynamic data,
+    T data,
   }) =>
       StateModel(
         state: state ?? this.state,
