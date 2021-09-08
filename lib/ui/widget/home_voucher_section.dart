@@ -1,5 +1,7 @@
 import 'package:ayov2/getx/getx.dart';
+import 'package:ayov2/model/model.dart';
 import 'package:ayov2/ui/ui.dart';
+import 'package:ayov2/util/enums.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -34,37 +36,42 @@ class HomeVoucherSection extends StatelessWidget {
                     padding: EdgeInsets.only(
                       right: (index >= 0 && index != 2) ? 10 : 0,
                     ),
-                    child: Obx(
-                      () {
-                        return (controller.loading.value)
-                            ? ShimmerLoader(
-                                radius: 15,
-                                width: Get.size.width - 60,
-                              )
-                            : Material(
-                                color: Colors.grey[100],
+                    child: Obx(() {
+                      StateModel<HomePageModel> home = controller.home();
+
+                      if (home.state == States.loading) {
+                        return ShimmerLoader(
+                          radius: 15,
+                          width: Get.size.width - 60,
+                        );
+                      }
+
+                      if (images.length > 0) {
+                        return Material(
+                          color: Colors.grey[100],
+                          borderRadius: BorderRadius.circular(15),
+                          child: InkWell(
+                            onTap: () {},
+                            borderRadius: BorderRadius.circular(15),
+                            child: Ink(
+                              width: Get.size.width - 60,
+                              child: ClipRRect(
                                 borderRadius: BorderRadius.circular(15),
-                                child: InkWell(
-                                  onTap: () {},
-                                  borderRadius: BorderRadius.circular(15),
-                                  child: Ink(
-                                    width: Get.size.width - 60,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(15),
-                                      child: CachedNetworkImage(
-                                        imageUrl: images[index],
-                                        fit: BoxFit.cover,
-                                        placeholder: (context, url) =>
-                                            ShimmerLoader(
-                                          radius: 15,
-                                        ),
-                                      ),
-                                    ),
+                                child: CachedNetworkImage(
+                                  imageUrl: images[index],
+                                  fit: BoxFit.cover,
+                                  placeholder: (context, url) => ShimmerLoader(
+                                    radius: 15,
                                   ),
                                 ),
-                              );
-                      },
-                    ),
+                              ),
+                            ),
+                          ),
+                        );
+                      }
+
+                      return SizedBox.shrink();
+                    }),
                   );
                 },
               ),

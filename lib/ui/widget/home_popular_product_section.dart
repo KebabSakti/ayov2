@@ -1,6 +1,7 @@
 import 'package:ayov2/getx/getx.dart';
 import 'package:ayov2/model/model.dart';
 import 'package:ayov2/ui/ui.dart';
+import 'package:ayov2/util/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -25,46 +26,58 @@ class HomePopularProductSection extends StatelessWidget {
             ),
             SizedBox(height: 15),
             Obx(() {
-              return SizedBox(
-                height: 280,
-                child: ListView.builder(
-                  itemCount: (controller.loading.value)
-                      ? 2
-                      : controller.homePageModel.productPopularModel.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return (controller.loading.value)
-                        ? Padding(
-                            padding: EdgeInsets.only(
-                              right: (index >= 0 && index != 1) ? 10 : 0,
-                            ),
-                            child: ShimmerLoader(
-                              radius: 15,
-                              width: (Get.size.width - 40) / 2,
-                            ),
-                          )
-                        : Padding(
-                            padding: EdgeInsets.only(
-                              right: (index >= 0 &&
-                                      index !=
-                                          (controller.homePageModel
-                                                  .productPopularModel.length -
-                                              1))
-                                  ? 10
-                                  : 0,
-                            ),
-                            child: ProductItem(
-                              onTap: () {
-                                controller.routeToProductDetailPage(controller
-                                    .homePageModel.productPopularModel[index]);
-                              },
-                              product: controller
-                                  .homePageModel.productPopularModel[index],
-                            ),
-                          );
-                  },
-                ),
-              );
+              StateModel<HomePageModel> home = controller.home();
+
+              if (home.state == States.loading) {
+                return SizedBox(
+                  height: 280,
+                  child: ListView.builder(
+                    itemCount: 2,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.only(
+                          right: (index >= 0 && index != 1) ? 10 : 0,
+                        ),
+                        child: ShimmerLoader(
+                          radius: 15,
+                          width: (Get.size.width - 40) / 2,
+                        ),
+                      );
+                    },
+                  ),
+                );
+              }
+
+              if (home.data.productPopularModel.length > 0) {
+                List<ProductModel> products = home.data.productPopularModel;
+
+                return SizedBox(
+                  height: 280,
+                  child: ListView.builder(
+                    itemCount: products.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.only(
+                          right: (index >= 0 && index != (products.length - 1))
+                              ? 10
+                              : 0,
+                        ),
+                        child: ProductItem(
+                          onTap: () {
+                            controller
+                                .routeToProductDetailPage(products[index]);
+                          },
+                          product: products[index],
+                        ),
+                      );
+                    },
+                  ),
+                );
+              }
+
+              return SizedBox.shrink();
             }),
           ],
         ),

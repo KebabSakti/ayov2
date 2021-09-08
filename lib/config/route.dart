@@ -92,5 +92,9 @@ class AppRoute {
       binding: MapPageBinding(),
       page: () => MapPage(),
     ),
+    GetPage(
+      name: ERROR_PAGE,
+      page: () => ErrorPage(),
+    ),
   ];
 }

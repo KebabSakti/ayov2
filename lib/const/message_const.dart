@@ -23,4 +23,4 @@ const String NO_DATA_MESSAGE =
     'Produk tidak ditemukan, gunakan filter untuk pencarian lebih detail';
 
 const String ERROR_MESSAGE =
-    'Yahh, terjadi kesalahan, sentuh tombol di bawah untuk mencoba lagi';
+    'Yahh, terjadi kesalahan, refresh untuk mencoba kembali';
