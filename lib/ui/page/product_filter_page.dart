@@ -1,11 +1,9 @@
 import 'package:ayov2/const/const.dart';
 import 'package:ayov2/getx/getx.dart';
-import 'package:ayov2/model/model.dart';
 import 'package:ayov2/ui/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class ProductFilterPage extends GetView<ProductFilterPageController> {
@@ -15,14 +13,14 @@ class ProductFilterPage extends GetView<ProductFilterPageController> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('Pilihan'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              controller.filterModel(ProductFilterModel());
-            },
-            icon: Icon(FontAwesomeIcons.timesCircle),
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     onPressed: () {
+        //       controller.filterModel(ProductFilterModel());
+        //     },
+        //     icon: Icon(FontAwesomeIcons.timesCircle),
+        //   ),
+        // ],
       ),
       body: Obx(() {
         return ListView(

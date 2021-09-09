@@ -17,6 +17,8 @@ class ProductFilterPageController extends GetxController {
     productId: Get.arguments.productId,
     productPrice: Get.arguments.productPrice,
     subCategory: Get.arguments.subCategory,
+    productTag: Get.arguments.productTag,
+    productBundleId: Get.arguments.productBundleId,
   ).obs;
 
   void back() {

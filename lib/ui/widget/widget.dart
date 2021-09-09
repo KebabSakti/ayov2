@@ -27,3 +27,4 @@ export './delivery_group.dart';
 export './page_error.dart';
 export './empty_data.dart';
 export './home_category_section_new.dart';
+export './category_item.dart';

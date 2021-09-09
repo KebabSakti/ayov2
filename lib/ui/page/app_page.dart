@@ -99,6 +99,9 @@ class AppPage extends GetView<AppPageController> {
           panel: Padding(
             padding: EdgeInsets.only(top: 30),
             child: Obx(() {
+              final List<CategoryModel> categories =
+                  controller.globalObs.categoryModel;
+
               if (controller.panelBody() == PanelBody.category) {
                 return SingleChildScrollView(
                   child: Column(
@@ -111,36 +114,20 @@ class AppPage extends GetView<AppPageController> {
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Stack(
-                                  children: [
-                                    Center(
-                                      child: Container(
-                                        width: 55,
-                                        height: 55,
-                                        decoration: BoxDecoration(
-                                          color: Colors.green[50],
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(100),
-                                          ),
-                                        ),
-                                      ),
+                                Ink(
+                                  width: 50,
+                                  height: 50,
+                                  child: SvgPicture.asset(
+                                    ALL_CATEGORY,
+                                    width: 50,
+                                    height: 50,
+                                    placeholderBuilder: (context) =>
+                                        ShimmerLoader(
+                                      width: 50,
+                                      height: 50,
+                                      radius: 50,
                                     ),
-                                    Positioned.fill(
-                                      child: Center(
-                                        child: SvgPicture.asset(
-                                          ALL_CATEGORY,
-                                          width: 40,
-                                          height: 40,
-                                          placeholderBuilder: (context) =>
-                                              ShimmerLoader(
-                                            width: 40,
-                                            height: 40,
-                                            radius: 40,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                                  ),
                                 ),
                                 SizedBox(width: 15),
                                 Expanded(
@@ -180,7 +167,7 @@ class AppPage extends GetView<AppPageController> {
                         child: ListView.separated(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
-                          itemCount: controller.globalObs.categoryModel.length,
+                          itemCount: categories.length,
                           separatorBuilder: (context, index) =>
                               Divider(height: 1),
                           itemBuilder: (context, index) {
@@ -193,39 +180,20 @@ class AppPage extends GetView<AppPageController> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      Stack(
-                                        children: [
-                                          Center(
-                                            child: Container(
-                                              width: 55,
-                                              height: 55,
-                                              decoration: BoxDecoration(
-                                                color: Colors.green[50],
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(100),
-                                                ),
-                                              ),
-                                            ),
+                                      Ink(
+                                        width: 50,
+                                        height: 50,
+                                        child: SvgPicture.network(
+                                          categories[index].categoryImage,
+                                          width: 50,
+                                          height: 50,
+                                          placeholderBuilder: (context) =>
+                                              ShimmerLoader(
+                                            width: 50,
+                                            height: 50,
+                                            radius: 50,
                                           ),
-                                          Positioned.fill(
-                                            child: Center(
-                                              child: SvgPicture.network(
-                                                controller
-                                                    .globalObs
-                                                    .categoryModel[index]
-                                                    .categoryImage,
-                                                width: 40,
-                                                height: 40,
-                                                placeholderBuilder: (context) =>
-                                                    ShimmerLoader(
-                                                  width: 40,
-                                                  height: 40,
-                                                  radius: 40,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
+                                        ),
                                       ),
                                       SizedBox(width: 15),
                                       Expanded(
@@ -236,10 +204,7 @@ class AppPage extends GetView<AppPageController> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              controller
-                                                  .globalObs
-                                                  .categoryModel[index]
-                                                  .categoryName,
+                                              categories[index].categoryName,
                                               style: TextStyle(
                                                 color: Colors.grey[800],
                                                 fontWeight: FontWeight.bold,
@@ -248,9 +213,7 @@ class AppPage extends GetView<AppPageController> {
                                             ),
                                             SizedBox(height: 3),
                                             Text(
-                                              controller
-                                                  .globalObs
-                                                  .categoryModel[index]
+                                              categories[index]
                                                   .categoryDescription,
                                               style: TextStyle(fontSize: 12),
                                             ),
@@ -263,8 +226,7 @@ class AppPage extends GetView<AppPageController> {
                                 onTap: () {
                                   controller.routeToProductPage(
                                     ProductFilterModel(
-                                      category: controller.globalObs
-                                          .categoryModel[index].categoryId,
+                                      category: categories[index].categoryId,
                                     ),
                                   );
                                 },
