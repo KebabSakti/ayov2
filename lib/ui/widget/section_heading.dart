@@ -15,11 +15,15 @@ class SectionHeading extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          heading,
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 16,
+        Expanded(
+          child: Text(
+            heading,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
+            ),
           ),
         ),
         (onPressed == null)
@@ -30,8 +34,8 @@ class SectionHeading extends StatelessWidget {
                   'Lihat Semua',
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontSize: 10,
                     color: Get.theme.primaryColor,
+                    fontSize: 12,
                   ),
                 ),
               ),

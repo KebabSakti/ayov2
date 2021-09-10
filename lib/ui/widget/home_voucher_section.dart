@@ -48,7 +48,6 @@ class HomeVoucherSection extends StatelessWidget {
 
                       if (images.length > 0) {
                         return Material(
-                          color: Colors.grey[100],
                           borderRadius: BorderRadius.circular(15),
                           child: InkWell(
                             onTap: () {},

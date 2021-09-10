@@ -63,6 +63,10 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                               fit: BoxFit.cover,
                               width: double.infinity,
                               height: double.infinity,
+                              errorWidget: (context, url, error) => Image.asset(
+                                NO_IMG,
+                                fit: BoxFit.cover,
+                              ),
                               placeholder: (context, url) {
                                 return ShimmerLoader();
                               },
@@ -120,7 +124,8 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                                                           .productFinalPrice,
                                                     ),
                                                     style: TextStyle(
-                                                      color: Colors.green,
+                                                      color: Get
+                                                          .theme.primaryColor,
                                                       fontSize: 18,
                                                     ),
                                                   ),
@@ -128,7 +133,10 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                                                     text:
                                                         '  ( ${controller.pageModel.product.productUnitValue} ${controller.pageModel.product.productUnit} )',
                                                     style: TextStyle(
-                                                      color: Colors.grey[400],
+                                                      color: Get
+                                                          .theme
+                                                          .colorScheme
+                                                          .onSecondary,
                                                       fontWeight:
                                                           FontWeight.w600,
                                                       fontSize: 10,
@@ -148,16 +156,15 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                                                     vertical: 4,
                                                   ),
                                                   decoration: BoxDecoration(
-                                                    color: Colors.amberAccent,
+                                                    color: Get.theme.colorScheme
+                                                        .primaryVariant,
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            4),
+                                                            10),
                                                   ),
                                                   child: Text(
-                                                    '9% OFF',
+                                                    '9% off',
                                                     style: TextStyle(
-                                                      color: Theme.of(context)
-                                                          .primaryColor,
                                                       fontSize: 10,
                                                       fontWeight:
                                                           FontWeight.w600,
@@ -173,7 +180,8 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                                                   style: TextStyle(
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.w600,
-                                                    color: Colors.grey[400],
+                                                    color: Get.theme.colorScheme
+                                                        .onSecondary,
                                                     decoration: TextDecoration
                                                         .lineThrough,
                                                   ),
@@ -211,8 +219,10 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                                                                 .value
                                                                 .productFavourite ==
                                                             0)
-                                                        ? Colors.grey[400]
-                                                        : Colors.red,
+                                                        ? Get.theme.colorScheme
+                                                            .onSecondary
+                                                        : Get.theme.colorScheme
+                                                            .primary,
                                                     size: 30,
                                                   ),
                                                 );
@@ -238,7 +248,8 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                                           style: TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.w600,
-                                            color: Colors.amber,
+                                            color: Get.theme.colorScheme
+                                                .primaryVariant,
                                           ),
                                         ),
                                         SizedBox(width: 2),
@@ -259,7 +270,8 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                                           decoration: BoxDecoration(
                                             border: Border(
                                               right: BorderSide(
-                                                color: Colors.grey[200],
+                                                color: Get.theme.colorScheme
+                                                    .secondaryVariant,
                                               ),
                                             ),
                                           ),
@@ -273,7 +285,8 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                                                             .productRatingValue) >
                                                         0)
                                                     ? Colors.amber
-                                                    : Colors.grey[400],
+                                                    : Get.theme.colorScheme
+                                                        .onSecondary,
                                                 size: 20,
                                               ),
                                               SizedBox(
@@ -282,9 +295,8 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                                               Text(
                                                 '${controller.pageModel.product.productRatingValue}',
                                                 style: TextStyle(
-                                                  color: Colors.grey[800],
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
                                               SizedBox(
                                                 width: 4,
@@ -292,9 +304,8 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                                               Text(
                                                 '(${controller.pageModel.product.productRatingCount})',
                                                 style: TextStyle(
-                                                  color: Colors.grey[600],
-                                                  fontWeight: FontWeight.w600,
-                                                ),
+                                                    fontWeight:
+                                                        FontWeight.w600),
                                               ),
                                             ],
                                           ),
@@ -316,9 +327,8 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                                               Text(
                                                 'Dilihat',
                                                 style: TextStyle(
-                                                  color: Colors.grey[800],
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
                                               SizedBox(
                                                 width: 4,
@@ -326,9 +336,8 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                                               Text(
                                                 '(${controller.pageModel.product.productView})',
                                                 style: TextStyle(
-                                                  color: Colors.grey[600],
-                                                  fontWeight: FontWeight.w600,
-                                                ),
+                                                    fontWeight:
+                                                        FontWeight.w600),
                                               ),
                                             ],
                                           ),
@@ -343,9 +352,8 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                                               Text(
                                                 'Terjual',
                                                 style: TextStyle(
-                                                  color: Colors.grey[800],
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
                                               SizedBox(
                                                 width: 4,
@@ -353,9 +361,8 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                                               Text(
                                                 '(${controller.pageModel.product.productSold})',
                                                 style: TextStyle(
-                                                  color: Colors.grey[600],
-                                                  fontWeight: FontWeight.w600,
-                                                ),
+                                                    fontWeight:
+                                                        FontWeight.w600),
                                               ),
                                             ],
                                           ),
@@ -369,8 +376,9 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                                       color: (controller.pageModel.product
                                                   .productDeliveryType ==
                                               'LANGSUNG')
-                                          ? Colors.redAccent
-                                          : Colors.amber,
+                                          ? Get.theme.primaryColor
+                                          : Get
+                                              .theme.colorScheme.primaryVariant,
                                     ),
                                   ],
                                 ),
@@ -507,8 +515,9 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                                                     .product
                                                     .productRatingValue) >
                                                 0)
-                                            ? Colors.amberAccent
-                                            : Colors.grey[400],
+                                            ? Get.theme.colorScheme
+                                                .primaryVariant
+                                            : Get.theme.colorScheme.onSecondary,
                                         size: 20,
                                       ),
                                       SizedBox(
@@ -524,19 +533,14 @@ class ProductDetailPage extends GetWidget<ProductDetailPageControlller> {
                                                 .productRatingValue
                                             : '0',
                                         style: TextStyle(
-                                          color: Colors.grey[800],
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                            fontWeight: FontWeight.bold),
                                       ),
                                       SizedBox(
                                         width: 4,
                                       ),
                                       Text(
                                         'dari ${controller.pageModel.product.productRatingCount} ulasan',
-                                        style: TextStyle(
-                                          color: Colors.grey[600],
-                                          fontSize: 12,
-                                        ),
+                                        style: TextStyle(fontSize: 12),
                                       ),
                                     ],
                                   ),

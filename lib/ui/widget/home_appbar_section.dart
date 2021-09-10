@@ -24,7 +24,7 @@ class HomeAppbarSection extends StatelessWidget {
           padding: const EdgeInsets.only(right: 4),
           child: Obx(() {
             return IconButtonWithDot(
-              Icon(Icons.shopping_cart_rounded),
+              Icon(Icons.local_mall_rounded),
               value: controller.cartController.cartQtyTotal.value,
               onPressed: () {
                 controller.routeToCartPage();

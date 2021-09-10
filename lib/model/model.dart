@@ -32,3 +32,5 @@ export './payment/payment_channel_model.dart';
 export './places/places_model.dart';
 export './places/distance_model.dart';
 export './state_model/state_model.dart';
+export './bundle/bundle_model.dart';
+export './bundle/product_bundle_model.dart';

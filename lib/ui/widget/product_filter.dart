@@ -3,7 +3,6 @@ import 'package:ayov2/model/model.dart';
 import 'package:ayov2/ui/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class ProductFilter extends StatelessWidget {
@@ -25,15 +24,14 @@ class ProductFilter extends StatelessWidget {
             height: 33,
             child: Ink(
               decoration: BoxDecoration(
-                color: Colors.grey[100],
+                color: Get.theme.colorScheme.background,
                 borderRadius: BorderRadius.circular(25),
               ),
               child: InkWell(
                 onTap: onFilterTap,
                 borderRadius: BorderRadius.circular(25),
                 child: Icon(
-                  FontAwesomeIcons.slidersH,
-                  size: 16,
+                  Icons.tune_rounded,
                   color: Get.theme.primaryColor,
                 ),
               ),
@@ -47,14 +45,7 @@ class ProductFilter extends StatelessWidget {
               children: [
                 ProductFilterItem(
                   selected: productFilterModel.value.highSell,
-                  child: Text(
-                    'Paling Laris',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black.withOpacity(0.6),
-                    ),
-                  ),
+                  child: Text('Paling Laris'),
                   onSelected: (value) {
                     productFilterModel(
                         productFilterModel.value.copyWith(highSell: value));
@@ -63,14 +54,7 @@ class ProductFilter extends StatelessWidget {
                 SizedBox(width: 10),
                 ProductFilterItem(
                   selected: productFilterModel.value.discount,
-                  child: Text(
-                    'Lagi Diskon',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black.withOpacity(0.6),
-                    ),
-                  ),
+                  child: Text('Lagi Diskon'),
                   onSelected: (value) {
                     productFilterModel(
                         productFilterModel.value.copyWith(discount: value));
@@ -88,14 +72,7 @@ class ProductFilter extends StatelessWidget {
                         size: 18,
                       ),
                       SizedBox(width: 4),
-                      Text(
-                        '4 ke atas',
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black.withOpacity(0.6),
-                        ),
-                      ),
+                      Text('4 ke atas'),
                     ],
                   ),
                   onSelected: (value) {
@@ -114,14 +91,7 @@ class ProductFilter extends StatelessWidget {
                         height: 15,
                       ),
                       SizedBox(width: 4),
-                      Text(
-                        'Banyak Poin',
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black.withOpacity(0.6),
-                        ),
-                      ),
+                      Text('Banyak Poin'),
                     ],
                   ),
                   onSelected: (value) {
@@ -132,14 +102,7 @@ class ProductFilter extends StatelessWidget {
                 SizedBox(width: 10),
                 ProductFilterItem(
                   selected: productFilterModel.value.highView,
-                  child: Text(
-                    'Trending',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black.withOpacity(0.6),
-                    ),
-                  ),
+                  child: Text('Trending'),
                   onSelected: (value) {
                     productFilterModel(
                         productFilterModel.value.copyWith(highView: value));
@@ -148,14 +111,7 @@ class ProductFilter extends StatelessWidget {
                 SizedBox(width: 10),
                 ProductFilterItem(
                   selected: productFilterModel.value.highSearch,
-                  child: Text(
-                    'Populer',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black.withOpacity(0.6),
-                    ),
-                  ),
+                  child: Text('Populer'),
                   onSelected: (value) {
                     productFilterModel(
                         productFilterModel.value.copyWith(highSearch: value));

@@ -17,7 +17,7 @@ class SearchProductViewSection extends StatelessWidget {
         Text(
           'Terakhir dilihat',
           style: TextStyle(
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w600,
           ),
         ),
         SizedBox(height: 18),

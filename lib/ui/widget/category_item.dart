@@ -23,7 +23,7 @@ class CategoryItem extends StatelessWidget {
             height: (Get.size.width - 50) / 4,
             padding: EdgeInsets.all(15),
             decoration: BoxDecoration(
-              color: Colors.grey[100],
+              color: Get.theme.colorScheme.background,
               borderRadius: BorderRadius.circular(25),
             ),
             child: icon,
@@ -36,7 +36,10 @@ class CategoryItem extends StatelessWidget {
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 10),
+          style: TextStyle(
+            fontSize: 10,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ],
     );

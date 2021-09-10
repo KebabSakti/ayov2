@@ -12,8 +12,8 @@ class SearchPage extends GetWidget<SearchPageController> {
       appBar: AppBar(
         elevation: 0,
         titleSpacing: 0,
-        iconTheme: IconThemeData(color: Colors.grey[800]),
-        backgroundColor: Colors.white,
+        backgroundColor: Get.theme.colorScheme.secondary,
+        iconTheme: IconThemeData(color: Get.theme.primaryColor),
         title: Padding(
           padding: const EdgeInsets.only(right: 20),
           child: ClipRRect(
@@ -21,28 +21,19 @@ class SearchPage extends GetWidget<SearchPageController> {
             child: Container(
               height: 38,
               width: double.infinity,
-              color: Colors.grey[100],
+              color: Get.theme.colorScheme.background,
               child: TextField(
                 controller: controller.searchField,
                 autofocus: true,
-                style: TextStyle(fontSize: 14, color: Colors.grey[800]),
+                style: TextStyle(fontSize: 14),
                 cursorColor: Colors.grey[600],
                 cursorWidth: 1,
                 decoration: InputDecoration(
                   hintText: 'Cari di sini',
-                  border: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                  enabledBorder: InputBorder.none,
-                  errorBorder: InputBorder.none,
-                  disabledBorder: InputBorder.none,
                   contentPadding: EdgeInsets.only(top: 4),
-                  hintStyle: TextStyle(
-                    color: Colors.grey[400],
-                    fontSize: 12,
-                  ),
                   prefixIcon: Icon(
                     Icons.search_rounded,
-                    color: Colors.grey[400],
+                    color: Get.theme.colorScheme.onSecondary,
                     size: 20,
                   ),
                   suffixIcon: Obx(() => (controller.keyword.value.length == 0)
@@ -52,8 +43,8 @@ class SearchPage extends GetWidget<SearchPageController> {
                           constraints: BoxConstraints(),
                           iconSize: 20,
                           icon: Icon(
-                            Icons.close_rounded,
-                            color: Colors.grey[400],
+                            Icons.cancel_rounded,
+                            color: Get.theme.colorScheme.onSecondary,
                           ),
                         )),
                   prefixIconConstraints: BoxConstraints(minWidth: 40),
@@ -106,7 +97,7 @@ class SearchPage extends GetWidget<SearchPageController> {
                         child: Text(
                           'Produk Terkait',
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ),

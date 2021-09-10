@@ -72,6 +72,13 @@ class AppPageData {
       ),
     );
 
+    //PRODUCT BUNDLES
+    List<BundleModel> bundles = List<BundleModel>.from(
+      await parsedData['data']['bundles'].map(
+        (item) => BundleModel.fromJson(item),
+      ),
+    );
+
     //PRODUCT WITH PAGINATION DATA
     ProductPaginateModel productPaginateModel = ProductPaginateModel(
       products: products,
@@ -89,6 +96,7 @@ class AppPageData {
       mostSearch: mostSearch,
       cartItems: cartItems,
       productPaginateModel: productPaginateModel,
+      bundles: bundles,
     );
   }
 

@@ -41,7 +41,7 @@ class HomePopularProductSection extends StatelessWidget {
                         ),
                         child: ShimmerLoader(
                           radius: 15,
-                          width: (Get.size.width - 40) / 2,
+                          width: (Get.size.width - 70) / 2,
                         ),
                       );
                     },

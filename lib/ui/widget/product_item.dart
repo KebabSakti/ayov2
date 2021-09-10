@@ -34,6 +34,10 @@ class ProductItem extends StatelessWidget {
                       fit: BoxFit.cover,
                       width: double.infinity,
                       height: 260 / 2,
+                      errorWidget: (context, url, error) => Image.asset(
+                        NO_IMG,
+                        fit: BoxFit.cover,
+                      ),
                       placeholder: (context, url) =>
                           ShimmerLoader(height: 260 / 2),
                     ),
@@ -46,11 +50,13 @@ class ProductItem extends StatelessWidget {
                           child: Container(
                             color: Colors.black38,
                             padding: EdgeInsets.symmetric(
-                                horizontal: 6, vertical: 4),
+                              horizontal: 6,
+                              vertical: 4,
+                            ),
                             child: Text(
                               '${product.productUnitValue} ${product.productUnit}',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: Get.theme.colorScheme.secondary,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 10,
                                 fontStyle: FontStyle.italic,
@@ -89,7 +95,7 @@ class ProductItem extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
-                                color: Colors.amber,
+                                color: Get.theme.colorScheme.primaryVariant,
                               ),
                             ),
                             SizedBox(width: 2),
@@ -107,7 +113,7 @@ class ProductItem extends StatelessWidget {
                                 style: TextStyle(
                                   fontSize: 10,
                                   fontWeight: FontWeight.w600,
-                                  color: Colors.grey[400],
+                                  color: Get.theme.colorScheme.onSecondary,
                                   decoration: TextDecoration.lineThrough,
                                 ),
                               ),
@@ -117,7 +123,7 @@ class ProductItem extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
-                            color: Colors.green,
+                            color: Get.theme.primaryColor,
                           ),
                         ),
                         Spacer(),
@@ -127,7 +133,7 @@ class ProductItem extends StatelessWidget {
                           name: 'PENGIRIMAN ${product.productDeliveryType}',
                           color: (product.productDeliveryType == 'LANGSUNG')
                               ? Get.theme.primaryColor
-                              : Colors.amber,
+                              : Get.theme.colorScheme.primaryVariant,
                         ),
                       ],
                     ),

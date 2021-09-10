@@ -82,13 +82,23 @@ class AppPageController extends GetxController {
             //   },
             // ),
             TextButton(
-              child: Text('Batal'),
+              child: Text(
+                'Batal',
+                style: TextStyle(
+                  color: Get.theme.primaryColor,
+                ),
+              ),
               onPressed: () {
                 Get.back();
               },
             ),
             TextButton(
-              child: Text('Keluar'),
+              child: Text(
+                'Keluar',
+                style: TextStyle(
+                  color: Get.theme.primaryColor,
+                ),
+              ),
               onPressed: () {
                 SystemChannels.platform.invokeMethod('SystemNavigator.pop');
               },

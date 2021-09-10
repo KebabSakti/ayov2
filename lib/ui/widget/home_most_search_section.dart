@@ -103,7 +103,7 @@ class HomeMostSearchSection extends StatelessWidget {
                                               style: TextStyle(
                                                 fontSize: 10,
                                                 fontWeight: FontWeight.w600,
-                                                color: Colors.green,
+                                                color: Get.theme.primaryColor,
                                               ),
                                             ),
                                           ],

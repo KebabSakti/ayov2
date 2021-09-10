@@ -35,7 +35,7 @@ class HomeCategorySectionNew extends StatelessWidget {
                         width: (Get.size.width - 50) / 4,
                         height: (Get.size.width - 50) / 4,
                         decoration: BoxDecoration(
-                          color: Colors.grey[100],
+                          color: Get.theme.colorScheme.secondaryVariant,
                           borderRadius: BorderRadius.circular(25),
                         ),
                         child: ShimmerLoader(radius: 25),
@@ -72,7 +72,7 @@ class HomeCategorySectionNew extends StatelessWidget {
                               icon: (index == 7)
                                   ? Icon(
                                       Icons.more_horiz_rounded,
-                                      color: Colors.green,
+                                      color: Get.theme.primaryColor,
                                       size: 40,
                                     )
                                   : SvgPicture.network(

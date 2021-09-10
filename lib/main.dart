@@ -1,4 +1,5 @@
 import 'package:ayov2/config/config.dart';
+import 'package:ayov2/config/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'getx/getx.dart';
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       enableLog: true,
-      theme: appTheme,
+      theme: Themes().light,
       initialRoute: '/',
       initialBinding: GlobalBinding(),
       defaultTransition: Transition.rightToLeft,

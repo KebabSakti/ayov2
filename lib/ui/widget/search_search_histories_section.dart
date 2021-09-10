@@ -17,7 +17,7 @@ class SearchHistoriesSection extends StatelessWidget {
         Text(
           'Terakhir dicari',
           style: TextStyle(
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w600,
           ),
         ),
         SizedBox(height: 10),
@@ -50,7 +50,7 @@ class SearchHistoriesSection extends StatelessWidget {
                   contentPadding: EdgeInsets.symmetric(horizontal: 0),
                   leading: Icon(
                     Icons.history_rounded,
-                    color: Colors.grey[600],
+                    color: Get.theme.colorScheme.onSecondary,
                   ),
                   title: Text(
                     controller.searchPageModel.value.searchHistories[index]

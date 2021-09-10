@@ -141,21 +141,19 @@ class CartPage extends GetView<CartPageController> {
                                       SizedBox(width: 15),
                                       SizedBox.fromSize(
                                         size: Size(30, 30),
-                                        child: ClipOval(
-                                          child: Material(
-                                            color: Colors.red,
-                                            child: InkWell(
-                                              onTap: () {
-                                                controller.delete(
-                                                    products[index].product);
-                                              },
-                                              child: Center(
-                                                child: Icon(
-                                                  Icons.delete_rounded,
-                                                  size: 18,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
+                                        child: InkWell(
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                          onTap: () {
+                                            controller.delete(
+                                                products[index].product);
+                                          },
+                                          child: Center(
+                                            child: Icon(
+                                              Icons.cancel_outlined,
+                                              size: 24,
+                                              color:
+                                                  Get.theme.colorScheme.primary,
                                             ),
                                           ),
                                         ),
@@ -208,32 +206,27 @@ class CartPage extends GetView<CartPageController> {
                                                     TextEditingController()
                                                       ..text = controller
                                                           .initialProductQty(
-                                                              products[index]
-                                                                  .product),
+                                                        products[index].product,
+                                                      ),
                                                 textAlign: TextAlign.center,
                                                 showCursor: false,
                                                 keyboardType:
                                                     TextInputType.number,
                                                 inputFormatters: [
                                                   LengthLimitingTextInputFormatter(
-                                                      3),
+                                                    3,
+                                                  ),
                                                 ],
                                                 maxLines: 1,
                                                 style: TextStyle(
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.w600,
-                                                  color: Colors.grey[800],
                                                 ),
                                                 decoration: InputDecoration(
                                                   hintText: '0',
-                                                  border: InputBorder.none,
-                                                  focusedBorder:
-                                                      InputBorder.none,
-                                                  enabledBorder:
-                                                      InputBorder.none,
-                                                  errorBorder: InputBorder.none,
-                                                  disabledBorder:
-                                                      InputBorder.none,
+                                                  hintStyle: TextStyle(
+                                                    fontSize: 16,
+                                                  ),
                                                 ),
                                                 onSubmitted: (value) {
                                                   controller.setQty(

@@ -18,7 +18,7 @@ class SearchPopularSearchSection extends StatelessWidget {
         Text(
           'Pencarian populer',
           style: TextStyle(
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w600,
           ),
         ),
         SizedBox(height: 10),
@@ -76,8 +76,7 @@ class SearchPopularSearchSection extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                     style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      color: Colors.grey[800],
+                      fontWeight: FontWeight.w600,
                       fontSize: 14,
                     ),
                   ),
@@ -87,7 +86,7 @@ class SearchPopularSearchSection extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                     style: TextStyle(
-                      color: Colors.grey[600],
+                      color: Get.theme.primaryColor,
                       fontSize: 12,
                     ),
                   ),
