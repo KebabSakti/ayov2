@@ -75,6 +75,11 @@ class CartPage extends GetView<CartPageController> {
                                 child: CachedNetworkImage(
                                   imageUrl:
                                       products[index].product.productCover,
+                                  errorWidget: (context, url, error) =>
+                                      Image.asset(
+                                    NO_IMG,
+                                    fit: BoxFit.cover,
+                                  ),
                                   placeholder: (context, url) =>
                                       ShimmerLoader(),
                                 ),

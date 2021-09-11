@@ -17,3 +17,4 @@ const String ORDER_SUMMARY_PAGE = '/order_summary';
 const String DELIVERY_DETAIL_PAGE = '/delivery_detail';
 const String MAP_PAGE = '/map';
 const String ERROR_PAGE = '/error_page';
+const String ORDER_PAGE = '/order';

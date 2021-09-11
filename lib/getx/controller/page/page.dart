@@ -17,3 +17,4 @@ export './order_summary_page_controller.dart';
 export './delivery_detail_page_controller.dart';
 export './map_page_controller.dart';
 export './error_page.dart';
+export './account_page.dart';

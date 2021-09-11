@@ -62,10 +62,10 @@ class RegisterPageController extends GetxController {
       );
     } on DioError {
       _helper.dialog.close();
-      _helper.dialog.error(DIOERROR_MESSAGE, dismissible: true);
+      _helper.toast.show(DIOERROR_MESSAGE);
     } catch (e) {
       _helper.dialog.close();
-      _helper.dialog.error(e.message, dismissible: true);
+      _helper.toast.show(e.message);
     }
   }
 

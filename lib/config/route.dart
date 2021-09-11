@@ -96,5 +96,9 @@ class AppRoute {
       name: ERROR_PAGE,
       page: () => ErrorPage(),
     ),
+    GetPage(
+      name: ORDER_PAGE,
+      page: () => OrderPage(),
+    ),
   ];
 }

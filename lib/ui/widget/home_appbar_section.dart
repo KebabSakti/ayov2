@@ -78,27 +78,53 @@ class HomeAppbarSection extends StatelessWidget {
 
             return Container(
               child: ImageSlider(
-                itemCount: banners.length,
-                itemBuilder: (_, int index) {
-                  return GestureDetector(
-                    onTap: () {
-                      if (banners[index].bannerPrimaryLink != null)
-                        controller
-                            .sliderOnClick(banners[index].bannerPrimaryLink);
+                items: List<Widget>.from(
+                  banners.map(
+                    (item) {
+                      return GestureDetector(
+                        onTap: () {
+                          if (item.bannerPrimaryLink != null)
+                            controller.sliderOnClick(item.bannerPrimaryLink);
+                        },
+                        child: CachedNetworkImage(
+                          imageUrl: item.bannerPrimaryImage,
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: double.infinity,
+                          placeholder: (context, url) {
+                            return ShimmerLoader();
+                          },
+                        ),
+                      );
                     },
-                    child: CachedNetworkImage(
-                      imageUrl: banners[index].bannerPrimaryImage,
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                      height: double.infinity,
-                      placeholder: (context, url) {
-                        return ShimmerLoader();
-                      },
-                    ),
-                  );
-                },
+                  ),
+                ),
               ),
             );
+
+            // return Container(
+            //   child: ImageSlider(
+            //     itemCount: banners.length,
+            //     itemBuilder: (_, int index) {
+            //       return GestureDetector(
+            //         onTap: () {
+            //           if (banners[index].bannerPrimaryLink != null)
+            //             controller
+            //                 .sliderOnClick(banners[index].bannerPrimaryLink);
+            //         },
+            //         child: CachedNetworkImage(
+            //           imageUrl: banners[index].bannerPrimaryImage,
+            //           fit: BoxFit.cover,
+            //           width: double.infinity,
+            //           height: double.infinity,
+            //           placeholder: (context, url) {
+            //             return ShimmerLoader();
+            //           },
+            //         ),
+            //       );
+            //     },
+            //   ),
+            // );
           }
 
           return SizedBox.shrink();
